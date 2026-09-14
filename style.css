@@ -1,0 +1,253 @@
+/* Design Web des années 90 / GeoCities */
+html, body {
+    height: 100%;
+}
+body {
+    background-color: #000000;
+    background-image: url('https://anlucas.neocities.org/bg_stars.gif');
+    color: #000080;
+    font-family: "Comic Sans MS", "Times New Roman", Times, serif;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: outset 10px #dfdfdf;
+    padding: 30px;
+    box-shadow: 15px 15px 0px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    color: #ff0000;
+    font-family: "Times New Roman", Times, serif;
+    text-shadow: 3px 3px #ffff00;
+    font-size: 4em;
+    margin-bottom: 5px;
+}
+
+.nav-menu {
+    background-color: #000080;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: inset 5px #dfdfdf;
+}
+
+.nav-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 20px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.5em;
+}
+.nav-menu a:hover {
+    color: #ffff00;
+    text-decoration: underline;
+}
+
+.blink {
+    animation: blinker 0.5s linear infinite;
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+.search-area {
+    background-color: #e0e0e0;
+    border: inset 5px #dfdfdf;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.3em;
+    border: inset 3px #dfdfdf;
+}
+
+button {
+    background-color: #ffff00;
+    color: #ff0000;
+    border: outset 8px #ff0000;
+    padding: 15px 30px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 5px 5px 15px rgba(0,0,0,1);
+}
+button:hover {
+    background-color: #00ff00;
+}
+button:active {
+    border: inset 8px #ff0000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,1);
+}
+
+    .results {
+        margin-top: 20px;
+        padding: 20px;
+        border: dashed 3px #000080;
+        background-color: rgba(255, 255, 255, 0.85);
+        display: none;
+        text-align: left;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 1.2em;
+    }
+
+.wiki-result {
+    margin-bottom: 15px;
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 10px;
+}
+.wiki-result a {
+    color: #0000ee;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+}
+.wiki-result a:hover {
+    text-decoration: underline;
+}
+
+.fayot-recommendation {
+    background-color: #e6ffe6;
+    border: solid 2px #008000;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.widgets {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.widget {
+    width: 48%;
+    border: outset 5px #dfdfdf;
+    background-color: #c0c0c0;
+    padding: 15px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+.widget-title {
+    background-color: #000080;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 0;
+}
+
+.audio-player {
+    border: outset 5px #dfdfdf;
+    background-color: #c0c0c0;
+    padding: 15px;
+    margin: 30px auto;
+    width: 400px;
+}
+
+hr {
+    border: 0;
+    height: 3px;
+    background-color: #c0c0c0;
+    border-bottom: solid 2px #ffffff;
+    border-top: solid 2px #808080;
+    margin: 30px 0;
+}
+
+.counter {
+    font-family: "Courier New", Courier, monospace;
+    background: black;
+    color: red;
+    border: inset 5px #dfdfdf;
+    display: inline-block;
+    padding: 10px;
+    font-size: 2em;
+    letter-spacing: 5px;
+}
+
+/* Animations et éléments chaotiques */
+.floating-note {
+    position: fixed;
+    font-size: 3em;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000080;
+    color: #ffff00;
+    border-top: outset 10px #dfdfdf;
+    padding: 20px;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive;
+    z-index: 9999;
+}
+
+.cookie-banner button {
+    font-size: 1.3em;
+    margin: 10px;
+    background-color: #ff0000;
+    color: white;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 10000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffcccc;
+    border: outset 10px #dfdfdf;
+    padding: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    color: #800000;
+}
+
+.modal-content input {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 15px;
+    width: 80%;
+}
+
+.countdown {
+    font-size: 1.5em;
+    color: #00ff00;
+    border: inset 3px #dfdfdf;
+    background: black;
+    padding: 2px 10px;
+    display: inline-block;
+    font-family: monospace;
+}

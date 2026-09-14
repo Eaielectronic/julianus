@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julianous - L'Antre de la Musique Classique</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Boutons Blob Opera partout ! -->
+<a href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en&cp=e30" target="_blank" style="position:absolute; top:15%; right:5%; z-index:9000;">
+    <button style="font-size: 1.5em; background: #ff00ff; color: #fff; cursor: pointer; border-radius: 50%; padding: 15px; animation: blinker 0.2s infinite;">BLOB OPERA !</button>
+</a>
+<a href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en&cp=e30" target="_blank" style="position:absolute; bottom:25%; left:2%; z-index:9000;">
+    <button style="font-size: 1.2em; background: #00ffff; color: #000; cursor: pointer; border: dashed 5px black; animation: blinker 1s infinite;">DÉCOUVREZ BLOB OPERA !</button>
+</a>
+
+<!-- Popup Modal Exercice -->
+<div id="exerciseModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Halte-là, cancrelat !</h2>
+        <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
+        <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
+        <input type="text" id="modalAnswer" placeholder="Votre réponse...">
+        <button onclick="checkModalAnswer()">Soumettre au Maître</button>
+        <button onclick="skipModalExercise()" style="margin-left:10px;">Sécher le cours</button>
+        <p id="modalResponse" style="color:red; font-weight:bold;"></p>
+    </div>
+</div>
+
+<div class="container">
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+        <div style="text-align: center;">
+            <h1>Julianous</h1>
+            <h2>L'excellence intellectuelle par la douleur pédagogique</h2>
+            <div style="margin-top:10px; font-weight:bold; color: yellow; text-shadow: 1px 1px red; font-size: 1.2em;" class="blink">Le Maître vous observe... Le contrôle frappera quand vous vous y attendrez le moins !</div>
+        </div>
+    </div>
+
+    <!-- Menu de navigation -->
+    <div class="nav-menu">
+        <a href="index.html">Accueil</a> | 
+        <a href="etudes.html">Études Classiques</a> | 
+        <a href="requiem.html">Requiem de Mozart</a> | 
+        <a href="chatiments.html">Châtiments Corporels</a> | 
+        <a href="auditions.html">Auditions</a> | 
+        <a href="livre-dor.html">Livre d'or</a>
+    </div>
+
+    <div style="text-align:center; font-family:'Times New Roman'; font-size:1.6em; color:#800000; margin: 30px 0; border: inset 6px gold; padding: 20px; background: #ffcccc;">
+        <em>« Celui qui ignore les bases du solfège n'est qu'un rustre égaré dans le temple des Muses. Inclinez-vous devant mon génie ou retournez à vos misérables occupations ! »<br>- Le Très Grand Professeur Julianous</em>
+    </div>
+
+    <div class="search-area">
+        <h3>Quelle notion musicale ou littéraire désirez-vous ardemment assimiler en ce jour ?</h3>
+        <form action="results.html" method="GET">
+            <input type="text" name="q" placeholder="Veuillez décliner votre requête céans..." />
+            <br>
+            <button type="submit">Initier la quête intellectuelle</button>
+        </form>
+    </div>
+
+    <div class="widgets">
+        <div class="widget">
+            <h4 class="widget-title">L'édifiante réflexion du jour</h4>
+            <p>Calculez incontinent l'intégrale de x² sur l'intervalle [0, 10], puis daignez transcrire ce résultat en chiffres romains, tout en fredonnant l'Ode à la joie avec prestance.</p>
+        </div>
+
+        <div style="text-align:center; font-family:'Comic Sans MS'; font-size:1.4em; color:#000080; margin: 30px 0; border: dotted 5px #0000ff; padding: 15px; background: #e6f7ff; transform: rotate(-2deg);">
+            <strong>« N'espérez point m'amadouer par des flatteries ! Vos lacunes harmoniques me donnent la migraine. Parlez avec respect, ou disparaissez ! »</strong>
+        </div>
+
+        <div class="widget">
+            <h4 class="widget-title">La maxime musicale</h4>
+            <p>« La symphonie est la seule et véritable obligation de l'âme, n'est-il pas vrai, monsieur le professeur ? »</p>
+            <p style="text-align: right;"><em>- L'humble Julianous</em></p>
+        </div>
+    </div>
+
+    <div class="audio-player">
+        <h4 class="widget-title" style="margin-bottom: 5px;">Mozart Player 95</h4>
+        <div style="font-size: 0.9em; margin-bottom: 10px; font-family: monospace; min-height: 40px; display: flex; align-items: center; justify-content: center; text-align: center;">Œuvre diffusée : <em>Cliquez n'importe où sur le fond pour la musique !</em></div>
+        <button id="playBtn" onclick="toggleAudio()">Délecter mes tympans de Mozart</button>
+    </div>
+
+    <hr>
+    
+    <p>Vous êtes l'honorable visiteur numéro :</p>
+    <div class="counter">001337</div>
+    <br>
+    
+    <div style="margin-top: 30px;">
+        <img src="https://anlucas.neocities.org/netscap3.gif" alt="Optimisé pour Netscape" style="border: outset 2px #fff;" />
+        <img src="https://anlucas.neocities.org/ie.gif" alt="Internet Explorer" style="border: outset 2px #fff; margin-left: 10px;" />
+    </div>
+</div>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+    <h3>⚠️ ALERTE COOKIES MUSICAUX ⚠️</h3>
+    <p>Ce site utilise d'illustres cookies pour mémoriser vos fausses notes. Que souhaitez-vous faire ?</p>
+    <button onclick="acceptCookies()">Accepter et écouter Mozart</button>
+    <button onclick="showCookieExercise()">Refuser (Contrôle Requis !)</button>
+</div>
+
+<!-- Vrai panneau HTML pour le refus de cookies -->
+<div id="cookieExercisePanel" style="display:none; position:fixed; bottom:0; left:0; width:100%; background: #008000; color:white; border-top: outset 10px #dfdfdf; padding: 20px; text-align: center; font-family: 'Times New Roman', serif; z-index: 10000;">
+    <h3>Résolvez cette énigme pour échapper aux cookies !</h3>
+    <p style="font-size: 1.3em;">5 x 8 + le numéro de la célèbre symphonie de Mozart en Sol mineur = ?</p>
+    <input type="text" id="cookieAnswerInput" style="font-size:1.5em; width: 100px; text-align: center;">
+    <button onclick="checkCookieAnswer()" style="background:#ff0000; color:white; font-size:1.2em; padding: 10px; border: outset 3px white;">Vérifier au tableau</button>
+    <button onclick="skipCookieExercise()" style="background:#000; color:white; font-size:1.2em; padding: 10px; border: outset 3px white; margin-left: 10px;">Sécher le cours</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

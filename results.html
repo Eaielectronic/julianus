@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julianous - Résultats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Popup Modal Exercice (INCLUSE ICI AUSSI POUR BLOQUER LA RECHERCHE) -->
+<div id="exerciseModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Halte-là, cancrelat !</h2>
+        <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
+        <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
+        <input type="text" id="modalAnswer" placeholder="Votre réponse...">
+        <button onclick="checkModalAnswer()">Soumettre au Maître</button>
+        <button onclick="skipModalExercise()" style="margin-left:10px;">Sécher le cours</button>
+        <p id="modalResponse" style="color:red; font-weight:bold;"></p>
+    </div>
+</div>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A1_music_note.gif" alt="Note" style="height: 80px;">
+        <h2>Les Archives de Julianous</h2>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A1_music_note.gif" alt="Note" style="height: 80px;">
+    </div>
+
+    <div class="nav-menu" style="background-color: #000080; padding: 15px; margin-bottom: 20px; border: inset 5px #dfdfdf;">
+        <a href="index.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Accueil</a> | 
+        <a href="etudes.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Études Classiques</a> | 
+        <a href="requiem.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Requiem de Mozart</a> | 
+        <a href="chatiments.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Châtiments Corporels</a> | 
+        <a href="auditions.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Auditions</a> | 
+        <a href="livre-dor.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Livre d'or</a>
+    </div>
+
+    <div class="search-area" style="padding: 15px; text-align: center;">
+        <form action="results.html" method="GET">
+            <input type="text" name="q" id="searchInput" style="width: 70%;" placeholder="Nouvelle recherche musicale..." />
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+
+    <div class="audio-player" style="margin: 20px auto;">
+        <h4 class="widget-title" style="margin-bottom: 5px;">Mozart Player 95</h4>
+        <div style="font-size: 0.9em; margin-bottom: 10px; font-family: monospace; min-height: 40px; display: flex; align-items: center; justify-content: center; text-align: center;">Œuvre diffusée : <em>Cliquez n'importe où sur le fond pour la musique !</em></div>
+        <button id="playBtn" onclick="toggleAudio()">Délecter mes tympans de Mozart</button>
+    </div>
+    
+    <div class="results" id="resultsArea" style="display: block; background: #fff; border: outset 5px #dfdfdf;">
+        <div id="responseText"><p style="font-size: 1.5em; color: blue;">Recherche en cours dans les grimoires mondiaux...</p></div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="index.html" style="font-size: 1.5em; background: #c0c0c0; padding: 10px; border: outset 4px #fff; text-decoration: none; color: black; font-weight: bold;">Retour au menu principal</a>
+    </div>
+</div>
+<script src="script.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        const offset = parseInt(urlParams.get('offset') || '0');
+        
+        if(query) {
+            document.getElementById('searchInput').value = query;
+            
+            // Gestion du compteur avec localStorage !
+            let searchCount = parseInt(localStorage.getItem('julianous_search_count') || '0');
+            searchCount++;
+            localStorage.setItem('julianous_search_count', searchCount);
+            
+            if (searchCount >= 3) {
+                // Bloquer et afficher la popup au bout de 3 !
+                document.getElementById('responseText').innerHTML = "<h2 style='color:red; margin: 20px;'>Recherche bloquée ! Vous devez d'abord assister au contrôle ! (Vous pouvez cependant sécher le cours...)</h2>";
+                localStorage.setItem('julianous_search_count', 0); // Reset
+                showExerciseModal();
+            } else {
+                performSearch(query, offset);
+            }
+        } else {
+            document.getElementById('responseText').innerHTML = "<p>Fichtre, votre requête est vide !</p>";
+        }
+    });
+</script>
+</body>
+</html>
