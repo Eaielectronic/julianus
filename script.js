@@ -14,7 +14,6 @@ const audioTracks = [
     }
 ];
 
-const featuredSheetUrl = "https://upload.wikimedia.org/wikipedia/commons/5/54/DwtkII-as-dur-fuga.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
 let currentAudio = null;
 let isPlaying = false;
 
@@ -230,48 +229,41 @@ function scatterBadges() {
 // --- Les deux partitions de musique changeantes sur les côtés ---
 function createSidebars() {
     const sideSheets = [
-        featuredSheetUrl,
-        "https://i.pinimg.com/736x/76/1f/40/761f402fd60d48a1d0441f1a7653661c.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/5/54/DwtkII-as-dur-fuga.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Bach_-_Cello_Suite_1_-_Prelude.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven_Moonlight_1st_movement.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Chopin_Prelude_No._4.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Mozart_Requiem_Lacrimosa.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Sheet_music_cover,_The_Blue_Danube,_by_Johann_Strauss_II.jpg"
     ];
 
     const leftSidebar = document.createElement('div');
-    leftSidebar.style = "position:fixed; top:10vh; left:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center;";
+    leftSidebar.style = "position:fixed; top:10vh; left:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
     
     const rightSidebar = document.createElement('div');
-    rightSidebar.style = "position:fixed; top:10vh; right:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center;";
-    
-    const leftLink = document.createElement('a');
-    leftLink.href = featuredSheetUrl;
-    leftLink.target = "_blank";
-    leftLink.rel = "noopener noreferrer";
-    leftLink.style = "width:100%;";
-
-    const rightLink = document.createElement('a');
-    rightLink.href = featuredSheetUrl;
-    rightLink.target = "_blank";
-    rightLink.rel = "noopener noreferrer";
-    rightLink.style = "width:100%;";
+    rightSidebar.style = "position:fixed; top:10vh; right:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
 
     const imgLeft = document.createElement('img');
-    imgLeft.style = "width:100%; border: outset 8px gold; box-shadow: 10px 10px black; opacity: 0.8; cursor:pointer;";
-    imgLeft.src = sideSheets[0];
+    imgLeft.style = "width:100%; border: outset 8px gold; box-shadow: 10px 10px black; opacity: 0.8;";
     
     const imgRight = document.createElement('img');
-    imgRight.style = "width:100%; border: outset 8px gold; box-shadow: -10px 10px black; opacity: 0.8; cursor:pointer;";
-    imgRight.src = sideSheets[1];
+    imgRight.style = "width:100%; border: outset 8px gold; box-shadow: -10px 10px black; opacity: 0.8;";
 
-    leftLink.appendChild(imgLeft);
-    rightLink.appendChild(imgRight);
-    leftSidebar.appendChild(leftLink);
-    rightSidebar.appendChild(rightLink);
+    leftSidebar.appendChild(imgLeft);
+    rightSidebar.appendChild(imgRight);
     document.body.appendChild(leftSidebar);
     document.body.appendChild(rightSidebar);
 
-    // Changer l'image de la partition toutes les 4 secondes
+    let sideIndex = 0;
+    function rotateSideSheets() {
+        imgLeft.src = sideSheets[sideIndex % sideSheets.length];
+        imgRight.src = sideSheets[(sideIndex + 1) % sideSheets.length];
+        sideIndex = (sideIndex + 2) % sideSheets.length;
+    }
+
+    rotateSideSheets();
     setInterval(() => {
-        const temp = imgLeft.src;
-        imgLeft.src = imgRight.src;
-        imgRight.src = temp;
+        rotateSideSheets();
     }, 4000);
 }
 
