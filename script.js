@@ -16,6 +16,7 @@ const audioTracks = [
 
 let currentAudio = null;
 let isPlaying = false;
+let autoplayOverlay = null;
 
 function initRobustAudio() {
     if (isPlaying) return;
@@ -36,6 +37,7 @@ function initRobustAudio() {
             isPlaying = true;
             updatePlayerUI();
         }).catch(error => {
+            if (autoplayOverlay) return;
             // Autoplay bloqué ! Création de l'overlay ROBUSTE
             const overlay = document.createElement('div');
             overlay.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:999999; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;";
@@ -44,6 +46,7 @@ function initRobustAudio() {
                 <p style="color:white; font-size:1.5em; margin-bottom: 30px;">Votre navigateur infidèle a osé bloquer la divine musique. C'est inacceptable !</p>
                 <button style="font-size:3em; padding:20px; background:#00ff00; border: outset 10px #00cc00; cursor:pointer; font-family:'Times New Roman'; font-weight:bold;">CLIQUEZ ICI POUR POURSUIVRE ET ÉCOUTER</button>
             `;
+            autoplayOverlay = overlay;
             document.body.appendChild(overlay);
             
             overlay.querySelector('button').addEventListener('click', () => {
@@ -51,6 +54,7 @@ function initRobustAudio() {
                 isPlaying = true;
                 updatePlayerUI();
                 overlay.remove();
+                autoplayOverlay = null;
             });
         });
     }
