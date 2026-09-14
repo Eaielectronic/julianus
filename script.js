@@ -14,6 +14,7 @@ const audioTracks = [
     }
 ];
 
+const featuredSheetUrl = "https://upload.wikimedia.org/wikipedia/commons/5/54/DwtkII-as-dur-fuga.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
 let currentAudio = null;
 let isPlaying = false;
 
@@ -74,6 +75,8 @@ function toggleAudio() {
 // Lancement robuste au chargement
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(initRobustAudio, 200);
+    document.addEventListener('pointerdown', initRobustAudio);
+    document.addEventListener('keydown', initRobustAudio);
 });
 
 // Le lancement est désormais géré par initRobustAudio() sur le DOMContentLoaded
@@ -227,26 +230,40 @@ function scatterBadges() {
 // --- Les deux partitions de musique changeantes sur les côtés ---
 function createSidebars() {
     const sideSheets = [
-        "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/500px-DwtkII-as-dur-fuga.jpg",
+        featuredSheetUrl,
         "https://i.pinimg.com/736x/76/1f/40/761f402fd60d48a1d0441f1a7653661c.jpg"
     ];
 
     const leftSidebar = document.createElement('div');
-    leftSidebar.style = "position:fixed; top:10vh; left:0; width:15vw; height:80vh; z-index:9000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
+    leftSidebar.style = "position:fixed; top:10vh; left:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center;";
     
     const rightSidebar = document.createElement('div');
-    rightSidebar.style = "position:fixed; top:10vh; right:0; width:15vw; height:80vh; z-index:9000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
+    rightSidebar.style = "position:fixed; top:10vh; right:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center;";
     
+    const leftLink = document.createElement('a');
+    leftLink.href = featuredSheetUrl;
+    leftLink.target = "_blank";
+    leftLink.rel = "noopener noreferrer";
+    leftLink.style = "width:100%;";
+
+    const rightLink = document.createElement('a');
+    rightLink.href = featuredSheetUrl;
+    rightLink.target = "_blank";
+    rightLink.rel = "noopener noreferrer";
+    rightLink.style = "width:100%;";
+
     const imgLeft = document.createElement('img');
-    imgLeft.style = "width:100%; border: outset 8px gold; box-shadow: 10px 10px black; opacity: 0.8;";
+    imgLeft.style = "width:100%; border: outset 8px gold; box-shadow: 10px 10px black; opacity: 0.8; cursor:pointer;";
     imgLeft.src = sideSheets[0];
     
     const imgRight = document.createElement('img');
-    imgRight.style = "width:100%; border: outset 8px gold; box-shadow: -10px 10px black; opacity: 0.8;";
+    imgRight.style = "width:100%; border: outset 8px gold; box-shadow: -10px 10px black; opacity: 0.8; cursor:pointer;";
     imgRight.src = sideSheets[1];
 
-    leftSidebar.appendChild(imgLeft);
-    rightSidebar.appendChild(imgRight);
+    leftLink.appendChild(imgLeft);
+    rightLink.appendChild(imgRight);
+    leftSidebar.appendChild(leftLink);
+    rightSidebar.appendChild(rightLink);
     document.body.appendChild(leftSidebar);
     document.body.appendChild(rightSidebar);
 
@@ -256,6 +273,31 @@ function createSidebars() {
         imgLeft.src = imgRight.src;
         imgRight.src = temp;
     }, 4000);
+}
+
+function setupSequentialAdVideos() {
+    const videos = Array.from(document.querySelectorAll('.fake-ad-video'));
+    if (videos.length === 0) return;
+
+    videos.forEach((video, index) => {
+        video.autoplay = false;
+        video.muted = false;
+        video.controls = true;
+        video.preload = "auto";
+        video.onended = () => {
+            const nextVideo = videos[(index + 1) % videos.length];
+            nextVideo.currentTime = 0;
+            const playPromise = nextVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        };
+    });
+
+    const firstPlayPromise = videos[0].play();
+    if (firstPlayPromise !== undefined) {
+        firstPlayPromise.catch(() => {});
+    }
 }
 
 // --- Petite Iframe Blob Opera ---
@@ -534,6 +576,7 @@ async function performSearch(input, offset = 0) {
         `;
 
         responseText.innerHTML = htmlContent;
+        setupSequentialAdVideos();
 
     } catch (error) {
         responseText.innerHTML = "<p><em>Erreur technique. Le professeur va être furieux !</em></p>";
