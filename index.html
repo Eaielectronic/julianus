@@ -33,11 +33,11 @@
         <div class="side-pub-badge">100% SOLFÈGE</div>
     </div>
     <div class="side-pub-footer">
-        <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d\'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+        <button class="side-pub-btn" onclick="triggerPartitionPopupExplosion()">🎵 ACHETER PARTITION 🎵</button>
     </div>
 </div>
 
-<!-- Boutons Blob Opera partout ! -->
+<!-- Boutons Blob Opera -->
 <a href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en&cp=e30" target="_blank" style="position:absolute; top:15%; right:5%; z-index:9000;">
     <button style="font-size: 1.5em; background: #ff00ff; color: #fff; cursor: pointer; border-radius: 50%; padding: 15px; animation: blinker 0.2s infinite;">BLOB OPERA !</button>
 </a>
@@ -49,7 +49,6 @@
 <div id="exerciseModal" class="modal-overlay">
     <div class="modal-content">
         <h2>Halte-là, cancrelat !</h2>
-<div class="bancale-gif" style="float: right; margin: 15px 0 15px 20px; transform: rotate(5deg); z-index: 10;"><img src="assets/conducting_van_cliburn.gif" alt="Conducting" style="height: 115px; border: outset 4px gold; box-shadow: -5px 5px 10px black;" /></div>
         <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
         <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
         <input type="text" id="modalAnswer" placeholder="Votre réponse...">
@@ -60,16 +59,11 @@
 </div>
 
 <div class="container">
-                <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 30px;">
-        <h1 style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0; font-size: 3.8em;">
-            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: 4px 4px 10px black;" />
-            <span>Julianous</span>
-            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: -4px 4px 10px black;" />
-        </h1>
-<div class="bancale-gif" style="float: left; margin: 15px 20px 15px 0; transform: rotate(-4deg); z-index: 10;"><img src="assets/dancing_teacher.gif" alt="Teacher Dancing" style="height: 110px; border: outset 4px red; box-shadow: 5px 5px 10px black;" /></div>
+    <!-- En-tête de la page -->
+    <div style="text-align: center; margin-top: 20px;">
+        <h1 style="font-size: 4em; margin: 0; color: #ff0000; font-family: 'Times New Roman', Times, serif; text-shadow: 3px 3px #ffff00;">Julianous</h1>
         <h2 style="margin-top: 10px; margin-bottom: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
     </div>
-
 
     <!-- Menu de navigation -->
     <div class="nav-menu">
@@ -83,19 +77,17 @@
         <a href="livre-dor.html">Livre d'or</a>
     </div>
 
-    
-
-
-    <div style="text-align:center; font-family:'Times New Roman'; font-size:1.6em; color:#800000; margin: 30px 0; border: inset 6px gold; padding: 20px; background: #ffcccc;">
+    <!-- Citation du Maître -->
+    <div style="text-align:center; font-family:'Times New Roman'; font-size:1.6em; color:#800000; margin: 25px 0; border: inset 6px gold; padding: 20px; background: #ffcccc;">
         <em>« Celui qui ignore les bases du solfège n'est qu'un rustre égaré dans le temple des Muses. Inclinez-vous devant mon génie ou retournez à vos misérables occupations ! »<br>- Le Très Grand Professeur Julianous</em>
     </div>
 
-    
+    <!-- Zone de recherche (Droite et nette) -->
     <div class="search-area" style="position: relative;">
         <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px;">
-            <img src="assets/giphy_maitre.gif" alt="Professeur sévère" style="height: 90px; border: outset 4px red; box-shadow: 4px 4px 8px black;" />
+            <img src="assets/giphy_maitre.gif" alt="Professeur sévère" style="height: 80px; border: outset 4px red; box-shadow: 4px 4px 8px black;" />
             <h3 style="margin: 0; flex: 1; text-align: center;">Quelle notion musicale ou littéraire désirez-vous ardemment assimiler en ce jour ?</h3>
-            <img src="assets/teachers_day.gif" alt="Jour du professeur" style="height: 90px; border: outset 4px gold; box-shadow: -4px 4px 8px black;" />
+            <img src="assets/teachers_day.gif" alt="Jour du professeur" style="height: 80px; border: outset 4px gold; box-shadow: -4px 4px 8px black;" />
         </div>
         <form action="results.html" method="GET">
             <input type="text" name="q" placeholder="Veuillez décliner votre requête céans..." />
@@ -104,33 +96,33 @@
         </form>
     </div>
 
-
-    <!-- Section Widgets Origine -->
-    
-        <div style="display: flex; justify-content: center; gap: 20px; margin: 25px 0; align-items: center; background: #fff0f0; border: double 6px red; padding: 15px;">
-            <img src="assets/point_education.gif" alt="Point Éducation" style="height: 100px; border: outset 3px #dfdfdf;" />
-            <div style="text-align: center; flex: 1;">
-                <h3 style="color: darkred; margin: 0; font-family: 'Impact'; font-size: 1.6em;">⚠️ L'OBSERVATOIRE PERMANENT DU MAÎTRE ⚠️</h3>
-                <p style="margin: 5px 0; font-size: 1.2em; font-weight: bold;">Le Professeur vérifie la rigueur de vos révisions à chaque seconde !</p>
-            </div>
-            <img src="assets/maitre_orchestra.gif" alt="Maître d'orchestre" style="height: 100px; border: outset 3px gold;" />
+    <!-- Observatoire Permanent du Maître (Intégration discrète des GIFs) -->
+    <div style="display: flex; justify-content: center; gap: 20px; margin: 25px 0; align-items: center; background: #fff0f0; border: double 6px red; padding: 15px;">
+        <img src="assets/point_education.gif" alt="Point Éducation" style="height: 90px; border: outset 3px #dfdfdf;" />
+        <div style="text-align: center; flex: 1;">
+            <h3 style="color: darkred; margin: 0; font-family: 'Impact'; font-size: 1.5em;">⚠️ L'OBSERVATOIRE PERMANENT DU MAÎTRE ⚠️</h3>
+            <p style="margin: 5px 0; font-size: 1.1em; font-weight: bold;">Le Professeur vérifie la rigueur de vos révisions à chaque seconde !</p>
         </div>
+        <img src="assets/maitre_orchestra.gif" alt="Maître d'orchestre" style="height: 90px; border: outset 3px gold;" />
+    </div>
 
+    <!-- Widgets -->
     <div class="widgets">
         <div class="widget">
             <h4 class="widget-title">L'édifiante réflexion du jour</h4>
             <p>Calculez incontinent l'intégrale de x² sur l'intervalle [0, 10], puis daignez transcrire ce résultat en chiffres romains, tout en fredonnant l'Ode à la joie avec prestance.</p>
-        </div>
-
-        <div style="text-align:center; font-family:'Comic Sans MS'; font-size:1.4em; color:#000080; margin: 30px 0; border: dotted 5px #0000ff; padding: 15px; background: #e6f7ff; transform: rotate(-2deg);">
-            <strong>« N'espérez point m'amadouer par des flatteries ! Vos lacunes harmoniques me donnent la migraine. Parlez avec respect, ou disparaissez ! »</strong>
+            <div style="text-align: center; margin-top: 10px;">
+                <img src="assets/dancing_teacher.gif" alt="Teacher Dancing" style="height: 75px; border: outset 2px red;" />
+            </div>
         </div>
 
         <div class="widget">
             <h4 class="widget-title">La maxime musicale</h4>
             <p>« La symphonie est la seule et véritable obligation de l'âme, n'est-il pas vrai, monsieur le professeur ? »</p>
-<div class="bancale-gif" style="text-align: center; margin: 25px 0; transform: rotate(-3deg); clear: both;"><img src="assets/dance_opera.gif" alt="Dance Opera" style="height: 120px; border: inset 5px blue; box-shadow: 6px 6px 12px black;" /></div>
             <p style="text-align: right;"><em>- L'humble Julianous</em></p>
+            <div style="text-align: center; margin-top: 10px;">
+                <img src="assets/dance_opera.gif" alt="Dance Opera" style="height: 75px; border: inset 2px blue;" />
+            </div>
         </div>
     </div>
 
@@ -186,8 +178,6 @@
     <button onclick="skipCookieExercise()" style="background:#000; color:white; font-size:1.2em; padding: 10px; border: outset 3px white; margin-left: 10px;">Sécher le cours</button>
 </div>
 
-<div class="bancale-gif" style="float: left; margin: 20px 20px 10px 0; transform: rotate(3deg); z-index: 10;"><img src="assets/sesame_street_band.gif" alt="Sesame Band" style="height: 105px; border: double 6px green; box-shadow: 4px 6px 10px black;" /></div>
 <script src="script.js"></script>
 </body>
 </html>
-
