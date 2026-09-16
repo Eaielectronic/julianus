@@ -252,6 +252,75 @@ function scatterBadges() {
     }
 }
 
+// --- Explosion de pop-ups rétro rigolotes pour les partitions ---
+function triggerPartitionPopupExplosion() {
+    const funnyPopups = [
+        {
+            title: "📜 DÉCRET SOLENNEL DE MOZART & MOLIÈRE 📜",
+            bg: "#ffcccc",
+            border: "red",
+            top: "120px", left: "150px", width: "320px",
+            content: `
+                <h4 style="color:red; margin:5px 0;" class="blink">🎉 CONTRAT DE SOLFÈGE ILLIMITÉ DÉBLOQUÉ ! 🎉</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">En cliquant ici, vous vous engagez solennellement à réviser la fugue en Sol mineur pendant 14 heures par jour !</p>
+                <img src="assets/giphy_maitre.gif" style="width:80px; border:outset 2px gold;">
+            `
+        },
+        {
+            title: "⚡ TÉLÉCHARGEMENT EXPRESS DU CLAVECIN ⚡",
+            bg: "#ffffcc",
+            border: "gold",
+            top: "200px", left: "450px", width: "310px",
+            content: `
+                <p style="font-size:12px; font-weight:bold; color:blue;">Téléchargement de la partition en 56k en cours...</p>
+                <div style="background:black; color:lime; font-family:monospace; padding:8px; border:inset 2px gray; font-size:11px;">
+                    [████████████░░░░] 68% - Clavecin_Du_Maitre_1998.midi
+                </div>
+                <p style="font-size:11px; color:red; margin-top:5px; font-weight:bold;">Attention : Ne coupez pas votre connexion Minitel !</p>
+            `
+        },
+        {
+            title: "🎭 SANCTION LITTÉRAIRE DE LEOPOLD MOZART 🎭",
+            bg: "#e6f2ff",
+            border: "blue",
+            top: "320px", left: "280px", width: "340px",
+            content: `
+                <p style="font-size:12px; font-weight:bold; color:#000080;">« Vous espériez obtenir la partition sans verser la moindre larme sur la portée ? Quelle outrecuidance ! »</p>
+                <button style="background:red; color:yellow; font-weight:bold; border:outset 3px gold; width:100%; padding:6px; cursor:pointer;" onclick="this.innerText='Récitation enregistrée par le Maître !';">PROSTERNEZ-VOUS DEVANT MOZART</button>
+            `
+        },
+        {
+            title: "🏆 DIPLÔME DE L'ÉLÈVE PREMIER DE LA CLASSE 🏆",
+            bg: "#e6ffe6",
+            border: "green",
+            top: "180px", left: "750px", width: "310px",
+            content: `
+                <h4 style="color:green; margin:5px 0;">🥇 DISTINCTION ROYALE DU MAÎTRE 🥇</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Le Professeur Julianous vous décerne la Palme Académique du Solfège Vivant !</p>
+                <button style="background:gold; color:black; font-weight:bold; border:outset 3px green; width:100%; padding:6px; cursor:pointer;" onclick="this.closest('.retro-popup-ad').style.display='none'">RECEVOIR LA PALME</button>
+            `
+        }
+    ];
+
+    funnyPopups.forEach((popData, index) => {
+        setTimeout(() => {
+            const popDiv = document.createElement('div');
+            popDiv.className = 'retro-popup-ad';
+            popDiv.style.cssText = `position: fixed; top: ${popData.top}; left: ${popData.left}; width: ${popData.width}; background: ${popData.bg}; border: outset 6px ${popData.border}; z-index: ${100020 + index}; box-shadow: 10px 10px 0px #000;`;
+            popDiv.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, ${popData.border}, #000); color: white;">
+                    <span>${popData.title}</span>
+                    <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: ${popData.bg};">
+                    ${popData.content}
+                </div>
+            `;
+            document.body.appendChild(popDiv);
+        }, index * 180);
+    });
+}
+
 // --- Les deux partitions de musique interchangeables fixes sur les côtés (Style Pub) ---
 function createSidebars() {
     const userSheets = [
@@ -272,7 +341,7 @@ function createSidebars() {
             <div class="side-pub-badge">-90% RECLAME</div>
         </div>
         <div class="side-pub-footer">
-            <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR LA PARTITION ⚡</button>
+            <button class="side-pub-btn" onclick="triggerPartitionPopupExplosion()">⚡ VOIR LA PARTITION ⚡</button>
         </div>
     `;
 
@@ -289,7 +358,7 @@ function createSidebars() {
             <div class="side-pub-badge">100% SOLFÈGE</div>
         </div>
         <div class="side-pub-footer">
-            <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d\\'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+            <button class="side-pub-btn" onclick="triggerPartitionPopupExplosion()">🎵 ACHETER PARTITION 🎵</button>
         </div>
     `;
 
