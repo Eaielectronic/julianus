@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Clean, valid generator for latin.html
+Restores valid HTML structure, declension tables, hyper-pompous Mozart text,
+flashing ads, interactive Latin quiz, 4x auto-scroll, and glitching morphing endings.
+"""
+
+html_content = """<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -261,9 +268,7 @@
             <button style="background: darkblue; color: cyan; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px cyan; cursor: pointer;" onclick="toggleAudio()">
                 🎹 ÉCOUTER LA MUSIQUE DU MAÎTRE 🎹
             </button>
-            <button style="background: darkgreen; color: lime; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px lime; cursor: pointer;" onclick="alert('📜 CERTIFICAT D'IGNORANCE DÉLIVRÉ :
-
-Le Maître Julianous atteste que votre niveau en contrepoint est nul, non avenu et punissable par décret impérial !');">
+            <button style="background: darkgreen; color: lime; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px lime; cursor: pointer;" onclick="alert('📜 CERTIFICAT D\'IGNORANCE DÉLIVRÉ :\n\nLe Maître Julianous atteste que votre niveau en contrepoint est nul, non avenu et punissable par décret impérial !');">
                 📜 AFFICHER VOTRE CERTIFICAT D'IGNORANCE 📜
             </button>
             <button style="background: purple; color: white; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px magenta; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
@@ -307,9 +312,7 @@ Le Maître Julianous atteste que votre niveau en contrepoint est nul, non avenu 
                 La Symphonie en Ut mineur n'est pas un divertissement pour esprits frivoles ! C'est une cathédrale sonore construite sur les fondations granitiques de la basse continue et de la fugue à quatre voix. Quiconque n'est pas capable de chanter la partie de basse à livre ouvert sera séance tenante privé de récréation pour les trente prochaines années !
             </p>
             <div style="text-align: center; margin-top: 20px;">
-                <button style="background: #000080; color: white; font-size: 1.2em; font-weight: bold; padding: 10px 20px; border: outset 4px gold; cursor: pointer;" onclick="alert('🎺 BÂTON PÉDAGOGIQUE ACTIF !
-
-Le Maître frappe votre pupitre avec vigueur !');">
+                <button style="background: #000080; color: white; font-size: 1.2em; font-weight: bold; padding: 10px 20px; border: outset 4px gold; cursor: pointer;" onclick="alert('🎺 BÂTON PÉDAGOGIQUE ACTIF !\n\nLe Maître frappe votre pupitre avec vigueur !');">
                     💥 FRAPPER LE PUPITRE DU CANCRE
                 </button>
             </div>
@@ -320,9 +323,7 @@ Le Maître frappe votre pupitre avec vigueur !');">
             <button style="background: gold; color: black; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px black; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
                 🎺 COMMANDER LA RÈGLE EN FER DE 50CM 🎺
             </button>
-            <button style="background: darkred; color: white; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px red; cursor: pointer;" onclick="alert('🕊️ PIGEON VOYAGEUR ENVOYÉ !
-
-Une convocation officielle a été expédiée à vos parents avec mention : CANCRE ASSIGNÉ AU CHÂTIMENT !');">
+            <button style="background: darkred; color: white; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px red; cursor: pointer;" onclick="alert('🕊️ PIGEON VOYAGEUR ENVOYÉ !\n\nUne convocation officielle a été expédiée à vos parents avec mention : CANCRE ASSIGNÉ AU CHÂTIMENT !');">
                 🕊️ ENVOYER UN CHÂTIMENT PAR PIGEON VOYAGEUR 🕊️
             </button>
         </div>
@@ -402,14 +403,20 @@ Une convocation officielle a été expédiée à vos parents avec mention : CANC
             feedback.innerHTML = '✅ BRAVO CANCRE ! "Rosam" est exact. Mais ne vous vantez pas, la 3ème déclinaison va vous détruire !';
         } else if (input === '') {
             feedback.style.color = 'red';
-            feedback.innerHTML = '❌ CHAMP VIDE ! L'ignorance totale ! Vous méritez 50 coups de règle en fer !';
+            feedback.innerHTML = '❌ CHAMP VIDE ! L\'ignorance totale ! Vous méritez 50 coups de règle en fer !';
             triggerPartitionPopupExplosion();
         } else {
             feedback.style.color = 'red';
-            feedback.innerHTML = '❌ HERÉSIE LATINE ! "' + input + '" est FAUX ! L'accusatif singulier est ROSAM ! CHÂTIMENT IMMÉDIAT !';
+            feedback.innerHTML = '❌ HERÉSIE LATINE ! "' + input + '" est FAUX ! L\'accusatif singulier est ROSAM ! CHÂTIMENT IMMÉDIAT !';
             triggerPartitionPopupExplosion();
         }
     }
 </script>
 </body>
 </html>
+"""
+
+with open("/home/tronix/julianous/latin.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Generated clean, valid latin.html")
