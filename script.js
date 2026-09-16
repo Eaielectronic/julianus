@@ -252,14 +252,14 @@ function scatterBadges() {
     }
 }
 
-// --- Explosion de pop-ups rétro rigolotes pour les partitions ---
+// --- Explosion de pop-ups rétro rigolotes pour les partitions avec POSITIONS ALÉATOIRES + PODCAST + ANTI-ART ---
 function triggerPartitionPopupExplosion() {
     const funnyPopups = [
         {
             title: "📜 DÉCRET SOLENNEL DE MOZART & MOLIÈRE 📜",
             bg: "#ffcccc",
             border: "red",
-            top: "120px", left: "150px", width: "320px",
+            width: "320px",
             content: `
                 <h4 style="color:red; margin:5px 0;" class="blink">🎉 CONTRAT DE SOLFÈGE ILLIMITÉ DÉBLOQUÉ ! 🎉</h4>
                 <p style="font-size:12px; font-weight:bold; color:#000;">En cliquant ici, vous vous engagez solennellement à réviser la fugue en Sol mineur pendant 14 heures par jour !</p>
@@ -267,10 +267,32 @@ function triggerPartitionPopupExplosion() {
             `
         },
         {
+            title: "🎙️ SPONSOR PODCAST MOLIÈRE & SOLFÈGE 🎙️",
+            bg: "#ffe6ff",
+            border: "magenta",
+            width: "340px",
+            content: `
+                <h4 style="color:purple; margin:5px 0;" class="blink">🎧 LE PODCAST DU MAÎTRE JULIANOUS 🎧</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Écoutez l'analyse impitoyable de la Symphonie N°40 en Ut mineur et les tirades de Molière à MAX VOLUME !</p>
+                <button style="background:purple; color:yellow; font-weight:bold; border:outset 3px gold; width:100%; padding:6px; cursor:pointer;" onclick="playPodcast()">▶️ LANCER LE PODCAST MOLIÈRE EN HD</button>
+            `
+        },
+        {
+            title: "⚠️ ALERTE ANTI-ART & VIRUS HARMONIQUE ⚠️",
+            bg: "#e6ffff",
+            border: "cyan",
+            width: "330px",
+            content: `
+                <h4 style="color:darkblue; margin:5px 0;">🎨 BOUCLIER ANTI-ART MODERNE ACTIVE 🎨</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Toute tentative de jouer des quintes parallèles ou de la musique atronale déclenchera le virus solfégique du Maître !</p>
+                <button style="background:darkblue; color:cyan; font-weight:bold; border:outset 3px white; width:100%; padding:6px; cursor:pointer;" onclick="alert('🛡️ BOUCLIER ANTI-ART EXPÉRIMENTAL ET PURIFICATEUR ACTIVÉ !');">ACTIVER LE BOUCLIER BAROQUE</button>
+            `
+        },
+        {
             title: "⚡ TÉLÉCHARGEMENT EXPRESS DU CLAVECIN ⚡",
             bg: "#ffffcc",
             border: "gold",
-            top: "200px", left: "450px", width: "310px",
+            width: "310px",
             content: `
                 <p style="font-size:12px; font-weight:bold; color:blue;">Téléchargement de la partition en 56k en cours...</p>
                 <div style="background:black; color:lime; font-family:monospace; padding:8px; border:inset 2px gray; font-size:11px;">
@@ -283,17 +305,28 @@ function triggerPartitionPopupExplosion() {
             title: "🎭 SANCTION LITTÉRAIRE DE LEOPOLD MOZART 🎭",
             bg: "#e6f2ff",
             border: "blue",
-            top: "320px", left: "280px", width: "340px",
+            width: "340px",
             content: `
                 <p style="font-size:12px; font-weight:bold; color:#000080;">« Vous espériez obtenir la partition sans verser la moindre larme sur la portée ? Quelle outrecuidance ! »</p>
                 <button style="background:red; color:yellow; font-weight:bold; border:outset 3px gold; width:100%; padding:6px; cursor:pointer;" onclick="this.innerText='Récitation enregistrée par le Maître !';">PROSTERNEZ-VOUS DEVANT MOZART</button>
             `
         },
         {
+            title: "🔥 ÉNORME RECLAME : GAFFIOT VINTAGE -90% 🔥",
+            bg: "#fff0f0",
+            border: "red",
+            width: "330px",
+            content: `
+                <h4 style="color:red; margin:5px 0;">📚 LE DICTIONNAIRE GAFFIOT (1895) 📚</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Recevez 1 RÈGLE EN FER DE 50CM OFFERTE pour tout achat du tome des déclinaisons latines !</p>
+                <button style="background:darkred; color:yellow; font-weight:bold; border:outset 3px gold; width:100%; padding:6px; cursor:pointer;" onclick="alert('🛒 COMMANDE EXPÉDIÉE PAR PIGEON VOYAGEUR !');">COMMANDER LA RÈGLE EN FER</button>
+            `
+        },
+        {
             title: "🏆 DIPLÔME DE L'ÉLÈVE PREMIER DE LA CLASSE 🏆",
             bg: "#e6ffe6",
             border: "green",
-            top: "180px", left: "750px", width: "310px",
+            width: "310px",
             content: `
                 <h4 style="color:green; margin:5px 0;">🥇 DISTINCTION ROYALE DU MAÎTRE 🥇</h4>
                 <p style="font-size:12px; font-weight:bold; color:#000;">Le Professeur Julianous vous décerne la Palme Académique du Solfège Vivant !</p>
@@ -304,20 +337,24 @@ function triggerPartitionPopupExplosion() {
 
     funnyPopups.forEach((popData, index) => {
         setTimeout(() => {
+            // CALCUL DE COORDONNÉES ÉCRAN TOTALEMENT ALEATOIRES PARTOUT SUR L'ÉCRAN
+            const randomTop = Math.floor(Math.random() * (window.innerHeight - 250)) + 30 + 'px';
+            const randomLeft = Math.floor(Math.random() * (window.innerWidth - 360)) + 20 + 'px';
+
             const popDiv = document.createElement('div');
             popDiv.className = 'retro-popup-ad';
-            popDiv.style.cssText = `position: fixed; top: ${popData.top}; left: ${popData.left}; width: ${popData.width}; background: ${popData.bg}; border: outset 6px ${popData.border}; z-index: ${100020 + index}; box-shadow: 10px 10px 0px #000;`;
+            popDiv.style.cssText = `position: fixed; top: ${randomTop}; left: ${randomLeft}; width: ${popData.width}; background: ${popData.bg}; border: outset 6px ${popData.border}; z-index: ${100020 + index}; box-shadow: 10px 10px 0px #000;`;
             popDiv.innerHTML = `
-                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, ${popData.border}, #000); color: white;">
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, ${popData.border}, #000); color: white; cursor: move;">
                     <span>${popData.title}</span>
                     <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
                 </div>
-                <div class="retro-popup-body" style="background: ${popData.bg};">
+                <div class="retro-popup-body" style="background: ${popData.bg}; padding: 10px;">
                     ${popData.content}
                 </div>
             `;
             document.body.appendChild(popDiv);
-        }, index * 180);
+        }, index * 160);
     });
 }
 
@@ -486,6 +523,48 @@ const retroAdPool = [
         }
     },
     {
+        id: 'podcastAd',
+        isVideo: false,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'top: 180px; left: 140px; width: 340px; border: outset 8px magenta; z-index: 100010; box-shadow: 10px 10px 0px #000; position: fixed; background: #ffe6ff;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #800080, #ff00ff); color: #fff;">
+                    <span class="blink" style="color: #ffff00; font-weight: bold;">🎙️ PUB PODCAST MOLIÈRE 🎙️</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #ffe6ff; color: #000; border: inset 4px purple;">
+                    <h4 style="color:purple; margin:5px 0;" class="blink">🎧 LE PODCAST DU MAÎTRE JULIANOUS 🎧</h4>
+                    <p style="font-size:12px; font-weight:bold; color:#000;">Écoutez l'analyse impitoyable de la Symphonie N°40 en Ut mineur et les tirades de Molière à MAX VOLUME !</p>
+                    <button style="background:purple; color:yellow; font-weight:bold; border:outset 4px gold; width:100%; padding:8px; cursor:pointer; font-size:13px;" onclick="playPodcast()">▶️ LANCER LE PODCAST MOLIÈRE EN HD</button>
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
+        id: 'antiArtAd',
+        isVideo: false,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'bottom: 80px; right: 120px; width: 330px; border: outset 8px cyan; z-index: 100012; box-shadow: 10px 10px 0px #000; position: fixed; background: #e6ffff;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #008080, #00ffff); color: #000;">
+                    <span class="blink" style="color: #000080; font-weight: bold;">🎨 PUB ANTI-ART BAROQUE 🎨</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #e6ffff; color: #000; border: inset 4px darkblue;">
+                    <h4 style="color:darkblue; margin:5px 0;">🎨 BOUCLIER ANTI-ART MODERNE ACTIVÉ 🎨</h4>
+                    <p style="font-size:12px; font-weight:bold; color:#000;">Toute tentative de jouer des quintes parallèles ou de la musique atronale déclenchera le virus solfégique du Maître !</p>
+                    <button style="background:darkblue; color:cyan; font-weight:bold; border:outset 4px white; width:100%; padding:8px; cursor:pointer; font-size:13px;" onclick="alert('🛡️ BOUCLIER ANTI-ART EXPÉRIMENTAL ET PURIFICATEUR ACTIVÉ !');">ACTIVER LE BOUCLIER BAROQUE</button>
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
         id: 'visitorAd',
         isVideo: false,
         create: () => {
@@ -508,6 +587,51 @@ const retroAdPool = [
     }
 ];
 
+// --- Application dynamique des Formes Bancales sur TOUS les éléments ---
+function makeEverythingBancale() {
+    const selectors = [
+        '.container',
+        '.nav-menu',
+        '.search-area',
+        '.widget',
+        '.wiki-result',
+        '.audio-player',
+        'table',
+        'fieldset',
+        'form',
+        '.retro-popup-ad',
+        '.side-pub-banner',
+        '.game-card',
+        '.moral-box',
+        '.cookie-banner',
+        '.modal-content',
+        '.decl-box',
+        '.insult-box',
+        'blockquote',
+        '.side-pub-img-container'
+    ];
+
+    document.querySelectorAll(selectors.join(', ')).forEach((el, index) => {
+        // Angles aléatoires bien bancals (-3.5deg à +3.5deg)
+        const angle = ((Math.random() - 0.5) * 7).toFixed(1);
+        const skewX = ((Math.random() - 0.5) * 3).toFixed(1);
+        const skewY = ((Math.random() - 0.5) * 3).toFixed(1);
+
+        // Rayons de bordure totalement assymétriques
+        const r1 = Math.floor(Math.random() * 30 + 5);
+        const r2 = Math.floor(Math.random() * 30 + 5);
+        const r3 = Math.floor(Math.random() * 30 + 5);
+        const r4 = Math.floor(Math.random() * 30 + 5);
+        const r5 = Math.floor(Math.random() * 30 + 5);
+        const r6 = Math.floor(Math.random() * 30 + 5);
+        const r7 = Math.floor(Math.random() * 30 + 5);
+        const r8 = Math.floor(Math.random() * 30 + 5);
+
+        el.style.transform = `rotate(${angle}deg) skew(${skewX}deg, ${skewY}deg)`;
+        el.style.borderRadius = `${r1}px ${r2}px ${r3}px ${r4}px / ${r5}px ${r6}px ${r7}px ${r8}px`;
+    });
+}
+
 // --- Publicités Rétro Alignées aux exigences exactes ---
 function createRetroAds() {
     const pageName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -529,23 +653,36 @@ function createRetroAds() {
     }
 
     const videoAds = retroAdPool.filter(a => a.isVideo);
+    const nonVideoAds = retroAdPool.filter(a => !a.isVideo);
     let selectedAds = [];
 
     if (isIndexPage) {
-        // Max 2 pubs sur l'index, dont AU MOINS UNE PUB VIDÉO
+        // Max 2-3 pubs sur l'index, dont AU MOINS UNE PUB VIDÉO + PODCAST / ANTI-ART
         const firstVideoAd = videoAds[Math.floor(Math.random() * videoAds.length)];
         selectedAds.push(firstVideoAd);
 
         const remainingPool = retroAdPool.filter(a => a.id !== firstVideoAd.id);
         const secondAd = remainingPool[Math.floor(Math.random() * remainingPool.length)];
         selectedAds.push(secondAd);
+
+        // Pub additionnelle Podcast ou Anti-art
+        if (nonVideoAds.length > 0) {
+            const thirdAd = nonVideoAds[Math.floor(Math.random() * nonVideoAds.length)];
+            if (!selectedAds.includes(thirdAd)) {
+                selectedAds.push(thirdAd);
+            }
+        }
     } else {
-        // Exactement 1 pub aléatoire sur les autres pages, et c'est TOUJOURS UNE PUB VIDÉO !
+        // 1 pub vidéo + parfois 1 pub podcast/anti-art sur les autres pages
         const randomVideoAd = videoAds[Math.floor(Math.random() * videoAds.length)];
         selectedAds.push(randomVideoAd);
+        if (Math.random() > 0.4 && nonVideoAds.length > 0) {
+            const extraAd = nonVideoAds[Math.floor(Math.random() * nonVideoAds.length)];
+            selectedAds.push(extraAd);
+        }
     }
 
-    // Instancier les pubs sélectionnées (sans bouger, position fixe)
+    // Instancier les pubs sélectionnées (sans bouger, position fixe et bancale)
     selectedAds.forEach(ad => {
         const popupElement = ad.create();
         document.body.appendChild(popupElement);
@@ -558,8 +695,10 @@ function createRetroAds() {
         popupVideos.forEach(vid => {
             vid.play().catch(() => {});
         });
+        makeEverythingBancale();
     }, 300);
 }
+
 
 
 
@@ -681,8 +820,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Injecter les morales dynamiques
-    setTimeout(injectMoralBoxes, 1000);
+    // Injecter les morales dynamiques et appliquer les formes bancales
+    setTimeout(() => {
+        injectMoralBoxes();
+        try { makeEverythingBancale(); } catch(e) {}
+    }, 1000);
+    try { makeEverythingBancale(); } catch(e) {}
 });
 
 // --- Cookies Banner avec VRAI HTML ---

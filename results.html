@@ -68,25 +68,22 @@
         <a href="chatiments.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Châtiments Corporels</a> |
         <a href="auditions.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Auditions</a> |
         <a href="latin.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Déclinaisons & Mozart</a> | 
+        <a href="jeux.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Le Clavecin</a> | 
         <a href="livre-dor.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Livre d'or</a>
     </div>
 
-    <div class="search-area" style="padding: 15px; text-align: center;">
-        <form action="results.html" method="GET">
-            <input type="text" name="q" id="searchInput" style="width: 70%; font-size: 1.2em; padding: 5px;" placeholder="Nouvelle recherche musicale..." />
-            <button type="submit" style="font-size: 1.2em; padding: 5px 15px;">Rechercher</button>
-        </form>
+    
+    <div class="search-area" style="padding: 20px; text-align: center; background: #fff8e6; border: double 6px gold; margin: 20px 0;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 15px;">
+            <img src="assets/giphy_maitre.gif" alt="Professeur Baguette" style="height: 80px; border: outset 3px red;" />
+            <form action="results.html" method="GET" style="flex: 1;">
+                <input type="text" name="q" id="searchInput" style="width: 75%; font-size: 1.3em; padding: 6px; border: outset 3px gold;" placeholder="Nouvelle recherche musicale..." />
+                <button type="submit" style="font-size: 1.2em; padding: 6px 18px; background: darkred; color: yellow; font-weight: bold; border: outset 4px gold; cursor: pointer;">Rechercher</button>
+            </form>
+            <img src="assets/teachers_day.gif" alt="Teachers Day" style="height: 80px; border: outset 3px gold;" />
+        </div>
     </div>
 
-    <div class="audio-player" style="margin: 20px auto; text-align: center;">
-        <h4 class="widget-title" style="margin-bottom: 5px;">Mozart Player 95</h4>
-        <div style="font-size: 0.9em; margin-bottom: 10px; font-family: monospace; min-height: 40px; display: flex; align-items: center; justify-content: center; text-align: center;">Œuvre diffusée : <em>Cliquez n'importe où sur le fond pour la musique !</em></div>
-        <button id="playBtn" onclick="toggleAudio()">Délecter mes tympans de Mozart</button>
-    </div>
-
-    <div class="results" id="resultsArea" style="display: block; background: #fff; border: outset 5px #dfdfdf; padding: 20px; margin-top: 20px;">
-        <div id="responseText"><p style="font-size: 1.5em; color: blue;">Recherche en cours dans les grimoires mondiaux...</p></div>
-    </div>
 
     <div style="text-align: center; margin-top: 30px;">
         <a href="index.html" style="font-size: 1.5em; background: #c0c0c0; padding: 10px; border: outset 4px #fff; text-decoration: none; color: black; font-weight: bold;">Retour au menu principal</a>

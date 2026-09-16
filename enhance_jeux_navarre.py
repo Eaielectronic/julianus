@@ -1,0 +1,693 @@
+#!/usr/bin/env python3
+"""
+Generate a hyper-pompous, chaotic, and fully functional jeux.html
+with crazy jumbled shapes, Navarre titles, pompous instructions,
+and a popup ad explosion EVERY 5 KEY PRESSES!
+"""
+
+html_content = """<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julianous - Le Clavecin Impérial de Navarre & 10 Épreuves</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles Spécifiques Piano, Formes Décalées & Mini-Jeux */
+        .piano-container {
+            background: linear-gradient(180deg, #3a0000, #800000, #2b1100);
+            border: outset 12px gold;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 15px 15px 0px #000;
+            text-align: center;
+            margin: 25px 0;
+            transform: rotate(-0.5deg);
+        }
+
+        .piano-keyboard {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            user-select: none;
+            margin: 20px auto;
+            background: #111;
+            padding: 18px;
+            border: inset 8px gold;
+            width: fit-content;
+            box-shadow: inset 0 0 25px black, 10px 10px 0px #400000;
+        }
+
+        .key {
+            cursor: pointer;
+            position: relative;
+            transition: background 0.1s, transform 0.1s;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 12px;
+            font-weight: bold;
+            font-family: 'Impact', sans-serif;
+            font-size: 1.1em;
+        }
+
+        .key.white {
+            width: 52px;
+            height: 200px;
+            background: linear-gradient(180deg, #ffffff 0%, #e6e6e6 100%);
+            color: #000;
+            border: 2px solid #333;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .key.white.active, .key.white:active {
+            background: #ffe680;
+            transform: translateY(4px);
+            box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+        }
+
+        .key.black {
+            width: 32px;
+            height: 120px;
+            background: linear-gradient(180deg, #333 0%, #000 100%);
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 0 0 4px 4px;
+            margin-left: -16px;
+            margin-right: -16px;
+            z-index: 2;
+            box-shadow: 2px 3px 5px rgba(0,0,0,0.8);
+        }
+
+        .key.black.active, .key.black:active {
+            background: #cc0000;
+            transform: translateY(3px);
+        }
+
+        .key.highlight-target {
+            animation: targetGlow 0.5s infinite alternate !important;
+        }
+
+        @keyframes targetGlow {
+            0% { box-shadow: 0 0 15px red; background: #ff4d4d; }
+            100% { box-shadow: 0 0 30px yellow; background: #ffff4d; }
+        }
+
+        /* Formes Décalées & Emmêlées pour la Grille des Exercices */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .ex-card {
+            background: #fff8e6;
+            border: outset 6px #800000;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Alternance des formes décalées et emmêlées */
+        .ex-card:nth-child(odd) {
+            transform: rotate(-1.5deg) skew(-1deg);
+            clip-path: polygon(0 0, 100% 2%, 98% 100%, 2% 98%);
+        }
+        .ex-card:nth-child(even) {
+            transform: rotate(1.5deg) skew(1deg);
+            clip-path: polygon(2% 0, 98% 0, 100% 98%, 0 100%);
+        }
+
+        .ex-card:hover {
+            transform: scale(1.05) rotate(0deg) skew(0deg) !important;
+            background: #ffe6b3;
+            box-shadow: 10px 10px 20px red !important;
+            z-index: 10;
+        }
+
+        .ex-card.selected {
+            border-color: gold;
+            background: #ffcccc;
+            box-shadow: inset 0 0 15px red;
+            transform: scale(1.04) !important;
+        }
+
+        .game-status-box {
+            background: #000040;
+            color: yellow;
+            border: double 10px gold;
+            padding: 25px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.4em;
+            margin: 20px 0;
+            box-shadow: 10px 10px 0px #000;
+            transform: rotate(0.5deg);
+        }
+
+        .pompous-badge {
+            background: yellow;
+            color: black;
+            font-weight: bold;
+            font-family: 'Impact', sans-serif;
+            padding: 4px 10px;
+            border: solid 2px black;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        #keyCounterDisplay {
+            font-size: 1.3em;
+            color: #00ffff;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite) -->
+<div id="sideBannerLeft" class="side-pub-banner side-pub-left">
+    <div class="side-pub-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgLeft" class="side-pub-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-pub-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="triggerPartitionPopupExplosion()">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-pub-banner side-pub-right">
+    <div class="side-pub-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgRight" class="side-pub-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-pub-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="triggerPartitionPopupExplosion()">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
+<div class="container">
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 30px;">
+        <h1 style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0; font-size: 3.8em;">
+            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: 4px 4px 10px black;" />
+            <span>Julianous</span>
+            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: -4px 4px 10px black;" />
+        </h1>
+        <h2 style="margin-top: 10px; margin-bottom: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
+    </div>
+
+    <!-- MENU DE NAVIGATION -->
+    <div class="nav-menu" style="background-color: #000080; padding: 15px; margin-top: 20px; margin-bottom: 20px; border: inset 5px #dfdfdf; text-align: center;">
+        <a href="index.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Accueil</a> |
+        <a href="etudes.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Études Classiques</a> |
+        <a href="requiem.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Requiem de Mozart</a> |
+        <a href="chatiments.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Châtiments Corporels</a> |
+        <a href="auditions.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Auditions</a> |
+        <a href="latin.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Déclinaisons & Mozart</a> |
+        <a href="jeux.html" style="color: #ffff00; text-decoration: underline; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Le Clavecin</a> |
+        <a href="livre-dor.html" style="color: #ffffff; text-decoration: none; font-weight: bold; margin: 0 10px; font-family: 'Times New Roman', Times, serif; font-size: 1.3em;">Livre d'or</a>
+    </div>
+
+    <!-- HEADER HYPER POMPEUX DE NAVARRE -->
+    <div style="background: linear-gradient(135deg, #400000, #800000, #1a0033); border: double 12px gold; padding: 30px; text-align: center; color: white; margin-bottom: 25px; box-shadow: 12px 12px 0px #000; transform: rotate(-0.5deg);">
+        <h2 style="font-family: 'Impact', sans-serif; font-size: 3.2em; margin: 0; color: yellow; text-shadow: 4px 4px 0px black; text-transform: uppercase;">
+            👑 LE GRAND THÉÂTRE IMPÉRIAL DE NAVARRE, MOZART, MOLIÈRE & DU TRÈS GRAND MAÎTRE JULIANOUS 👑
+        </h2>
+        <h3 class="blink" style="color: cyan; font-size: 1.8em; margin-top: 15px;">
+            « SOUFFREZ EN MUSIQUE DANS LES RÈGLES SACRÉES DE LA COUR, DE LA GRAMMAIRE ET DE LA NOBLESSE ! »
+        </h3>
+        <div style="margin-top: 15px; font-size: 1.2em; color: #ffcccc; font-family: 'Times New Roman', serif; font-style: italic;">
+            ⚠️ AVERTISSEMENT SOLENNEL : TOUTES LES 5 TOUCHES FRAPPÉES SUR LE CLAVECIN, UNE DÉFLAGRATION DE RÉCLAMES IMPÉRIALES SERA DÉCLENCHÉE !
+        </div>
+    </div>
+
+    <!-- SECTION PIANO INTERACTIF VRAI SON (WEB AUDIO API) -->
+    <div class="piano-container">
+        <h3 style="color: yellow; font-family: 'Impact', sans-serif; font-size: 2.2em; margin-top: 0; text-transform: uppercase;">
+            🎹 LE CLAVECIN MAJESTUEUX DE LA COUR DE NAVARRE (VRAIS SONS SYNTHÉTISÉS) 🎹
+        </h3>
+        <p style="color: white; font-size: 1.25em;">
+            Touches Clavier PC : <strong>A, Z, E, R, T, Y, U, I, O, P</strong> (Blanches) / <strong>S, D, G, H, J</strong> (Noires / Dièses)
+        </p>
+
+        <!-- CLAVIER DE PIANO HTML -->
+        <div class="piano-keyboard" id="pianoKeyboard">
+            <div class="key white" data-note="C4" data-key="a">DO<br>(A)</div>
+            <div class="key black" data-note="C#4" data-key="s">C#</div>
+            <div class="key white" data-note="D4" data-key="z">RÉ<br>(Z)</div>
+            <div class="key black" data-note="D#4" data-key="d">D#</div>
+            <div class="key white" data-note="E4" data-key="e">MI<br>(E)</div>
+            <div class="key white" data-note="F4" data-key="r">FA<br>(R)</div>
+            <div class="key black" data-note="F#4" data-key="g">F#</div>
+            <div class="key white" data-note="G4" data-key="t">SOL<br>(T)</div>
+            <div class="key black" data-note="G#4" data-key="h">G#</div>
+            <div class="key white" data-note="A4" data-key="y">LA<br>(Y)</div>
+            <div class="key black" data-note="A#4" data-key="j">A#</div>
+            <div class="key white" data-note="B4" data-key="u">SI<br>(U)</div>
+            <div class="key white" data-note="C5" data-key="i">DO5<br>(I)</div>
+            <div class="key white" data-note="D5" data-key="o">RÉ5<br>(O)</div>
+            <div class="key white" data-note="E5" data-key="p">MI5<br>(P)</div>
+        </div>
+
+        <!-- COMPTEUR DE TOUCHES ET POPUP EN DIRECT -->
+        <div id="keyCounterDisplay">⚡ Touches frappées : 0 / 5 avant la déflagration de pub ! ⚡</div>
+
+        <!-- ZONE DE STATUT DU JEU COURANT -->
+        <div class="game-status-box" id="gameStatusBox">
+            <div id="exerciseTitle" style="color: yellow; font-family: 'Impact'; font-size: 1.6em;">Sélectionnez une épreuve ci-dessous pour démarrer le défi du Maître de Navarre !</div>
+            <div id="exerciseInstructions" style="margin-top: 10px; color: white;">Cliquez librement sur les touches du clavecin impérial ci-dessus pour composer ou délecter vos oreilles !</div>
+            <div id="exerciseScore" style="margin-top: 10px; font-weight: bold; color: lime;">Score : 0 / 10</div>
+        </div>
+    </div>
+
+    <!-- SELECTION DES 10 TYPES D'EXERCICES DE MOZART & MOLIÈRE DE NAVARRE -->
+    <div style="background: #ffffec; border: outset 8px #800000; padding: 25px; margin: 30px 0; box-shadow: 10px 10px 0px #000;">
+        <h2 style="color: #800000; text-align: center; font-family: 'Impact', sans-serif; font-size: 2.5em; border-bottom: double 6px #800000; padding-bottom: 10px; margin-top: 0; text-transform: uppercase;">
+            🏆 LES 10 ÉPREUVES SÉVÈRES DU CONSERVATOIRE DE NAVARRE 🏆
+        </h2>
+
+        <div class="exercise-grid">
+            <!-- EX 1 -->
+            <div class="ex-card" onclick="startExercise(1)">
+                <span class="pompous-badge">ÉPREUVE I</span>
+                <h3 style="color: #800000; margin-top: 5px;">1. La Marche Turque de Navarre</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Exécutez les 4 premières notes de la Marche Turque sous peine d'assignation en justice par la Cour !</p>
+                <button style="background: red; color: yellow; font-weight: bold; border: outset 3px gold; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve I</button>
+            </div>
+
+            <!-- EX 2 -->
+            <div class="ex-card" onclick="startExercise(2)">
+                <span class="pompous-badge">ÉPREUVE II</span>
+                <h3 style="color: #000080; margin-top: 5px;">2. Le Châtiment de la Fausse Note</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Identifiez la touche maudite piégée par le Maître avant que la sentence de Molière ne tombe !</p>
+                <button style="background: #000080; color: white; font-weight: bold; border: outset 3px cyan; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve II</button>
+            </div>
+
+            <!-- EX 3 -->
+            <div class="ex-card" onclick="startExercise(3)">
+                <span class="pompous-badge">ÉPREUVE III</span>
+                <h3 style="color: #006600; margin-top: 5px;">3. L'Ablatif Absolu Musical</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Associez le contrepoint parfait de la rose latine à sa touche de clavecin sous la dictée du Maître !</p>
+                <button style="background: #006600; color: yellow; font-weight: bold; border: outset 3px lime; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve III</button>
+            </div>
+
+            <!-- EX 4 -->
+            <div class="ex-card" onclick="startExercise(4)">
+                <span class="pompous-badge">ÉPREUVE IV</span>
+                <h3 style="color: purple; margin-top: 5px;">4. Le Séquenceur de Mozart</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Séquenceur Impérial : Répétez la symphonie sacrée de Mozart mot pour mot, note pour note !</p>
+                <button style="background: purple; color: white; font-weight: bold; border: outset 3px magenta; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve IV</button>
+            </div>
+
+            <!-- EX 5 -->
+            <div class="ex-card" onclick="startExercise(5)">
+                <span class="pompous-badge">ÉPREUVE V</span>
+                <h3 style="color: #993300; margin-top: 5px;">5. Le Duel Théâtral de Molière</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Terrassez la vanité littéraire du poète Trissotin par l'éclat de votre note aiguë !</p>
+                <button style="background: #993300; color: yellow; font-weight: bold; border: outset 3px gold; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve V</button>
+            </div>
+
+            <!-- EX 6 -->
+            <div class="ex-card" onclick="startExercise(6)">
+                <span class="pompous-badge">ÉPREUVE VI</span>
+                <h3 style="color: darkred; margin-top: 5px;">6. Vitesse & Dièses Royaux</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Frappez 5 dièses sacrés (touches noires) avec la fureur et la rapidité d'un mousquetaire !</p>
+                <button style="background: darkred; color: yellow; font-weight: bold; border: outset 3px gold; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve VI</button>
+            </div>
+
+            <!-- EX 7 -->
+            <div class="ex-card" onclick="startExercise(7)">
+                <span class="pompous-badge">ÉPREUVE VII</span>
+                <h3 style="color: #1a0033; margin-top: 5px;">7. Le Dies Irae de la Cour</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Rejouez le motif funèbre du Requiem KV 626 sans commettre la moindre fausse note !</p>
+                <button style="background: #1a0033; color: cyan; font-weight: bold; border: outset 3px magenta; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve VII</button>
+            </div>
+
+            <!-- EX 8 -->
+            <div class="ex-card" onclick="startExercise(8)">
+                <span class="pompous-badge">ÉPREUVE VIII</span>
+                <h3 style="color: #333300; margin-top: 5px;">8. L'Accord Parfait Impérial</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Construisez la triade sacrée de DO Majeur devant toute la noblesse de la Cour !</p>
+                <button style="background: #333300; color: yellow; font-weight: bold; border: outset 3px gold; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve VIII</button>
+            </div>
+
+            <!-- EX 9 -->
+            <div class="ex-card" onclick="startExercise(9)">
+                <span class="pompous-badge">ÉPREUVE IX</span>
+                <h3 style="color: #004d4d; margin-top: 5px;">9. La Flûte Enchantée</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">Reproduisez les trilles virtuoses de l'oiseleur Papageno parmi les sons aigus du clavecin !</p>
+                <button style="background: #004d4d; color: lime; font-weight: bold; border: outset 3px cyan; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve IX</button>
+            </div>
+
+            <!-- EX 10 -->
+            <div class="ex-card" onclick="startExercise(10)">
+                <span class="pompous-badge">ÉPREUVE X</span>
+                <h3 style="color: #800080; margin-top: 5px;">10. L'Examen Ultime & Sacre</h3>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1em;">L'ultime sacre du cancre repenti combinant clavecin, latin et tirades royales devant le Maître !</p>
+                <button style="background: #800080; color: yellow; font-weight: bold; border: outset 3px gold; padding: 8px 15px; cursor: pointer;">Jouer l'épreuve X</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PETITS JEUX ET GADGETS SÉPARÉS MOLIÈRE & MOZART -->
+    <div style="background: #fff0f5; border: dashed 6px #cc0066; padding: 25px; margin: 30px 0; box-shadow: 10px 10px 0px #000;">
+        <h2 style="color: #99004d; text-align: center; font-family: 'Impact', sans-serif; font-size: 2.3em; margin-top: 0;">
+            🎭 GADGETS & MINI-JEUX COMPLÉMENTAIRES MOLIÈRE & MOZART DE NAVARRE 🎭
+        </h2>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <!-- GADGET 1 : GENERATEUR D'INSULTES BAROQUES DE MOLIERE -->
+            <div style="flex: 1; min-width: 280px; background: white; border: double 6px #800000; padding: 20px; text-align: center; transform: rotate(-1deg);">
+                <h3 style="color: #800000; margin-top: 0;">📜 Générateur d'Insultes Baroques de Molière</h3>
+                <p style="font-size: 1.1em;">Recevez une tirade cinglante de Molière réadaptée contre les cancres !</p>
+                <button onclick="generateMoliereInsult()" style="background: #800000; color: yellow; font-size: 1.2em; font-weight: bold; padding: 10px 20px; border: outset 4px gold; cursor: pointer;">
+                    ⚡ Générer une insulte d'époque ⚡
+                </button>
+                <p id="moliereInsultDisplay" style="font-size: 1.3em; font-style: italic; color: darkred; margin-top: 15px; font-family: 'Times New Roman'; min-height: 50px;"></p>
+            </div>
+
+            <!-- GADGET 2 : ROULETTE DE LA FORTUNE DU SOLFÈGE -->
+            <div style="flex: 1; min-width: 280px; background: white; border: double 6px #000080; padding: 20px; text-align: center; transform: rotate(1deg);">
+                <h3 style="color: #000080; margin-top: 0;">🎲 Roue de la Fortune Solfégique</h3>
+                <p style="font-size: 1.1em;">Tournez la roue du Maître pour découvrir votre sentence musicale !</p>
+                <button onclick="spinSolfegeWheel()" style="background: #000080; color: cyan; font-size: 1.2em; font-weight: bold; padding: 10px 20px; border: outset 4px cyan; cursor: pointer;">
+                    🎰 Tourner la Roue 🎰
+                </button>
+                <p id="wheelResultDisplay" style="font-size: 1.3em; font-weight: bold; color: #000080; margin-top: 15px; min-height: 50px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOUTON RETOUR -->
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+        <a href="index.html" style="font-size: 1.5em; background: #c0c0c0; padding: 12px 25px; border: outset 5px #fff; text-decoration: none; color: black; font-weight: bold; box-shadow: 5px 5px 0px black;">
+            ⬅️ RETOUR À L'ACCUEIL DU MAÎTRE
+        </a>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // ==========================================
+    // SYNTHÉTISEUR DE SON PIANO / CLAVECIN (WEB AUDIO API)
+    // ==========================================
+    let audioCtx = null;
+    let globalKeyPressCount = 0;
+
+    const noteFrequencies = {
+        'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13,
+        'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00,
+        'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+        'C5': 523.25, 'D5': 587.33, 'E5': 659.25
+    };
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    }
+
+    function playNoteSound(note) {
+        initAudio();
+        if (!noteFrequencies[note]) return;
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // Son type clavecin baroque (Triangle + harmoniques)
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(noteFrequencies[note], audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+    }
+
+    // Bind clavier virtuel et clavier PC
+    const keys = document.querySelectorAll('.key');
+    const keyMap = {};
+
+    keys.forEach(k => {
+        const note = k.getAttribute('data-note');
+        const keyboardChar = k.getAttribute('data-key');
+        keyMap[keyboardChar] = k;
+
+        k.addEventListener('click', () => {
+            playKey(k, note);
+        });
+    });
+
+    window.addEventListener('keydown', (e) => {
+        const char = e.key.toLowerCase();
+        if (keyMap[char]) {
+            const k = keyMap[char];
+            const note = k.getAttribute('data-note');
+            playKey(k, note);
+        }
+    });
+
+    function playKey(keyEl, note) {
+        keyEl.classList.add('active');
+        setTimeout(() => keyEl.classList.remove('active'), 200);
+        playNoteSound(note);
+        
+        // COMPTEUR DE TOUCHES & POPUP TOUTES LES 5 TOUCHES !
+        globalKeyPressCount++;
+        const counterDisp = document.getElementById('keyCounterDisplay');
+        const remaining = 5 - (globalKeyPressCount % 5);
+        counterDisp.innerText = `⚡ Touches frappées : ${globalKeyPressCount} (${remaining === 5 ? 0 : remaining} restante(s) avant la pub !) ⚡`;
+
+        if (globalKeyPressCount % 5 === 0) {
+            // EXPLOSION DE POPUPS RÉCLAMES RÉTRO !
+            triggerPartitionPopupExplosion();
+        }
+
+        handleExerciseInput(note);
+    }
+
+    // ==========================================
+    // LOGIQUE DES 10 EXERCICES DE MOZART & MOLIÈRE DE NAVARRE
+    // ==========================================
+    let currentExercise = 0;
+    let exerciseStep = 0;
+    let score = 0;
+    let simonSequence = [];
+
+    function startExercise(exNum) {
+        currentExercise = exNum;
+        exerciseStep = 0;
+        score = 0;
+
+        document.querySelectorAll('.ex-card').forEach((c, idx) => {
+            c.classList.toggle('selected', idx + 1 === exNum);
+        });
+
+        const title = document.getElementById('exerciseTitle');
+        const instr = document.getElementById('exerciseInstructions');
+        const sc = document.getElementById('exerciseScore');
+
+        document.querySelectorAll('.key').forEach(k => k.classList.remove('highlight-target'));
+
+        if (exNum === 1) {
+            title.innerText = "Épreuve I : La Marche Turque de la Cour de Navarre";
+            instr.innerText = "Exécutez séance tenante les 4 premières notes : B4 -> A4 -> G#4 -> A4 (Touches PC : U -> Y -> H -> Y)";
+            highlightKey('B4');
+        } else if (exNum === 2) {
+            title.innerText = "Épreuve II : Le Châtiment de la Fausse Note";
+            instr.innerText = "Identifiez et frappez la touche clignotante en rouge avant la sentence de Molière !";
+            highlightRandomKey();
+        } else if (exNum === 3) {
+            title.innerText = "Épreuve III : L'Ablatif Absolu Musical";
+            instr.innerText = "Associez l'ablatif de Rosa (Rosa) à la touche DO (C4 / Toucher A) !";
+            highlightKey('C4');
+        } else if (exNum === 4) {
+            title.innerText = "Épreuve IV : Le Séquenceur Impérial de Mozart";
+            instr.innerText = "Séquenceur Impérial : Répétez la symphonie sacrée de Mozart mot pour mot, note pour note !";
+            simonSequence = ['C4', 'E4', 'G4', 'C5'];
+            playSimonSequence();
+        } else if (exNum === 5) {
+            title.innerText = "Épreuve V : Le Duel Théâtral de Molière";
+            instr.innerText = "Trissotin déclame ses mauvais poèmes ! Frappez la note la plus aiguë (MI5 / Toucher P) !";
+            highlightKey('E5');
+        } else if (exNum === 6) {
+            title.innerText = "Épreuve VI : Vitesse & Dièses Royaux";
+            instr.innerText = "Frappez 5 dièses sacrés (touches noires) avec la fureur d'un mousquetaire de Navarre !";
+        } else if (exNum === 7) {
+            title.innerText = "Épreuve VII : Le Dies Irae de la Cour";
+            instr.innerText = "Rejouez le motif funèbre du Requiem KV 626 : D4 -> D4 -> D4 -> C4 (Touches PC : Z -> Z -> Z -> A)";
+            highlightKey('D4');
+        } else if (exNum === 8) {
+            title.innerText = "Épreuve VIII : L'Accord Parfait Impérial";
+            instr.innerText = "Construisez la triade sacrée de DO Majeur : appuyez sur la note MI (E4 / Toucher E) !";
+            highlightKey('E4');
+        } else if (exNum === 9) {
+            title.innerText = "Épreuve IX : La Flûte Enchantée";
+            instr.innerText = "Reproduisez les trilles virtuoses de Papageno : G4 -> B4 -> D5 (Touches PC : T -> U -> O)";
+            highlightKey('G4');
+        } else if (exNum === 10) {
+            title.innerText = "Épreuve X : L'Examen Ultime & Sacre de Julianous";
+            instr.innerText = "Jouez le DO suprême (C5 / Toucher I) pour obtenir le diplôme royal de la Cour de Navarre !";
+            highlightKey('C5');
+        }
+
+        sc.innerText = "Score : " + score + " / 10";
+    }
+
+    function highlightKey(note) {
+        document.querySelectorAll('.key').forEach(k => {
+            if (k.getAttribute('data-note') === note) {
+                k.classList.add('highlight-target');
+            }
+        });
+    }
+
+    function highlightRandomKey() {
+        const keysArr = Array.from(document.querySelectorAll('.key'));
+        const randK = keysArr[Math.floor(Math.random() * keysArr.length)];
+        randK.classList.add('highlight-target');
+    }
+
+    function playSimonSequence() {
+        let delay = 500;
+        simonSequence.forEach(note => {
+            setTimeout(() => {
+                const k = document.querySelector(`.key[data-note="${note}"]`);
+                if (k) playKey(k, note);
+            }, delay);
+            delay += 600;
+        });
+    }
+
+    function handleExerciseInput(note) {
+        if (currentExercise === 0) return;
+
+        const instr = document.getElementById('exerciseInstructions');
+        const sc = document.getElementById('exerciseScore');
+
+        if (currentExercise === 1) {
+            const marcheTurqueSeq = ['B4', 'A4', 'G#4', 'A4'];
+            if (note === marcheTurqueSeq[exerciseStep]) {
+                exerciseStep++;
+                if (exerciseStep < marcheTurqueSeq.length) {
+                    highlightKey(marcheTurqueSeq[exerciseStep]);
+                } else {
+                    score = 10;
+                    instr.innerText = "✅ BRAVO NOBLE CANCRE ! La Marche Turque est parfaitement interprétée devant la Cour de Navarre !";
+                }
+            } else {
+                instr.innerText = "❌ FAUSSE NOTE ! Le Maître vous assène un coup de règle impérial sur les doigts ! Réessayez.";
+                exerciseStep = 0;
+            }
+        } else if (currentExercise === 2) {
+            score = 10;
+            instr.innerText = "✅ EXCELLENT ! Vous avez neutralisé la fausse note avant la sentence de Molière !";
+        } else if (currentExercise === 3) {
+            if (note === 'C4') {
+                score = 10;
+                instr.innerText = "✅ PARFAIT ! L'Ablatif Absolu et le DO Majeur sont sanctifiés par le Maître !";
+            }
+        } else if (currentExercise === 4) {
+            if (note === simonSequence[exerciseStep]) {
+                exerciseStep++;
+                if (exerciseStep === simonSequence.length) {
+                    score = 10;
+                    instr.innerText = "✅ MÉMOIRE IMPÉRIAL ! Vous avez reproduit la symphonie de Mozart sans la moindre erreur !";
+                }
+            } else {
+                instr.innerText = "❌ ERREUR DE MÉMOIRE ! L'esprit de Mozart secoue la tête avec mépris !";
+                exerciseStep = 0;
+            }
+        } else if (currentExercise === 5) {
+            if (note === 'E5') {
+                score = 10;
+                instr.innerText = "✅ TRISSOTIN EST TERRASSÉ ! Votre note aiguë a fait fuir les mauvais poètes de la Cour !";
+            }
+        } else if (currentExercise === 6) {
+            if (note.includes('#')) {
+                exerciseStep++;
+                if (exerciseStep >= 5) {
+                    score = 10;
+                    instr.innerText = "✅ VITESSE FULGURANTE ! 5 dièses royaux enchaînés avec la fureur d'un mousquetaire !";
+                }
+            }
+        } else if (currentExercise === 7) {
+            const diesIraeSeq = ['D4', 'D4', 'D4', 'C4'];
+            if (note === diesIraeSeq[exerciseStep]) {
+                exerciseStep++;
+                if (exerciseStep === diesIraeSeq.length) {
+                    score = 10;
+                    instr.innerText = "✅ REQUIEM EXÉCUTÉ ! Les larmes du Lacrimosa s'évaporent devant votre talent !";
+                }
+            }
+        } else if (currentExercise === 8) {
+            if (note === 'E4') {
+                score = 10;
+                instr.innerText = "✅ ACCORD PARFAIT MAJEUR ! La triade sacrée de DO est en place devant la Noblesse !";
+            }
+        } else if (currentExercise === 9) {
+            if (note === 'G4' || note === 'B4' || note === 'D5') {
+                score = 10;
+                instr.innerText = "✅ PAPAGENO CHANTE ! Les oiseaux de la Flûte Enchantée s'envolent dans les jardins de Navarre !";
+            }
+        } else if (currentExercise === 10) {
+            if (note === 'C5') {
+                score = 10;
+                instr.innerText = "🎓 DIPLÔME ROYAL OBTENU ! Le Très Grand Maître Julianous s'incline solennellement devant votre grandeur !";
+            }
+        }
+
+        sc.innerText = "Score : " + score + " / 10";
+    }
+
+    // ==========================================
+    // GADGETS MOLIÈRE & MOZART DE NAVARRE
+    // ==========================================
+    function generateMoliereInsult() {
+        const insults = [
+            "« Allez, cancrelat de solfège ! Retournez brailler vos octaves parmi les pécores du village de Navarre ! »",
+            "« Un tel massacre du contrepoint ferait démissionner la troupe du Théâtre du Palais-Royal ! »",
+            "« Votre ignorance égale votre audace : vous touchez au clavecin comme un pourceau au marbre ! »",
+            "« Fi de vos fausses notes ! Qu'on m'apporte une règle en fer pour discipliner cet esprit récalcitrant ! »",
+            "« Vous parlez de musique comme Trissotin parle de poésie : avec l'assurance de la bêtise crasse ! »"
+        ];
+        const display = document.getElementById('moliereInsultDisplay');
+        display.innerText = insults[Math.floor(Math.random() * insults.length)];
+    }
+
+    function spinSolfegeWheel() {
+        const sentences = [
+            "🔴 SENTENCE : 50 lignes de 'Je ne ferai plus de quintes parallèles devant le Roi' !",
+            "🟡 CHANCE : Le Maître de Navarre vous pardonne une fausse note exceptionnellement !",
+            "🟢 DIPLÔME : Vous gagnez la médaille d'or du Clavecin Impérial !",
+            "🟣 CHÂTIMENT : Exécution immédiate du Dies Irae les yeux bandés devant toute la Cour !"
+        ];
+        const display = document.getElementById('wheelResultDisplay');
+        display.innerText = sentences[Math.floor(Math.random() * sentences.length)];
+    }
+</script>
+</body>
+</html>
+"""
+
+with open("/home/tronix/julianous/jeux.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Generated hyper-pompous, chaotic jeux.html with Navarre titles and 5-keypress popup explosion!")
