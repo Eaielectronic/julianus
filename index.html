@@ -51,7 +51,7 @@
         <h2>Halte-là, cancrelat !</h2>
         <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
         <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
-        <input type="text" id="modalAnswer" placeholder="Votre réponse...">
+        <input type="text" id="modalAnswer" placeholder="Votre réponse..." onkeypress="if(event.key==='Enter') checkModalAnswer();">
         <button onclick="checkModalAnswer()">Soumettre au Maître</button>
         <button onclick="skipModalExercise()" style="margin-left:10px;">Sécher le cours</button>
         <p id="modalResponse" style="color:red; font-weight:bold;"></p>

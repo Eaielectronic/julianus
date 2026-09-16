@@ -983,14 +983,19 @@ function skipCookieExercise() {
 // --- Système de Recherche avec API Wikipedia ---
 async function performSearch(input, offset = 0) {
     const responseText = document.getElementById("responseText");
-    
-    if(!input || input.trim() === "") {
-        responseText.innerHTML = "<p style='color:red; font-size:1.5em; font-weight:bold;'>Fichtre ! Vous omettez de remplir le formulaire !</p>";
-        return;
+    if (!responseText) return;
+
+    if (!input || typeof input !== 'string' || input.trim() === "") {
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput && searchInput.value && searchInput.value.trim() !== "") {
+            input = searchInput.value.trim();
+        } else {
+            responseText.innerHTML = "<p style='color:red; font-size:1.5em; font-weight:bold; text-align:center;'>Fichtre ! Vous omettez de remplir le formulaire !</p>";
+            return;
+        }
     }
 
     try {
-        // API Wikipedia: srlimit=20 pour avoir 2x plus de résultats et sroffset pour la pagination
         const enhancedInput = input; 
         const url = `https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(enhancedInput)}&utf8=&format=json&srlimit=20&sroffset=${offset}&origin=*`;
         
@@ -1014,58 +1019,132 @@ async function performSearch(input, offset = 0) {
         } else {
             const searchResults = data.query.search;
             
-            // Fausses publicités façon spam des années 90 avec exercices et vidéos
-            const fakeAds = [
-                { 
-                    title: "🎉 FÉLICITATIONS ! VOUS ÊTES LE 100 000ème ÉLÈVE ! 🎉", 
-                    text: "Gagnez un Minitel couleur en calculant immédiatement la dérivée seconde de f(x) = arctan(e^(x^2)) de tête. Dépêchez-vous, cette offre expire dans 3 minutes !" 
-                },
-                { 
-                    title: "🔥 PERDEZ DE L'IGNORANCE EN 7 JOURS ! 🔥", 
-                    text: "Notre méthode miracle: conjuguez le verbe 'choir' au subjonctif plus-que-parfait tous les matins. Cliquez ici pour révéler le secret jalousement gardé !" 
-                },
-                { 
-                    title: "⚠️ ALERTE VIRUS D'INCULTURE ⚠️", 
-                    text: "Votre ordinateur a détecté de la musique commerciale ! Démontrez le théorème de Fermat pour désinfecter votre disque dur sur-le-champ." 
-                },
-                { 
-                    title: "💰 AUGMENTEZ VOTRE QI DE 500 POINTS 💰", 
-                    text: "Traduisez 'L'étudiant incompétent sera foudroyé' en araméen ancien pour accéder au compte bancaire secret de Beethoven !" 
+            // Publicités intercalées : GIFs, Vidéos réelles, et Textes Rétro 90s
+            const inlineSearchAds = [
+                {
+                    type: 'gif',
+                    gif: 'assets/dancing_teacher.gif',
+                    title: '🎓 COURS PARTICULIERS DE RIGUEUR ET DE CLAVECIN 🎓',
+                    text: 'Le Maître esquisse une danse de célébration pour les élèves qui révisent 6 heures par jour !',
+                    badge: 'RÉCLAME 100% PÉDAGOGIQUE'
                 },
                 {
-                    title: "🎥 AUDITION CATASTROPHIQUE 🎥",
-                    text: "Observez cette abomination musicale et souffrez avec moi !",
-                    video: "assets/audition1.mp4"
+                    type: 'video',
+                    video: 'assets/course_video.mp4',
+                    title: '🎥 EXTRAIT EN DIRECT DE LA CLASSE DE JULIANOUS 🎥',
+                    text: 'Observez cette démonstration Magistrale et prenez immédiatement des notes sur votre cahier !',
+                    badge: 'SÉQUENCE VIDÉO EXCLUSIVE'
                 },
                 {
-                    title: "🎥 LE SUPPLICE DE L'ÉLITE 🎥",
-                    text: "Regardez ceci et méditez sur votre propre médiocrité crasse.",
-                    video: "assets/audition2.mp4"
+                    type: 'text',
+                    title: '⚡ SPONSOR EXCLUSIF : DICTIONNAIRE LATIN DE 1842 ⚡',
+                    text: 'Conjuguez 500 verbes par jour et obtenez l\'absolution du Maître au prochain contrôle impérial !',
+                    badge: 'OFFRE RARE & IMPÉRIALE'
                 },
                 {
-                    title: "🎥 L'HORREUR VISUELLE ET AUDITIVE 🎥",
-                    text: "Analysez cette vidéo et faites une dissertation de 40 pages pour demain matin.",
-                    video: "assets/audition3.mp4"
+                    type: 'gif',
+                    gif: 'assets/sesame_street_band.gif',
+                    title: '🎺 RECRUTEMENT DE FANFARE ÉTUDIANTE 🎺',
+                    text: 'Pour les cancres repentis, une répétition générale sous haute surveillance rythmique !',
+                    badge: 'PAUSE FANFARE'
                 },
                 {
-                    title: "🎥 SOUILLURE EN TRÈS BASSE RÉSOLUTION 🎥",
-                    text: "Même avec si peu de pixels, votre médiocrité crève les yeux.",
-                    video: "assets/audition4.mp4"
+                    type: 'video',
+                    video: 'assets/audition1.mp4',
+                    title: '🎥 ARCHIVE D\'AUDITION MAJEURE EN HISTOIRE DE LA MUSIQUE 🎥',
+                    text: 'Découvrez ce que donne un travail acharné sans aucune mollesse intellectuelle !',
+                    badge: 'ARCHIVE VIDÉO RÉELLE'
+                },
+                {
+                    type: 'gif',
+                    gif: 'assets/dance_opera.gif',
+                    title: '🎭 OPÉRA EN SÉRIE : BALLET DU MAÎTRE 🎭',
+                    text: 'Aucune faute de solfège n\'est tolérée au sein du grand corps de ballet !',
+                    badge: 'BALLET SPONSORED'
+                },
+                {
+                    type: 'text',
+                    title: '💰 GAGNEZ UN DIAPASON D\'OR MASSIF 18 CARATS ! 💰',
+                    text: 'Résolvez l\'énigme du Requiem de Mozart en envoyant la réponse par Minitel au 3615 JULIANOUS !',
+                    badge: 'CONCOURS DE L\'ÉLITE'
+                },
+                {
+                    type: 'video',
+                    video: 'assets/virus_art.mp4',
+                    title: '🎥 DOCUMENTAIRE CHOC : L\'EFFET DU CLAVECIN SUR LE CERVEAU 🎥',
+                    text: 'La preuve vidéo que la musique baroque guérit de l\'ignorance crasse !',
+                    badge: 'DOCUMENTAIRE CHOC'
+                },
+                {
+                    type: 'gif',
+                    gif: 'assets/conducting_van_cliburn.gif',
+                    title: '🎼 MAESTRO EN ACTION : SYMPHONIE ACADÉMIQUE 🎼',
+                    text: 'Admirez la précision du geste sous la direction magistrale du virtuose !',
+                    badge: 'MAESTRO VIVANT'
+                },
+                {
+                    type: 'video',
+                    video: 'assets/mozart_pub.mp4',
+                    title: '🎥 GRAND OPUS MOZART EN VIDEO HAUTE DÉFINITION 🎥',
+                    text: 'Contemplez cette œuvre sacrée qui devrait résonner en vous nuit et jour.',
+                    badge: 'VRAIE VIDÉO MOZART'
                 }
             ];
+
+            let adIndex = 0;
 
             searchResults.forEach((result, index) => {
                 const wikiUrl = `https://fr.wikipedia.org/wiki/${encodeURIComponent(result.title)}`;
 
                 htmlContent += `
                     <div class="wiki-result" style="margin-bottom: 20px; border: outset 4px #dfdfdf; background: #ffffe6; padding: 15px; text-align: left;">
-                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A1_music_note.gif" alt="Note" style="height: 40px; float: left; margin-right: 15px;">
+                        <img src="assets/A1_music_note.gif" alt="Note" style="height: 40px; float: left; margin-right: 15px;">
                         <a href="${wikiUrl}" target="_blank" style="color: #ff0000; font-size: 1.4em; font-family: 'Times New Roman', serif; text-decoration: none; font-weight: bold;">📚 ${result.title} 🎵</a>
                         <div style="color: #000080; font-size: 1em; margin-bottom: 5px; font-weight: bold;">JulianousID: ${Math.floor(Math.random()*10000)} - Pertinence Académique: 100%</div>
                         <div class="snippet" style="color: #000; font-size: 1.1em; font-family: 'Comic Sans MS', cursive;">${result.snippet}...</div>
                         <div style="clear: both;"></div>
                     </div>
                 `;
+
+                // Insérer une pub toutes les 2 réponses de recherche
+                if ((index + 1) % 2 === 0) {
+                    const ad = inlineSearchAds[adIndex % inlineSearchAds.length];
+                    adIndex++;
+
+                    let adMediaHTML = '';
+                    if (ad.type === 'gif') {
+                        adMediaHTML = `
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin: 10px 0; flex-wrap: wrap;">
+                                <img src="${ad.gif}" style="max-height: 95px; border: outset 3px gold; border-radius: 4px;" alt="Pub GIF">
+                                <p style="font-size: 1.05em; color: #333; font-style: italic; margin: 0; text-align: left; max-width: 420px; font-family: 'Times New Roman', serif;">${ad.text}</p>
+                            </div>
+                        `;
+                    } else if (ad.type === 'video') {
+                        adMediaHTML = `
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin: 10px 0;">
+                                <video class="fake-ad-video all-ad-video" src="${ad.video}" controls style="max-width: 300px; max-height: 170px; border: outset 4px #000; background: #000;"></video>
+                                <p style="font-size: 1em; color: #333; font-style: italic; margin: 0; text-align: center; max-width: 480px; font-family: 'Times New Roman', serif;">${ad.text}</p>
+                            </div>
+                        `;
+                    } else {
+                        adMediaHTML = `
+                            <p style="font-size: 1.15em; color: #000080; font-weight: bold; margin: 10px 0; font-family: 'Comic Sans MS', cursive; text-align: center;">${ad.text}</p>
+                        `;
+                    }
+
+                    htmlContent += `
+                        <div class="search-inline-ad" style="margin: 20px 0; border: dashed 4px #ff0000; background: #fff0f5; padding: 15px; text-align: center; border-radius: 6px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2);">
+                            <div style="font-size: 0.85em; font-weight: bold; color: white; background: red; display: inline-block; padding: 3px 10px; margin-bottom: 6px; text-transform: uppercase;">
+                                ${ad.badge}
+                            </div>
+                            <h4 style="color: #990000; margin: 5px 0; font-size: 1.3em; font-family: 'Times New Roman', serif;" class="blink">${ad.title}</h4>
+                            ${adMediaHTML}
+                            <div style="margin-top: 8px;">
+                                <a href="etudes.html" style="background: #ffff00; color: #cc0000; font-weight: bold; border: outset 3px red; padding: 5px 15px; text-decoration: none; display: inline-block; font-size: 0.95em; font-family: 'Times New Roman', serif;">⚡ ACCÉDER À CETTE RECOMMANDATION IMPÉRIALE ⚡</a>
+                            </div>
+                        </div>
+                    `;
+                }
             });
             
             // Pagination
@@ -1101,7 +1180,7 @@ async function performSearch(input, offset = 0) {
         setupSequentialAdVideos();
 
     } catch (error) {
-        responseText.innerHTML = "<p><em>Erreur technique. Le professeur va être furieux !</em></p>";
+        responseText.innerHTML = "<p style='color:red; text-align:center;'><em>Erreur technique. Le professeur va être furieux !</em></p>";
     }
 }
 
@@ -1113,28 +1192,47 @@ function handleEnter(event) {
 
 // --- Popup Modal ---
 function showExerciseModal() {
-    document.getElementById("exerciseModal").style.display = "block";
+    const modal = document.getElementById("exerciseModal");
+    if (modal) modal.style.display = "block";
 }
 
 function checkModalAnswer() {
-    const ans = document.getElementById("modalAnswer").value;
+    const ansInput = document.getElementById("modalAnswer");
+    const ans = ansInput ? ansInput.value.trim() : "";
+    const modalResponse = document.getElementById("modalResponse");
+    const q = window.pendingSearchQuery || (document.getElementById("searchInput") ? document.getElementById("searchInput").value : "");
+    const offset = window.pendingSearchOffset || 0;
+
     if(ans === "84") {
-        document.getElementById("modalResponse").innerHTML = "Excellent ! Retournez étudier.";
+        if (modalResponse) modalResponse.innerHTML = "<span style='color:green; font-weight:bold;'>Excellent ! Le Maître valide votre niveau. Lancement automatique de la recherche...</span>";
         setTimeout(() => {
-            document.getElementById("exerciseModal").style.display = "none";
-            document.getElementById("modalResponse").innerHTML = "";
-            document.getElementById("modalAnswer").value = "";
-        }, 1500);
+            const modal = document.getElementById("exerciseModal");
+            if (modal) modal.style.display = "none";
+            if (modalResponse) modalResponse.innerHTML = "";
+            if (ansInput) ansInput.value = "";
+            if (q) {
+                performSearch(q, offset);
+            }
+        }, 1200);
     } else {
-        document.getElementById("modalResponse").innerHTML = "Faux ! Mozart est mort à 35 ans. (14x7/2 + 35 = 84).";
+        if (modalResponse) modalResponse.innerHTML = "<span style='color:red;'>Faux ! Mozart est mort à 35 ans (14x7/2 + 35 = 84). Tentez à nouveau ou séchez le cours !</span>";
     }
 }
 
 function skipModalExercise() {
-    document.getElementById("modalResponse").innerHTML = "<span style='color:orange;'>Vous avez séché le contrôle ! Scandaleux, mais vous passez...</span>";
+    const modalResponse = document.getElementById("modalResponse");
+    const q = window.pendingSearchQuery || (document.getElementById("searchInput") ? document.getElementById("searchInput").value : "");
+    const offset = window.pendingSearchOffset || 0;
+
+    if (modalResponse) modalResponse.innerHTML = "<span style='color:orange; font-weight:bold;'>Vous avez séché le contrôle ! Scandaleux, mais le Maître lance la recherche tout de même...</span>";
     setTimeout(() => {
-        document.getElementById("exerciseModal").style.display = "none";
-        document.getElementById("modalResponse").innerHTML = "";
-        document.getElementById("modalAnswer").value = "";
-    }, 2000);
+        const modal = document.getElementById("exerciseModal");
+        if (modal) modal.style.display = "none";
+        if (modalResponse) modalResponse.innerHTML = "";
+        const ansInput = document.getElementById("modalAnswer");
+        if (ansInput) ansInput.value = "";
+        if (q) {
+            performSearch(q, offset);
+        }
+    }, 1200);
 }

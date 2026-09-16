@@ -39,16 +39,17 @@
 
 
 <!-- Popup Modal Exercice (INCLUSE ICI AUSSI POUR BLOQUER LA RECHERCHE) -->
+<!-- Popup Modal Exercice (INCLUSE ICI AUSSI POUR BLOQUER LA RECHERCHE) -->
 <div id="exerciseModal" class="modal-overlay">
     <div class="modal-content">
         <h2>Halte-là, cancrelat !</h2>
-<p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
+        <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
         <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
-        <input type="text" id="modalAnswer" placeholder="Votre réponse...">
+        <input type="text" id="modalAnswer" placeholder="Votre réponse..." onkeypress="if(event.key==='Enter') checkModalAnswer();">
         <button onclick="checkModalAnswer()">Soumettre au Maître</button>
         <button onclick="skipModalExercise()" style="margin-left:10px;">Sécher le cours</button>
         <p id="modalResponse" style="color:red; font-weight:bold;"></p>
-</div>
+    </div>
 </div>
 
 <div class="container">
@@ -58,7 +59,7 @@
             <span>Julianous</span>
             <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: -4px 4px 10px black;" />
         </h1>
-<h2 style="margin-top: 10px; margin-bottom: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
+        <h2 style="margin-top: 10px; margin-bottom: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
     </div>
 
     <div class="nav-menu" style="background-color: #000080; padding: 15px; margin-top: 20px; margin-bottom: 20px; border: inset 5px #dfdfdf; text-align: center;">
@@ -104,6 +105,8 @@
         
         if(query) {
             document.getElementById('searchInput').value = query;
+            window.pendingSearchQuery = query;
+            window.pendingSearchOffset = offset;
             
             // Gestion du compteur avec localStorage !
             let searchCount = parseInt(localStorage.getItem('julianous_search_count') || '0');
@@ -112,14 +115,14 @@
             
             if (searchCount >= 3) {
                 // Bloquer et afficher la popup au bout de 3 !
-                document.getElementById('responseText').innerHTML = "<h2 style='color:red; margin: 20px;'>Recherche bloquée ! Vous devez d'abord assister au contrôle ! (Vous pouvez cependant sécher le cours...)</h2>";
+                document.getElementById('responseText').innerHTML = "<h2 style='color:red; margin: 20px; text-align:center;'>🔒 RECHERCHE INTERCEPTÉE PAR LE PROFESSEUR ! 🔒<br><span style='font-size:0.8em; color:black;'>Vous avez trop sollicité le savoir sans contrôle. Veuillez répondre à l'énigme ci-dessus ou sécher le cours pour afficher vos résultats !</span></h2>";
                 localStorage.setItem('julianous_search_count', 0); // Reset
                 showExerciseModal();
             } else {
                 performSearch(query, offset);
             }
         } else {
-            document.getElementById('responseText').innerHTML = "<p>Fichtre, votre requête est vide !</p>";
+            document.getElementById('responseText').innerHTML = "<p style='font-size:1.2em; text-align:center; font-family: \"Times New Roman\", serif;'>Fichtre, votre requête est vide ! Saisissez un sujet dans la barre de recherche ci-dessus.</p>";
         }
     });
 </script>
