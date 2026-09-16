@@ -73,59 +73,80 @@ function initRobustAudio() {
     }
 }
 
-// Activer la musique au tout premier clic n'importe où sur la page
-document.addEventListener('click', function handlePageClickToPlay(e) {
-    if (!isPlaying && !e.target.closest('#playBtn')) {
+function playPodcast() {
+    const podcastAudio = document.getElementById("podcastAudio");
+    if (podcastAudio) {
+        podcastAudio.volume = 1.0;
+        podcastAudio.muted = false;
+        if (podcastAudio.paused) {
+            podcastAudio.play().then(() => {
+                alert("🎙️ LE PODCAST MAGISTRAL MOLIÈRE EST EN LECTURE À MAX VOLUME ! 🎶");
+            }).catch(err => {
+                console.log("Erreur lecture podcast:", err);
+                podcastAudio.muted = true;
+                podcastAudio.play().catch(() => {});
+            });
+        } else {
+            podcastAudio.pause();
+        }
+    }
+}
+
+function playAllVideosSimultaneously() {
+    const videos = document.querySelectorAll('video, .all-ad-video');
+    videos.forEach(vid => {
+        vid.volume = 1.0;
+        vid.muted = false;
+        const p = vid.play();
+        if (p !== undefined) {
+            p.catch(() => {
+                vid.muted = true;
+                vid.play().catch(() => {});
+            });
+        }
+    });
+
+    const podcastAudio = document.getElementById('podcastAudio');
+    if (podcastAudio) {
+        podcastAudio.volume = 1.0;
+        podcastAudio.muted = false;
+        podcastAudio.play().catch(() => {});
+    }
+
+    if (!isPlaying) {
         const audio = getOrInitAudio();
         audio.play().then(() => {
             isPlaying = true;
             updatePlayerUI();
         }).catch(() => {});
     }
+}
+
+// Activer toutes les vidéos et toutes les musiques en simultané dès qu'on clique n'importe où
+document.addEventListener('click', function handlePageClickToPlay(e) {
+    playAllVideosSimultaneously();
 });
 
 
-// --- Images de partitions pour l'arrière-plan et les barres latérales ---
+// --- Images de partitions pour l'arrière-plan (réduites : presque pas d'image) ---
 const sheetImages = [
-    "https://i.pinimg.com/736x/76/1f/40/761f402fd60d48a1d0441f1a7653661c.jpg",
-    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/500px-DwtkII-as-dur-fuga.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bach_-_Cello_Suite_1_-_Prelude.jpg/400px-Bach_-_Cello_Suite_1_-_Prelude.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Beethoven_Moonlight_1st_movement.jpg/400px-Beethoven_Moonlight_1st_movement.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Chopin_Prelude_No._4.jpg/400px-Chopin_Prelude_No._4.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mozart_Requiem_Lacrimosa.jpg/400px-Mozart_Requiem_Lacrimosa.jpg"
+    "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/500px-DwtkII-as-dur-fuga.jpg"
 ];
 
-// --- Éparpillement statique chaotique au début ---
+// --- Éparpillement statique (très peu d'images pour ne pas gêner les pavés de texte) ---
 function scatterImages() {
-    // Ajout d'images de partitions aléatoires
-    for(let i=0; i<15; i++) {
+    for(let i=0; i<3; i++) {
         let img = document.createElement('img');
-        img.src = sheetImages[Math.floor(Math.random() * sheetImages.length)];
+        img.src = sheetImages[0];
         img.style.position = 'absolute';
         img.style.left = (Math.random() * 90) + 'vw';
-        img.style.top = (Math.random() * 300) + 'vh'; // Éparpillé sur la page
-        img.style.width = (Math.random() * 200 + 50) + 'px';
-        img.style.opacity = '0.1';
+        img.style.top = (Math.random() * 300) + 'vh';
+        img.style.width = '100px';
+        img.style.opacity = '0.05';
         img.style.zIndex = '50';
         img.style.transform = `rotate(${Math.random() * 360}deg)`;
         img.style.pointerEvents = 'none';
         document.body.appendChild(img);
-    }
-    
-    // Ajout massif de petites notes de musique statiques
-    const symbols = ['🎵', '🎶', '🎼', '🎻', '🎹'];
-    for(let i=0; i<60; i++) {
-        let note = document.createElement('div');
-        note.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-        note.style.position = 'absolute';
-        note.style.left = (Math.random() * 95) + 'vw';
-        note.style.top = (Math.random() * 300) + 'vh';
-        note.style.fontSize = (Math.random() * 5 + 1) + 'em';
-        note.style.opacity = '0.15';
-        note.style.zIndex = '50';
-        note.style.transform = `rotate(${Math.random() * 360}deg)`;
-        note.style.pointerEvents = 'none';
-        document.body.appendChild(note);
     }
 }
 
@@ -294,7 +315,7 @@ function createSidebars() {
     }, 3000);
 }
 
-// --- Publicités Rétro Enrichies (Vidéos, Images, Pop-ups Virus Anti-Art & Cours Julianous) ---
+// --- Publicités Rétro Enrichies (Vidéos, Images, Pop-ups Virus Anti-Art, Mozart 2 Min & Cours Julianous) ---
 function createRetroAds() {
     // 1. Bandeau défilant supérieur rétro
     if (!document.querySelector('.marquee-ad-bar')) {
@@ -308,9 +329,36 @@ function createRetroAds() {
         document.body.appendChild(marqueeBar);
     }
 
-    // 2. LA FENÊTRE POP-UP DU VIRUS ANTI-ART (Format iframe YouTube standard exact)
+    // 2. PUB MOZART 2 MINUTES MAX VOLUME (Pop-up vidéo géante en autoplay)
+    const mozartAdPopup = document.createElement('div');
+    mozartAdPopup.className = 'retro-popup-ad boing-effect';
+    mozartAdPopup.style.top = '70px';
+    mozartAdPopup.style.left = '30px';
+    mozartAdPopup.style.width = '370px';
+    mozartAdPopup.style.border = 'outset 8px gold';
+    mozartAdPopup.style.zIndex = '100008';
+    mozartAdPopup.style.boxShadow = '12px 12px 0px #000';
+    mozartAdPopup.innerHTML = `
+        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ffff00); color: #000;">
+            <span class="blink" style="color: #ff0000; font-weight: bold;">🎻 PUB MOZART 2 MIN (MAX VOLUME) 🎻</span>
+            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
+        </div>
+        <div class="retro-popup-body" style="background: #000; color: #ffff00; border: inset 4px red;">
+            <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #00ff00;" class="blink">
+                🔊 LE CHEF D'ŒUVRE MOZART (2 MINUTES CHRONO) EN AUTOPLAY SON MAXIMAL ! 🔊
+            </p>
+            <video id="mozartVideoAd" class="all-ad-video" width="100%" height="190" controls autoplay loop style="border: outset 4px gold; background: black;">
+                <source src="assets/mozart_pub.mp4" type="video/mp4">
+            </video>
+            <p style="font-size:11px; margin: 4px 0; color:#00ffff; font-family: monospace;">Écoutez l'opéra à plein volume pendant la navigation !</p>
+            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 13px; cursor: pointer; width: 100%; padding: 6px; text-transform: uppercase;" onclick="playAllVideosSimultaneously(); alert('TOUTES LES VIDÉOS JOUENT EN SIMULTANÉ À FULL VOLUME !');">🔊 MONTER TOUS LES SONS AU MAXIMUM 🔊</button>
+        </div>
+    `;
+    document.body.appendChild(mozartAdPopup);
+
+    // 3. LA FENÊTRE POP-UP DU VIRUS ANTI-ART (Format iframe YouTube standard exact)
     const virusPopup = document.createElement('div');
-    virusPopup.className = 'retro-popup-ad';
+    virusPopup.className = 'retro-popup-ad boing-effect';
     virusPopup.style.top = '100px';
     virusPopup.style.right = '30px';
     virusPopup.style.width = '360px';
@@ -335,9 +383,9 @@ function createRetroAds() {
     `;
     document.body.appendChild(virusPopup);
 
-    // 3. Pop-up Rétro : COURS MAGISTRAUX DE JULIANOUS (-90% avec vidéo de cours)
+    // 4. Pop-up Rétro : COURS MAGISTRAUX DE JULIANOUS (-90% avec vidéo de cours)
     const coursePopup = document.createElement('div');
-    coursePopup.className = 'retro-popup-ad';
+    coursePopup.className = 'retro-popup-ad boing-effect';
     coursePopup.style.bottom = '20px';
     coursePopup.style.left = '200px';
     coursePopup.style.width = '320px';
@@ -350,7 +398,7 @@ function createRetroAds() {
         </div>
         <div class="retro-popup-body" style="background: #ffffcc;">
             <div class="blink" style="color:red; font-weight:bold; font-size:13px; margin-bottom:5px;">🎓 PROMO SOLFÈGE & HARMONIE EXPRESS 🎓</div>
-            <video width="100%" height="160" controls autoplay muted loop style="border: inset 3px gold; background: black;">
+            <video id="courseVidAd" class="all-ad-video" width="100%" height="160" controls autoplay loop style="border: inset 3px gold; background: black;">
                 <source src="assets/course_video.mp4" type="video/mp4">
             </video>
             <p style="font-size:11px; font-weight:bold; color:#000080; margin: 5px 0;">Apprenez la fugue et le clavecin sous la menace du Maître ! -90% de réduction immédiate !</p>
@@ -359,10 +407,10 @@ function createRetroAds() {
     `;
     document.body.appendChild(coursePopup);
 
-    // 4. Pop-up rétro image "Vous êtes le 1 000 000ème visiteur"
+    // 5. Pop-up rétro image "Vous êtes le 1 000 000ème visiteur"
     const visitorAdPopup = document.createElement('div');
-    visitorAdPopup.className = 'retro-popup-ad';
-    visitorAdPopup.style.top = '220px';
+    visitorAdPopup.className = 'retro-popup-ad boing-effect';
+    visitorAdPopup.style.top = '280px';
     visitorAdPopup.style.left = '180px';
     visitorAdPopup.style.width = '260px';
     visitorAdPopup.style.zIndex = '100003';
@@ -378,6 +426,9 @@ function createRetroAds() {
         </div>
     `;
     document.body.appendChild(visitorAdPopup);
+
+    // Lancer immédiatement toutes les vidéos en simultané au chargement
+    setTimeout(playAllVideosSimultaneously, 500);
 }
 
 
