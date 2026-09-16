@@ -6,6 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite, Au-dessus de tout) -->
+<div id="sideBannerLeft" class="side-pub-banner side-pub-left">
+    <div class="side-pub-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgLeft" class="side-pub-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-pub-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-pub-banner side-pub-right">
+    <div class="side-pub-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgRight" class="side-pub-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-pub-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
 <div class="container">
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
         <div style="text-align: center;">
@@ -24,38 +54,101 @@
         <a href="livre-dor.html">Livre d'or</a>
     </div>
 
-    <div style="border: outset 10px #cc00cc; padding: 20px; background: #ffcccc; margin: 20px 0; box-shadow: 15px 15px 0px #000;">
-        <h2 style="color: darkred; text-align: center; border-bottom: double 5px darkred; padding-bottom: 10px; font-family: 'Impact', sans-serif; font-size: 2.5em;">Châtiments Corporels et Moraux</h2>
-        <h3 class="blink" style="text-align: center; color: red; font-size: 1.8em;">Le bâton est le meilleur ami de l'élève</h3>
+    <div style="border: outset 10px #cc00cc; padding: 25px; background: #ffcccc; margin: 20px 0; box-shadow: 15px 15px 0px #000;">
+        <h2 style="color: darkred; text-align: center; border-bottom: double 5px darkred; padding-bottom: 10px; font-family: 'Impact', sans-serif; font-size: 2.8em;">🔨 CHÂTIMENTS CORPORELS & SANCTIONS MORALES 🔨</h2>
+        <h3 class="blink" style="text-align: center; color: red; font-size: 1.8em;">« Qui aime bien, châtie bien... Et le Maître aime passionnément la rigueur ! »</h3>
         
-        <table style="width: 100%; border: inset 8px #cc00cc; margin: 30px 0; background: url('https://anlucas.neocities.org/bg_stars.gif'); color: white;">
-            <tr>
-                <td style="padding: 30px;">
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dashed 4px yellow; padding: 20px; background: rgba(0,0,0,0.8); box-shadow: 5px 5px 10px black;">La règle en fer sur les doigts n'est plus légale, hélas. Mais la violence psychologique reste une méthode pédagogique éprouvée et approuvée par le Conservatoire de Paris en 1842.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0; background: #fff; padding: 10px; border: solid 3px red; display: inline-block;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                        <img src="https://anlucas.neocities.org/flames.gif" alt="Flammes" style="margin: 0 20px;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: double 6px cyan; padding: 20px; background: rgba(0,0,100,0.8); box-shadow: 5px 5px 10px black;">Recopier 500 fois 'Je ne ferai plus d'octaves cachées' est un minimum syndical. Ceux qui osent contester verront leur instrument confisqué et jeté aux lions.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0;">
-                        <marquee scrollamount="20" style="color: yellow; font-size: 2em; font-weight: bold; background: red; padding: 10px; border: solid 3px black;">VOUS N'AVEZ TOUJOURS RIEN COMPRIS !!! VOTRE IGNORANCE EST AFFLIGEANTE !!!</marquee>
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dotted 5px lime; padding: 20px; background: rgba(50,0,0,0.8); box-shadow: 5px 5px 10px black;">L'humiliation publique devant vos camarades est le seul moyen de graver la théorie musicale dans vos mémoires défaillantes.</p>
-                </td>
-            </tr>
-        </table>
-        
-        <div style="text-align: center; padding: 25px; background: #ffffcc; border: solid 6px #000080; color: #000080; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px gray;">
-            <strong style="font-size: 1.5em; text-transform: uppercase;">🌐 Archive du Web Antique (Pensée du Maître) 🌐</strong><br><br>
-            <i style="font-size: 1.3em;">"Lorem ipsum dolor sit amet, consectetuer adipiscing elit... BLABLABLA ! La vérité est que votre niveau est si lamentable que même le latin perd son sens face à votre ignorance crasse. Les balises HTML de 1998 ont plus de structure que vos compositions. Retournez travailler vos gammes avant que je ne détruise votre clavier avec un marteau !"</i>
+        <!-- ENCADRÉ 1 : TARTUFFE & LA SANCTION DU FAUX DÉVOT -->
+        <div style="border: double 8px #ff0000; background: #ffe6e6; padding: 20px; margin: 25px 0; box-shadow: 8px 8px 0px #800000;">
+            <h3 style="color: #800000; font-family: 'Times New Roman', serif; margin-top:0; border-bottom: solid 2px red; padding-bottom: 5px;">
+                🎭 TARTUFFE DE MOLIÈRE : « COUVREZ CE SOLFÈGE MÉDIOCRE ! »
+            </h3>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="assets/giphy_maitre.gif" alt="Maître en colère" style="width: 130px; border: outset 4px red; box-shadow: 4px 4px 0px black;">
+                <div style="font-family: 'Georgia', serif; font-size: 1.2em; text-align: justify; color: #000;">
+                    <blockquote style="font-style: italic; border-left: solid 4px red; padding-left: 10px; margin: 5px 0;">
+                        « Couvrez ce solfège que je ne saurais voir ! Par de pareils objets les âmes sont blessées, et cela fait venir de coupables pensées de gifler le cancre à coups de règle en fer ! »
+                    </blockquote>
+                    <p style="text-align: right; font-weight: bold; color: #800000;">- Adaptation libre du TARTUFFE de Molière (Acte III, Scène II)</p>
+                    <p>Tout élève surpris à jouer une fausse note sur le Requiem sera immédiatement soumis au bonnet d'âne en fer forgé et à la récitation intégrale du Malade Imaginaire !</p>
+                </div>
+            </div>
         </div>
+
+        <!-- ENCADRÉ 2 : LE DIES IRAE DE MOZART & LE CHÂTIMENT ULTIME -->
+        <div style="border: outset 8px #000080; background: #e6e6ff; padding: 20px; margin: 25px 0; box-shadow: 8px 8px 0px #000;">
+            <h3 style="color: #000080; font-family: 'Impact', sans-serif; margin-top:0; font-size: 1.6em;">
+                ⚡ LE CHÂTIMENT DE MOZART : LE DIES IRAE DE L'ÉLÈVE PARESSEUX
+            </h3>
+            <div style="font-family: 'Times New Roman', serif; font-size: 1.2em; color: #000; text-align: justify;">
+                <p><em>« Dies irae, dies illa, Solvet saeclum in favilla ! »</em> (Jour de colère que ce jour-là, où le Maître réduira votre ignorance en poussière !)</p>
+                <p>Mozart lui-même exigeait de ses élèves une discipline de fer. Si vos doigts fléchissent sur le clavier :</p>
+                <ul style="font-weight: bold; color: #800000; background: #fff; padding: 15px 30px; border: dashed 3px red;">
+                    <li>1. Tape de règle en bois sur les phalanges (10 coups par fausse note).</li>
+                    <li>2. Privation de clavecin pendant 3 lunes consécutives.</li>
+                    <li>3. Copie de 500 lignes : <em>« Je ne murmurerai plus pendant le Dies Irae. »</em></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ENCADRÉ 3 : VOLTAIRE & LE CANDIDE PÉDAGOGIQUE -->
+        <div style="border: dashed 6px #800080; background: #f3e6ff; padding: 20px; margin: 25px 0;">
+            <h3 style="color: #800080; font-family: 'Georgia', serif; margin-top:0;">
+                📜 VOLTAIRE & LA PHILOSOPHIE DU FOUET
+            </h3>
+            <p style="font-size: 1.2em; font-style: italic; color: #2a0052; text-align: justify;">
+                « Tout est pour le mieux dans le meilleur des mondes possibles... sauf dans votre cahier de solfège qui est un désastre absolu ! Il faut cultiver notre jardin, certes, mais il faut avant tout châtier les cancres afin que la musique demeure pure et triomphante ! »
+            </p>
+            <p style="text-align: right; font-weight: bold; color: #800080;">- D'après Candide de Voltaire</p>
+        </div>
+
+        <!-- ENCADRÉ 4 : VIDÉO DE CHÂTIMENT EN DIRECT -->
+        <div style="border: double 8px #ff00ff; background: #1a001a; color: #ff00ff; padding: 20px; margin: 25px 0; text-align: center; box-shadow: 10px 10px 0px black;">
+            <h3 class="blink" style="color: #ffff00; font-family: 'Impact', sans-serif; font-size: 1.8em; margin-top:0;">
+                🎥 EXÉCUTION D'UNE SANCTION PÉDAGOGIQUE EN VIDÉO
+            </h3>
+            <video controls width="75%" style="border: outset 5px red; margin: 10px 0;">
+                <source src="assets/audition3.mp4" type="video/mp4">
+            </video>
+            <p style="font-family: monospace; font-size: 1.2em; color: #fff;">Séquence enregistrée en 1999 lors du grand contrôle surprise. Admirez la sévérité du Maître !</p>
+        </div>
+
+        <!-- ENCADRÉ 5 : LE BARÈME DES SANCTIONS -->
+        <div style="border: inset 8px darkred; background: #fff0f0; padding: 20px; margin: 25px 0;">
+            <h3 style="color: darkred; text-align: center; font-family: 'Impact', sans-serif; font-size: 1.6em;">
+                📊 LE BARÈME INFLEXIBLE DE MAÎTRE JULIANOUS 📊
+            </h3>
+            <table style="width: 100%; border: solid 2px darkred; border-collapse: collapse; font-family: 'Times New Roman', serif; font-size: 1.1em;">
+                <thead>
+                    <tr style="background: darkred; color: white;">
+                        <th style="padding: 8px; border: solid 1px black;">Infraction Académique</th>
+                        <th style="padding: 8px; border: solid 1px black;">Référence Littéraire / Musicale</th>
+                        <th style="padding: 8px; border: solid 1px black;">Châtiment Incorruptible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #ffffff;">
+                        <td style="padding: 8px; border: solid 1px black;">Quinte parallèle impardonnable</td>
+                        <td style="padding: 8px; border: solid 1px black;">Requiem de Mozart</td>
+                        <td style="padding: 8px; border: solid 1px black;">100 coups de règle + Réciter Molière</td>
+                    </tr>
+                    <tr style="background: #ffe6e6;">
+                        <td style="padding: 8px; border: solid 1px black;">Baillement pendant le contrepoint</td>
+                        <td style="padding: 8px; border: solid 1px black;">Le Malade Imaginaire</td>
+                        <td style="padding: 8px; border: solid 1px black;">Bonnet d'âne en fer forgé pendant 48h</td>
+                    </tr>
+                    <tr style="background: #ffffff;">
+                        <td style="padding: 8px; border: solid 1px black;">Oubli du matériel de solfège</td>
+                        <td style="padding: 8px; border: solid 1px black;">Boileau - L'Art Poétique</td>
+                        <td style="padding: 8px; border: solid 1px black;">Copie manuelle de 1000 partitions</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
 <script src="script.js"></script>
 </body>
 </html>
+

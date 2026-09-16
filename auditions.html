@@ -6,6 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite, Au-dessus de tout) -->
+<div id="sideBannerLeft" class="side-pub-banner side-pub-left">
+    <div class="side-pub-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgLeft" class="side-pub-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-pub-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-pub-banner side-pub-right">
+    <div class="side-pub-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgRight" class="side-pub-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-pub-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
 <div class="container">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div><img src="assets/point_education.gif" style="height: 120px; border: outset 3px #dfdfdf; background: white;" /></div>

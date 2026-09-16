@@ -6,6 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite, Au-dessus de tout) -->
+<div id="sideBannerLeft" class="side-pub-banner side-pub-left">
+    <div class="side-pub-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgLeft" class="side-pub-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-pub-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-pub-banner side-pub-right">
+    <div class="side-pub-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgRight" class="side-pub-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-pub-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
 <div class="container">
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
         <div style="text-align: center;">
@@ -24,38 +54,77 @@
         <a href="livre-dor.html">Livre d'or</a>
     </div>
 
-    <div style="border: outset 10px #ffff00; padding: 20px; background: #ccffcc; margin: 20px 0; box-shadow: 15px 15px 0px #000;">
-        <h2 style="color: darkred; text-align: center; border-bottom: double 5px darkred; padding-bottom: 10px; font-family: 'Impact', sans-serif; font-size: 2.5em;">Études Classiques Obligatoires</h2>
-        <h3 class="blink" style="text-align: center; color: red; font-size: 1.8em;">La souffrance mène à la perfection</h3>
+    <div style="border: outset 10px #ffff00; padding: 25px; background: #ccffcc; margin: 20px 0; box-shadow: 15px 15px 0px #000;">
+        <h2 style="color: darkred; text-align: center; border-bottom: double 5px darkred; padding-bottom: 10px; font-family: 'Impact', sans-serif; font-size: 2.8em;">📖 ÉTUDES CLASSIQUES & MAGISTRALES 📖</h2>
+        <h3 class="blink" style="text-align: center; color: red; font-size: 1.8em;">« Sans la souffrance et Molière, la musique n'est que ruine de l'esprit ! »</h3>
         
-        <table style="width: 100%; border: inset 8px #ffff00; margin: 30px 0; background: url('https://anlucas.neocities.org/bg_stars.gif'); color: white;">
-            <tr>
-                <td style="padding: 30px;">
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dashed 4px yellow; padding: 20px; background: rgba(0,0,0,0.8); box-shadow: 5px 5px 10px black;">L'étude du contrepoint sévère n'est pas une option, c'est une nécessité vitale. Quiconque ose utiliser des quintes parallèles sera immédiatement foudroyé et renvoyé à l'école primaire.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0; background: #fff; padding: 10px; border: solid 3px red; display: inline-block;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                        <img src="https://anlucas.neocities.org/flames.gif" alt="Flammes" style="margin: 0 20px;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: double 6px cyan; padding: 20px; background: rgba(0,0,100,0.8); box-shadow: 5px 5px 10px black;">L'harmonie tonale est un privilège que vous ne méritez pas encore. Votre cerveau est ramolli par la musique populaire, une abomination qui devrait être interdite par la loi divine de Bach.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0;">
-                        <marquee scrollamount="20" style="color: yellow; font-size: 2em; font-weight: bold; background: red; padding: 10px; border: solid 3px black;">VOUS N'AVEZ TOUJOURS RIEN COMPRIS !!! VOTRE IGNORANCE EST AFFLIGEANTE !!!</marquee>
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dotted 5px lime; padding: 20px; background: rgba(50,0,0,0.8); box-shadow: 5px 5px 10px black;">Chaque note de cette partition doit être jouée avec la précision d'un métronome suisse et la passion d'un volcan en éruption. Si vous transpirez, c'est que vous commencez seulement à comprendre.</p>
-                </td>
-            </tr>
-        </table>
-        
-        <div style="text-align: center; padding: 25px; background: #ffffcc; border: solid 6px #000080; color: #000080; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px gray;">
-            <strong style="font-size: 1.5em; text-transform: uppercase;">🌐 Archive du Web Antique (Pensée du Maître) 🌐</strong><br><br>
-            <i style="font-size: 1.3em;">"Lorem ipsum dolor sit amet, consectetuer adipiscing elit... BLABLABLA ! La vérité est que votre niveau est si lamentable que même le latin perd son sens face à votre ignorance crasse. Les balises HTML de 1998 ont plus de structure que vos compositions. Retournez travailler vos gammes avant que je ne détruise votre clavier avec un marteau !"</i>
+        <!-- ENCADRÉ 1 : MOZART -->
+        <div style="border: double 8px #000080; background: #ffffcc; padding: 20px; margin: 25px 0; box-shadow: 8px 8px 0px #800000;">
+            <h3 style="color: #800000; font-family: 'Times New Roman', serif; margin-top:0; border-bottom: solid 2px #800000; padding-bottom: 5px;">
+                🎼 SECTION MOZART : LA FUGUE ET LA RIGUEUR DU CLAVECIN
+            </h3>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="assets/Bach_Fuga.jpg" alt="Fugue de Mozart & Bach" style="width: 140px; border: outset 4px gold; box-shadow: 4px 4px 0px black;">
+                <div style="font-family: 'Times New Roman', serif; font-size: 1.2em; text-align: justify; color: #000;">
+                    <p><em>« La musique n'est pas dans les notes, mais dans le silence entre elles... Cependant, chez vous, cher cancrelat, même vos silences sont affreusement hors mesure ! »</em></p>
+                    <p style="text-align: right; font-weight: bold; color: #800000;">- Wolfgang Amadeus Mozart (Revisité par le Maître Julianous)</p>
+                    <p>L'étude du contrepoint sévère selon Mozart exige 14 heures de clavecin quotidien. Quiconque commet une quinte parallèle sera contraint de chanter la Fuga en La bémol majeur à l'envers devant l'assemblée !</p>
+                </div>
+            </div>
         </div>
+
+        <!-- ENCADRÉ 2 : MOLIÈRE & LE BOURGEOIS GENTILHOMME -->
+        <div style="border: outset 8px #ff00ff; background: #e6f2ff; padding: 20px; margin: 25px 0; box-shadow: 8px 8px 0px #000080;">
+            <h3 style="color: #000080; font-family: 'Impact', sans-serif; margin-top:0; font-size: 1.6em;">
+                🎭 SECTION MOLIÈRE : LA PROSE & LE SOLFÈGE GENTILHOMME
+            </h3>
+            <div style="font-family: 'Georgia', serif; font-size: 1.2em; line-height: 1.6; color: #000066; text-align: justify;">
+                <blockquote style="border-left: solid 6px #ff00ff; padding-left: 15px; margin: 10px 0; font-style: italic; background: #ffffff;">
+                    « Par ma foi ! Il y a plus de quarante ans que je dis de la prose sans que j'en susse rien ; mais vous, bélître, il y a quarante ans que vous massacrez la portée sans en ressentir la moindre honte ! Que diable alliez-vous faire dans cette galère du solfège ? »
+                </blockquote>
+                <p style="text-align: right; font-weight: bold; color: #ff00ff;">- D'après Molière (Le Bourgeois Gentilhomme, Acte II, Scène IV)</p>
+                <p>À la manière du Maître de Musique chez Molière, nous vous rappelons que : <em>« Sans la musique, un État ne peut subsister. Tous les désordres, toutes les guerres qu'on voit dans le monde, n'arrivent que pour n'apprendre pas la musique et le contrepoint rigoureux ! »</em></p>
+            </div>
+        </div>
+
+        <!-- ENCADRÉ 3 : BOILEAU & LA RIGUEUR DU POÈTE -->
+        <div style="border: dashed 6px #008000; background: #ffffe6; padding: 20px; margin: 25px 0; box-shadow: 8px 8px 0px #000;">
+            <h3 style="color: #008000; font-family: 'Times New Roman', serif; margin-top:0;">
+                ✍️ SECTION BOILEAU : VINGT FOIS SUR LE MÉTIER
+            </h3>
+            <p style="font-size: 1.3em; font-family: 'Times New Roman', serif; font-style: italic; color: #333; text-align: center; background: #fff; padding: 15px; border: inset 3px green;">
+                « Vingt fois sur le métier remettez votre ouvrage :<br>
+                Polissez-le sans cesse et le repolissez ;<br>
+                Ajoutez quelqu'accord, et souvent effacez ;<br>
+                Et si votre solfège est faux, recopiez cent fois le Traité d'Harmonie ! »
+            </p>
+            <p style="text-align: right; font-weight: bold; color: #008000;">- Nicolas Boileau (L'Art Poétique, Chant I)</p>
+        </div>
+
+        <!-- ENCADRÉ 4 : DÉMONSTRATION VIDÉO ACADÉMIQUE -->
+        <div style="border: groove 8px red; background: #000; color: #00ff00; padding: 20px; margin: 25px 0; text-align: center; box-shadow: 10px 10px 0px #ff0000;">
+            <h3 class="blink" style="color: yellow; font-family: 'Impact', sans-serif; font-size: 1.8em; margin-top:0;">
+                📺 ARCHIVE VIDÉO : LA LEÇON DE CHANT ROYALE
+            </h3>
+            <video controls width="75%" style="border: outset 5px gold; margin: 10px 0;">
+                <source src="assets/audition2.mp4" type="video/mp4">
+            </video>
+            <p style="font-family: monospace; font-size: 1.2em; color: #fff;">Exemple vivant de récital exécuté sous la férule de Julianous. Notez la posture et l'angoisse salutaire de l'exécutant.</p>
+        </div>
+
+        <!-- ENCADRÉ 5 : MAXIMES & CHÂTIMENTS D'ÉTUDE -->
+        <div style="border: inset 8px #ff9900; background: #fff0f5; padding: 20px; margin: 25px 0; text-align: center;">
+            <h3 style="color: #cc0000; font-family: 'Times New Roman', serif;">📜 LE RÉCAPITULATIF DES DEVOIRS OBLIGATOIRES 📜</h3>
+            <ul style="text-align: left; font-size: 1.2em; font-family: 'Comic Sans MS', cursive; color: #000080; line-height: 1.8;">
+                <li>✔️ Transcrire la Flûte Enchantée de Mozart pour 12 harpes et 3 trios de cornemuses.</li>
+                <li>✔️ Réciter les tirades des Femmes Savantes de Molière en sautant à cloche-pied.</li>
+                <li>✔️ Résoudre l'équation harmonique : <code>Mozart² + Bach³ / Molière = Perfection Académique</code>.</li>
+            </ul>
+        </div>
+
     </div>
 </div>
 <script src="script.js"></script>
 </body>
 </html>
+

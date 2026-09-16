@@ -8,6 +8,35 @@
 </head>
 <body>
 
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite, Au-dessus de tout) -->
+<div id="sideBannerLeft" class="side-pub-banner side-pub-left">
+    <div class="side-pub-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgLeft" class="side-pub-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-pub-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-pub-banner side-pub-right">
+    <div class="side-pub-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-pub-img-container">
+        <img id="sideImgRight" class="side-pub-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-pub-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-pub-footer">
+        <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d\'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
 <!-- Boutons Blob Opera partout ! -->
 <a href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en&cp=e30" target="_blank" style="position:absolute; top:15%; right:5%; z-index:9000;">
     <button style="font-size: 1.5em; background: #ff00ff; color: #fff; cursor: pointer; border-radius: 50%; padding: 15px; animation: blinker 0.2s infinite;">BLOB OPERA !</button>
@@ -61,6 +90,7 @@
         </form>
     </div>
 
+    <!-- Section Widgets Origine -->
     <div class="widgets">
         <div class="widget">
             <h4 class="widget-title">L'édifiante réflexion du jour</h4>
@@ -75,6 +105,24 @@
             <h4 class="widget-title">La maxime musicale</h4>
             <p>« La symphonie est la seule et véritable obligation de l'âme, n'est-il pas vrai, monsieur le professeur ? »</p>
             <p style="text-align: right;"><em>- L'humble Julianous</em></p>
+        </div>
+    </div>
+
+    <!-- Section PODCAST MOLIÈRE EN AUDIO -->
+    <div style="margin: 30px 0; padding: 20px; border: outset 8px #9900cc; background: #f9f0ff; box-shadow: 10px 10px 0px #4b0082; text-align: center;">
+        <h3 style="color: #4b0082; font-family: 'Impact', sans-serif; font-size: 1.8em; margin-top:0;">🎙️ LE PODCAST MAGISTRAL : MOLIÈRE & LE SOLFÈGE 🎙️</h3>
+        <p style="font-family: 'Georgia', serif; font-size: 1.2em; color: #333; margin-bottom: 15px;">
+            <em>« Écoutez la leçon orale exclusive du Bourgeois Gentilhomme de Molière révisée par le Maître Julianous. »</em>
+        </p>
+        <div style="background: #000; color: #00ff00; padding: 15px; border: inset 4px gold; border-radius: 5px;">
+            <div style="font-family: monospace; font-size: 1.2em; margin-bottom: 10px;">📻 <strong>PODCAST EN LECTURE AUDIO</strong></div>
+            <audio id="podcastAudio" controls style="width: 80%; max-width: 500px;">
+                <source src="assets/Veni_Creator.ogg" type="audio/ogg">
+                <source src="assets/Mozart_Nachtmusik.ogg" type="audio/ogg">
+                Votre navigateur ne prend pas en charge le lecteur audio podcast.
+            </audio>
+            <br><br>
+            <button onclick="playPodcast()" style="background: #00ff00; color: black; font-weight: bold; padding: 10px 20px; border: outset 4px green; font-size: 1.1em; cursor: pointer;">▶ LANCER LE PODCAST MOLIÈRE</button>
         </div>
     </div>
 
@@ -116,3 +164,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+

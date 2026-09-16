@@ -1,7 +1,7 @@
 // --- Lecteur audio avec de vraies œuvres de Mozart et de Chœurs ---
 const audioTracks = [
     {
-        title: "Petite Musique de Nuit",
+        title: "Petite Musique de Nuit - Mozart",
         url: "assets/Mozart_Nachtmusik.ogg"
     },
     {
@@ -16,73 +16,74 @@ const audioTracks = [
 
 let currentAudio = null;
 let isPlaying = false;
-let autoplayOverlay = null;
+let currentTrackIndex = 0;
 
-function initRobustAudio() {
-    if (isPlaying) return;
-
+function getOrInitAudio() {
     if (!currentAudio) {
-        const track = audioTracks[Math.floor(Math.random() * audioTracks.length)];
         currentAudio = new Audio();
+        currentAudio.src = audioTracks[currentTrackIndex].url;
         currentAudio.loop = true;
-        currentAudio.src = track.url;
-        currentAudio.volume = 0.6;
-        currentAudio.currentTime = 25; // Avance rapide pour sauter le silence et avoir la musique IMMÉDIATEMENT forte !
+        currentAudio.volume = 0.7;
     }
-
-    let playPromise = currentAudio.play();
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            // Lecture réussie automatiquement
-            isPlaying = true;
-            updatePlayerUI();
-        }).catch(error => {
-            if (autoplayOverlay) return;
-            // Autoplay bloqué ! Création de l'overlay ROBUSTE
-            const overlay = document.createElement('div');
-            overlay.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:999999; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;";
-            overlay.innerHTML = `
-                <h1 style="color:red; font-family:'Times New Roman'; text-shadow: 2px 2px #fff; font-size:4em;">L'ART N'ATTEND PAS !</h1>
-                <p style="color:white; font-size:1.5em; margin-bottom: 30px;">Votre navigateur infidèle a osé bloquer la divine musique. C'est inacceptable !</p>
-                <button style="font-size:3em; padding:20px; background:#00ff00; border: outset 10px #00cc00; cursor:pointer; font-family:'Times New Roman'; font-weight:bold;">CLIQUEZ ICI POUR POURSUIVRE ET ÉCOUTER</button>
-            `;
-            autoplayOverlay = overlay;
-            document.body.appendChild(overlay);
-            
-            overlay.querySelector('button').addEventListener('click', () => {
-                currentAudio.play();
-                isPlaying = true;
-                updatePlayerUI();
-                overlay.remove();
-                autoplayOverlay = null;
-            });
-        });
-    }
+    return currentAudio;
 }
 
 function updatePlayerUI() {
     const playBtn = document.getElementById("playBtn");
     const trackDisplay = document.querySelector(".audio-player div");
-    if(playBtn) playBtn.innerText = "Interdit de stopper l'art !";
-    if(trackDisplay) trackDisplay.innerHTML = `Œuvre diffusée : <br><strong style="font-size:1.1em; color:#000080;">Lecture perpétuelle !</strong>`;
-}
-
-function toggleAudio() {
-    if (isPlaying) {
-        updatePlayerUI();
-    } else {
-        initRobustAudio();
+    const trackName = audioTracks[currentTrackIndex].title;
+    
+    if (playBtn) {
+        playBtn.innerText = isPlaying ? "⏸ PAUSE MOZART" : "▶ DÉLECTER MES TYMPANS DE MOZART";
+        playBtn.style.backgroundColor = isPlaying ? "#00ff00" : "#ffff00";
+    }
+    if (trackDisplay) {
+        trackDisplay.innerHTML = `Œuvre diffusée : <br><strong style="font-size:1.1em; color:${isPlaying ? '#000080' : '#800000'};">${trackName} ${isPlaying ? '🎶 (En lecture)' : '⏸ (En pause - Cliquez pour lancer !)'}</strong>`;
     }
 }
 
-// Lancement robuste au chargement
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initRobustAudio, 200);
-    document.addEventListener('pointerdown', initRobustAudio);
-    document.addEventListener('keydown', initRobustAudio);
+function toggleAudio() {
+    const audio = getOrInitAudio();
+    if (audio.paused) {
+        audio.play().then(() => {
+            isPlaying = true;
+            updatePlayerUI();
+        }).catch(err => {
+            console.log("Lecture audio bloquée par le navigateur:", err);
+            isPlaying = false;
+            updatePlayerUI();
+        });
+    } else {
+        audio.pause();
+        isPlaying = false;
+        updatePlayerUI();
+    }
+}
+
+function initRobustAudio() {
+    const audio = getOrInitAudio();
+    if (audio.paused) {
+        audio.play().then(() => {
+            isPlaying = true;
+            updatePlayerUI();
+        }).catch(() => {
+            isPlaying = false;
+            updatePlayerUI();
+        });
+    }
+}
+
+// Activer la musique au tout premier clic n'importe où sur la page
+document.addEventListener('click', function handlePageClickToPlay(e) {
+    if (!isPlaying && !e.target.closest('#playBtn')) {
+        const audio = getOrInitAudio();
+        audio.play().then(() => {
+            isPlaying = true;
+            updatePlayerUI();
+        }).catch(() => {});
+    }
 });
 
-// Le lancement est désormais géré par initRobustAudio() sur le DOMContentLoaded
 
 // --- Images de partitions pour l'arrière-plan et les barres latérales ---
 const sheetImages = [
@@ -230,46 +231,156 @@ function scatterBadges() {
     }
 }
 
-// --- Les deux partitions de musique changeantes sur les côtés ---
+// --- Les deux partitions de musique interchangeables fixes sur les côtés (Style Pub) ---
 function createSidebars() {
-    const sideSheets = [
-        "https://upload.wikimedia.org/wikipedia/commons/5/54/DwtkII-as-dur-fuga.jpg",
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Bach_-_Cello_Suite_1_-_Prelude.jpg",
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven_Moonlight_1st_movement.jpg",
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Chopin_Prelude_No._4.jpg",
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Mozart_Requiem_Lacrimosa.jpg",
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Sheet_music_cover,_The_Blue_Danube,_by_Johann_Strauss_II.jpg"
+    const userSheets = [
+        "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-dur-fuga.jpg/330px-DwtkII-as-dur-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-vieille-partition-de-musique.jpg.jpg"
     ];
 
-    const leftSidebar = document.createElement('div');
-    leftSidebar.style = "position:fixed; top:10vh; left:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
-    
-    const rightSidebar = document.createElement('div');
-    rightSidebar.style = "position:fixed; top:10vh; right:0; width:15vw; height:80vh; z-index:20000; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;";
+    // Bannière Gauche
+    const leftBanner = document.createElement('div');
+    leftBanner.className = 'side-pub-banner side-pub-left';
+    leftBanner.innerHTML = `
+        <div class="side-pub-header">
+            <span>🔥 PUB PARTITION 🔥</span>
+            <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+        </div>
+        <div class="side-pub-img-container">
+            <img id="sideImgLeft" class="side-pub-img" src="${userSheets[0]}" alt="Partition Sponsorisée 1">
+            <div class="side-pub-badge">-90% RECLAME</div>
+        </div>
+        <div class="side-pub-footer">
+            <button class="side-pub-btn" onclick="alert('Téléchargement de la partition en cours... Préparez vos violons !');">⚡ VOIR LA PARTITION ⚡</button>
+        </div>
+    `;
 
-    const imgLeft = document.createElement('img');
-    imgLeft.style = "width:100%; border: outset 8px gold; box-shadow: 10px 10px black; opacity: 0.8;";
-    
-    const imgRight = document.createElement('img');
-    imgRight.style = "width:100%; border: outset 8px gold; box-shadow: -10px 10px black; opacity: 0.8;";
+    // Bannière Droite
+    const rightBanner = document.createElement('div');
+    rightBanner.className = 'side-pub-banner side-pub-right';
+    rightBanner.innerHTML = `
+        <div class="side-pub-header">
+            <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+            <button class="side-pub-close" onclick="this.closest('.side-pub-banner').style.display='none'">X</button>
+        </div>
+        <div class="side-pub-img-container">
+            <img id="sideImgRight" class="side-pub-img" src="${userSheets[1]}" alt="Partition Sponsorisée 2">
+            <div class="side-pub-badge">100% SOLFÈGE</div>
+        </div>
+        <div class="side-pub-footer">
+            <button class="side-pub-btn" onclick="alert('Vous avez débloqué le chef d\\'œuvre baroque de Julianous !');">🎵 ACHETER PARTITION 🎵</button>
+        </div>
+    `;
 
-    leftSidebar.appendChild(imgLeft);
-    rightSidebar.appendChild(imgRight);
-    document.body.appendChild(leftSidebar);
-    document.body.appendChild(rightSidebar);
+    document.body.appendChild(leftBanner);
+    document.body.appendChild(rightBanner);
 
-    let sideIndex = 0;
-    function rotateSideSheets() {
-        imgLeft.src = sideSheets[sideIndex % sideSheets.length];
-        imgRight.src = sideSheets[(sideIndex + 1) % sideSheets.length];
-        sideIndex = (sideIndex + 2) % sideSheets.length;
+    // Permutation automatique des deux images toutes les 3 secondes ("sa changer entre les deux images")
+    let isFlipped = false;
+    setInterval(() => {
+        const imgL = document.getElementById('sideImgLeft');
+        const imgR = document.getElementById('sideImgRight');
+        if (imgL && imgR) {
+            imgL.style.opacity = '0.2';
+            imgR.style.opacity = '0.2';
+            setTimeout(() => {
+                isFlipped = !isFlipped;
+                imgL.src = isFlipped ? userSheets[1] : userSheets[0];
+                imgR.src = isFlipped ? userSheets[0] : userSheets[1];
+                imgL.style.opacity = '1';
+                imgR.style.opacity = '1';
+            }, 300);
+        }
+    }, 3000);
+}
+
+// --- Publicités Rétro Enrichies (Vidéos, Images, Pop-ups Virus Anti-Art & Cours Julianous) ---
+function createRetroAds() {
+    // 1. Bandeau défilant supérieur rétro
+    if (!document.querySelector('.marquee-ad-bar')) {
+        const marqueeBar = document.createElement('div');
+        marqueeBar.className = 'marquee-ad-bar';
+        marqueeBar.innerHTML = `
+            <marquee behavior="scroll" direction="left" scrollamount="6">
+                🚨 ALERTE OFFRE SPÉCIALE 1998 🚨 : -90% SUR TOUTES LES LEÇONS DE CONTREPOINT DE MAÎTRE JULIANOUS ! ★ GAGNEZ UN CLAVECIN EN BOIS DU XVIIe SIÈCLE EN TÉLÉCHARGEANT NOTRE SONNERIE POLYPHONIQUE MOZART (ENVOYEZ "MOZART" AU 81000) ★ C'EST INTOLÉRABLE DE MANQUER CELA ! ★
+            </marquee>
+        `;
+        document.body.appendChild(marqueeBar);
     }
 
-    rotateSideSheets();
-    setInterval(() => {
-        rotateSideSheets();
-    }, 4000);
+    // 2. LA FENÊTRE POP-UP DU VIRUS ANTI-ART (Format iframe YouTube standard exact)
+    const virusPopup = document.createElement('div');
+    virusPopup.className = 'retro-popup-ad';
+    virusPopup.style.top = '100px';
+    virusPopup.style.right = '30px';
+    virusPopup.style.width = '360px';
+    virusPopup.style.border = 'outset 8px red';
+    virusPopup.style.zIndex = '100005';
+    virusPopup.style.boxShadow = '12px 12px 0px #000';
+    virusPopup.innerHTML = `
+        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #800000);">
+            <span class="blink" style="color: #ffff00;">⚠️ ALERTE CRITIQUE : VIRUS ANTI-ART ⚠️</span>
+            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
+        </div>
+        <div class="retro-popup-body" style="background: #000; color: #ff0000; border: inset 3px red;">
+            <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #ffff00;" class="blink">
+                🚨 ATTENTION ! UN VIRUS ESSAYE DE VOUS ATTAQUER ET DÉRANGE L'ART ! 🚨
+            </p>
+            <div style="position:relative; width:100%; height:180px; border: outset 4px red; background: black;">
+                <iframe width="100%" height="180" src="https://www.youtube.com/embed/coNzTMQ0DFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="background: black;"></iframe>
+            </div>
+            <p style="font-size:11px; margin: 6px 0; color:#00ffff; font-family: monospace;">Attaque détectée ! Un virus de médiocrité dérange la musique classique !</p>
+            <button style="background: #ff0000; color: #ffff00; font-weight: bold; border: outset 4px gold; font-size: 13px; cursor: pointer; width: 100%; padding: 6px; text-transform: uppercase;" onclick="alert('Le Maître a neutralisé le virus anti-art !'); this.closest('.retro-popup-ad').style.display='none';">🔴 ÉLIMINER LE VIRUS PAR LE CONTREPOINT 🔴</button>
+        </div>
+    `;
+    document.body.appendChild(virusPopup);
+
+    // 3. Pop-up Rétro : COURS MAGISTRAUX DE JULIANOUS (-90% avec vidéo de cours)
+    const coursePopup = document.createElement('div');
+    coursePopup.className = 'retro-popup-ad';
+    coursePopup.style.bottom = '20px';
+    coursePopup.style.left = '200px';
+    coursePopup.style.width = '320px';
+    coursePopup.style.border = 'outset 6px gold';
+    coursePopup.style.zIndex = '100004';
+    coursePopup.innerHTML = `
+        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #000080, #008000);">
+            <span>🎓 COURS EXCLUSIFS PAR JULIANOUS 🎓</span>
+            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
+        </div>
+        <div class="retro-popup-body" style="background: #ffffcc;">
+            <div class="blink" style="color:red; font-weight:bold; font-size:13px; margin-bottom:5px;">🎓 PROMO SOLFÈGE & HARMONIE EXPRESS 🎓</div>
+            <video width="100%" height="160" controls autoplay muted loop style="border: inset 3px gold; background: black;">
+                <source src="assets/course_video.mp4" type="video/mp4">
+            </video>
+            <p style="font-size:11px; font-weight:bold; color:#000080; margin: 5px 0;">Apprenez la fugue et le clavecin sous la menace du Maître ! -90% de réduction immédiate !</p>
+            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 13px; cursor: pointer; width: 100%; padding: 6px;" onclick="alert('Inscription enregistrée ! Vos leçons de clavecin commencent à 5h du matin !');">▶ REJOINDRE LE COURS DU MAÎTRE ◀</button>
+        </div>
+    `;
+    document.body.appendChild(coursePopup);
+
+    // 4. Pop-up rétro image "Vous êtes le 1 000 000ème visiteur"
+    const visitorAdPopup = document.createElement('div');
+    visitorAdPopup.className = 'retro-popup-ad';
+    visitorAdPopup.style.top = '220px';
+    visitorAdPopup.style.left = '180px';
+    visitorAdPopup.style.width = '260px';
+    visitorAdPopup.style.zIndex = '100003';
+    visitorAdPopup.innerHTML = `
+        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ff00ff);">
+            <span>🎉 FELICITATIONS VISITEUR #1 000 000 🎉</span>
+            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
+        </div>
+        <div class="retro-popup-body" style="background: #ffffcc;">
+            <img src="assets/giphy_maitre.gif" alt="Gagnant" style="width: 90px; height: 90px; border: outset 3px gold; margin-bottom: 5px;">
+            <p style="color: #ff0000; font-weight: bold; font-size: 12px;" class="blink">VOUS AVEZ GAGNÉ UN CLAVECIN GRATUIT !</p>
+            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 12px; cursor: pointer; width: 100%; padding: 5px;" onclick="this.innerText='RÉCLAMATION EN COURS...'; setTimeout(()=>alert('Félicitations ! Le clavecin sera livré par calèche d\\'ici 6 à 8 semaines.'), 500);">👉 RANGER VOTRE CLAVECIN 👈</button>
+        </div>
+    `;
+    document.body.appendChild(visitorAdPopup);
 }
+
+
 
 function setupSequentialAdVideos() {
     const videos = Array.from(document.querySelectorAll('.fake-ad-video'));
@@ -353,13 +464,14 @@ function createGlobalFloatingGifs() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    scatterImages();
-    scatterMorals();
-    scatterBadges();
-    scatterFloatingNotes();
-    createSidebars();
-    addBlobOperaIframe();
-    createGlobalFloatingGifs();
+    try { scatterImages(); } catch(e) {}
+    try { scatterMorals(); } catch(e) {}
+    try { scatterBadges(); } catch(e) {}
+    try { createFloatingNotes(); } catch(e) {}
+    try { createSidebars(); } catch(e) {}
+    try { createRetroAds(); } catch(e) {}
+    try { addBlobOperaIframe(); } catch(e) {}
+    try { createGlobalFloatingGifs(); } catch(e) {}
     
     // Autoplay aléatoire sur la page auditions
     const auditionVideos = document.querySelectorAll('.audition-video');

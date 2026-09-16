@@ -251,3 +251,168 @@ hr {
     display: inline-block;
     font-family: monospace;
 }
+
+/* Bannières Publicitaires Rétro de Partitions de Musique (Fixes Côtés - Positionnées vers la moitié) */
+.side-pub-banner {
+    position: fixed !important;
+    top: 35vh !important;
+    width: 175px !important;
+    z-index: 999999 !important;
+    background: #ffff00;
+    border: outset 6px #ff0000;
+    box-shadow: 8px 8px 0px #000000;
+    padding: 6px;
+    text-align: center;
+    font-family: "Impact", "Comic Sans MS", sans-serif;
+    pointer-events: auto !important;
+}
+
+.side-pub-left {
+    left: 5px !important;
+}
+
+.side-pub-right {
+    right: 5px !important;
+}
+
+.side-pub-header {
+    background: #ff0000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    border: inset 2px #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-pub-close {
+    background: #000;
+    color: #fff;
+    border: solid 1px #fff;
+    font-size: 10px;
+    padding: 1px 4px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.side-pub-close:hover {
+    background: red;
+}
+
+.side-pub-img-container {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    border: inset 4px #808080;
+    background: #000;
+}
+
+.side-pub-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease;
+}
+
+.side-pub-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #ff00ff;
+    color: #ffff00;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border: dashed 2px #00ffff;
+    animation: blinker 0.4s infinite;
+}
+
+.side-pub-footer {
+    margin-top: 6px;
+}
+
+.side-pub-btn {
+    background: #00ff00;
+    color: #000080;
+    border: outset 4px #008000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 8px;
+    width: 100%;
+    cursor: pointer;
+    text-transform: uppercase;
+    animation: blinker 1.2s infinite;
+}
+
+.side-pub-btn:hover {
+    background: #ffff00;
+    color: #ff0000;
+}
+
+/* Publicités Rétro Défilantes & Pop-ups */
+.marquee-ad-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ff0000;
+    color: #ffff00;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 4px 0;
+    z-index: 100001;
+    border-bottom: outset 4px #ffffff;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+}
+
+.retro-popup-ad {
+    position: fixed;
+    width: 320px;
+    background: #c0c0c0;
+    border: outset 5px #ffffff;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.8);
+    z-index: 99999;
+    font-family: "Times New Roman", serif;
+}
+
+.retro-popup-titlebar {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-popup-body {
+    padding: 10px;
+    text-align: center;
+    background: #ffffff;
+    border: inset 2px #dfdfdf;
+    margin: 4px;
+}
+
+@media screen and (max-width: 1100px) {
+    .side-pub-banner {
+        width: 130px;
+    }
+    .side-pub-img-container {
+        height: 180px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .side-pub-banner {
+        display: none; /* Masqué sur très petits écrans pour préserver l'ergonomie mobile */
+    }
+}
+
