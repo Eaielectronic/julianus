@@ -424,7 +424,7 @@ hr {
     position: fixed;
     right: 10px;
     bottom: 110px;
-    width: 280px;
+    width: min(92vw, 480px);
     background: #000;
     color: #ffff00;
     border: outset 6px #ff0000;
@@ -435,9 +435,17 @@ hr {
     text-align: center;
 }
 
+.virus-art-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
 .virus-art-corner h4 {
     margin: 0 0 6px;
     color: #ff3333;
+    text-align: left;
 }
 
 .virus-art-corner p {
@@ -452,7 +460,9 @@ hr {
     display: block;
     border: inset 3px #dfdfdf;
     background: #000;
-    min-height: 160px;
+    aspect-ratio: 16 / 9;
+    min-height: 230px;
+    height: auto;
 }
 
 @media screen and (max-width: 1100px) {
@@ -469,8 +479,13 @@ hr {
         display: none; /* Masqué sur très petits écrans pour préserver l'ergonomie mobile */
     }
     .virus-art-corner {
-        width: 220px;
+        width: min(94vw, 420px);
         bottom: 90px;
+    }
+
+    .virus-art-corner video,
+    .virus-art-corner iframe {
+        min-height: 180px;
     }
 }
 
