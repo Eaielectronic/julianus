@@ -773,7 +773,10 @@ function createRetroAds() {
         popupVideos.forEach(vid => {
             vid.play().catch(() => {});
         });
-        makeEverythingBancale();
+        const pName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        if (['jeux.html', 'chatiments.html', 'auditions.html', 'latin.html'].includes(pName)) {
+            makeEverythingBancale();
+        }
     }, 300);
 }
 
@@ -898,12 +901,24 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Injecter les morales dynamiques et appliquer les formes bancales
+    const bancalePages = ['jeux.html', 'chatiments.html', 'auditions.html', 'latin.html'];
+    const isBancalePage = bancalePages.includes(pageName);
+
+    if (isBancalePage) {
+        document.body.classList.add('bancale-enabled');
+    }
+
+    // Injecter les morales dynamiques et appliquer les formes bancales uniquement sur les 4 pages spécifiées
     setTimeout(() => {
         injectMoralBoxes();
-        try { makeEverythingBancale(); } catch(e) {}
+        if (isBancalePage) {
+            try { makeEverythingBancale(); } catch(e) {}
+        }
     }, 1000);
-    try { makeEverythingBancale(); } catch(e) {}
+
+    if (isBancalePage) {
+        try { makeEverythingBancale(); } catch(e) {}
+    }
 });
 
 // --- Cookies Banner avec VRAI HTML ---

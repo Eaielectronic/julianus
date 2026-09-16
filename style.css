@@ -435,9 +435,20 @@ hr {
     }
 }
 
-/* Style Formes Bancales (Crooked / Wonky / Asymmetric Layout Shapes sur TOUTES les pages sauf les pubs et la recherche) */
-.container, .nav-menu, .widget, .wiki-result, .audio-player,
-.game-card, .moral-box, .cookie-banner, .modal-content, .decl-box, .insult-box, fieldset, table {
+/* Style Formes Bancales (Crooked / Wonky Shapes SEULEMENT SUR LES 4 PAGES SPÉCIFIÉES : Le Clavecin, Châtiments, Auditions, Déclinaisons & Mozart) */
+body.bancale-enabled .container,
+body.bancale-enabled .nav-menu,
+body.bancale-enabled .widget,
+body.bancale-enabled .wiki-result,
+body.bancale-enabled .audio-player,
+body.bancale-enabled .game-card,
+body.bancale-enabled .moral-box,
+body.bancale-enabled .cookie-banner,
+body.bancale-enabled .modal-content,
+body.bancale-enabled .decl-box,
+body.bancale-enabled .insult-box,
+body.bancale-enabled fieldset,
+body.bancale-enabled table {
     border-radius: 25px 8px 30px 6px / 7px 26px 5px 32px !important;
     box-shadow: 12px 10px 0px rgba(0,0,0,0.8), -4px 6px 10px rgba(255,0,0,0.2) !important;
     transition: transform 0.3s ease, border-radius 0.3s ease;
@@ -449,24 +460,28 @@ hr {
     border-radius: 0px !important;
 }
 
-.container {
+body.bancale-enabled .container {
     transform: rotate(-0.8deg) skew(-0.5deg, 0.3deg) !important;
 }
 
-.nav-menu {
+body.bancale-enabled .nav-menu {
     transform: rotate(1.4deg) skew(0.8deg, -0.4deg) !important;
     border-radius: 12px 35px 6px 28px / 30px 5px 22px 8px !important;
 }
 
-.widget:nth-child(odd), .game-card:nth-child(odd), table:nth-child(odd) {
+body.bancale-enabled .widget:nth-child(odd),
+body.bancale-enabled .game-card:nth-child(odd),
+body.bancale-enabled table:nth-child(odd) {
     transform: rotate(-1.8deg) skew(-0.8deg, 0.5deg);
 }
 
-.widget:nth-child(even), .game-card:nth-child(even), table:nth-child(even) {
+body.bancale-enabled .widget:nth-child(even),
+body.bancale-enabled .game-card:nth-child(even),
+body.bancale-enabled table:nth-child(even) {
     transform: rotate(1.6deg) skew(0.7deg, -0.6deg);
 }
 
-button {
+body.bancale-enabled button {
     border-radius: 15px 4px 18px 5px / 5px 16px 4px 19px !important;
     transform: rotate(-1deg);
 }
@@ -476,7 +491,8 @@ button {
     border-radius: 0px !important;
 }
 
-button:hover {
+body.bancale-enabled button:hover {
     transform: rotate(1.5deg) scale(1.05);
 }
+
 
