@@ -464,21 +464,32 @@ function createGlobalFloatingGifs() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    const pageName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    const isSearchPage = pageName === 'results.html';
+    const isIndexPage = pageName === 'index.html' || pageName === '' || pageName === 'julianous';
+
     try { scatterImages(); } catch(e) {}
     try { scatterMorals(); } catch(e) {}
-    try { scatterBadges(); } catch(e) {}
     try { createFloatingNotes(); } catch(e) {}
-    try { createSidebars(); } catch(e) {}
-    try { createRetroAds(); } catch(e) {}
-    try { addBlobOperaIframe(); } catch(e) {}
-    try { createGlobalFloatingGifs(); } catch(e) {}
+
+    // Bannières de partitions latérales fixes : présentes sur l'index et les autres pages, masquées sur la recherche pour garder la recherche propre
+    if (!isSearchPage) {
+        try { createSidebars(); } catch(e) {}
+    }
+
+    // SUR L'INDEX SEULEMENT : BOURRÉ DE PUBS, POP-UPS VIRUS, BLOB OPERA ET BANNERS !
+    if (isIndexPage) {
+        try { scatterBadges(); } catch(e) {}
+        try { createRetroAds(); } catch(e) {}
+        try { addBlobOperaIframe(); } catch(e) {}
+        try { createGlobalFloatingGifs(); } catch(e) {}
+    }
     
     // Autoplay aléatoire sur la page auditions
     const auditionVideos = document.querySelectorAll('.audition-video');
     if (auditionVideos.length > 0) {
         const randomVid = auditionVideos[Math.floor(Math.random() * auditionVideos.length)];
         randomVid.autoplay = true;
-        // On tente de forcer le play() (peut être bloqué par le navigateur s'il n'y a pas d'interaction préalable)
         const playPromise = randomVid.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => console.log("L'autoplay a été bloqué par le navigateur.", error));
@@ -624,24 +635,6 @@ async function performSearch(input, offset = 0) {
 
             searchResults.forEach((result, index) => {
                 const wikiUrl = `https://fr.wikipedia.org/wiki/${encodeURIComponent(result.title)}`;
-                
-                // Insertion d'une vraie pub clickbait tous les 4 résultats
-                if (index > 0 && index % 4 === 0) {
-                    const ad = fakeAds[Math.floor(Math.random() * fakeAds.length)];
-                    let videoHtml = "";
-                    if (ad.video) {
-                        videoHtml = `<br><br><video class="fake-ad-video" width="80%" src="${ad.video}" controls style="border: outset 8px gold; box-shadow: 10px 10px 0px #000; margin-bottom: 20px; background: black;"></video>`;
-                    }
-                    htmlContent += `
-                        <div style="margin: 40px 0; border: outset 8px #ff00ff; background: #00ffff; padding: 20px; text-align: center; box-shadow: 10px 10px 0px #000; position: relative; z-index: 100;">
-                            <h3 class="blink" style="color: #ff0000; font-size: 2em; margin-top:0; font-family: 'Impact', sans-serif;">${ad.title}</h3>
-                            <p style="font-size: 1.4em; font-family: 'Times New Roman', serif; font-weight:bold; color: #000080; background: yellow; display: inline-block; padding: 10px; border: dashed 2px black;">${ad.text}</p>
-                            ${videoHtml}
-                            <br><br>
-                            <button onclick="this.innerHTML='Système infecté par l\\'ignorance !'; this.style.backgroundColor='black'; this.style.color='red';" style="background:#ff0000; color: #ffff00; font-size:1.5em; padding:15px 30px; border: outset 6px #ff9999; font-weight: bold; cursor: crosshair; text-transform: uppercase;">▶ CLIQUEZ ICI MAINTENANT ◀</button>
-                        </div>
-                    `;
-                }
 
                 htmlContent += `
                     <div class="wiki-result" style="margin-bottom: 20px; border: outset 4px #dfdfdf; background: #ffffe6; padding: 15px; text-align: left;">
