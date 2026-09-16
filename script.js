@@ -593,7 +593,7 @@ const retroAdPool = [
         create: () => {
             const div = document.createElement('div');
             div.className = 'retro-popup-ad';
-            div.style.cssText = 'top: 65px; right: 35px; width: 370px; border: outset 8px #ff0000; z-index: 100011; box-shadow: 10px 10px 0px #000; position: fixed; transform: none !important; border-radius: 0px !important;';
+            div.style.cssText = 'top: 65px; right: 35px; width: 520px; border: outset 8px #ff0000; z-index: 100011; box-shadow: 10px 10px 0px #000; position: fixed; transform: none !important; border-radius: 0px !important;';
             div.innerHTML = `
                 <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ffff00); color: #000;">
                     <span class="blink" style="font-weight: bold;">📺 FOCUS YOUTUBE DU MAÎTRE 📺</span>
@@ -601,9 +601,9 @@ const retroAdPool = [
                 </div>
                 <div class="retro-popup-body" style="background: #000; color: #ffff00; border: inset 4px red;">
                     <p style="font-size:13px; font-weight:bold; margin-top:2px; color:#00ff00;" class="blink">
-                        1 FOIS SUR 2 SUR L'INDEX : LE FOCUS VIDÉO !
+                        TOUJOURS SUR L'INDEX : LE FOCUS VIDÉO !
                     </p>
-                    <iframe width="100%" height="190" src="https://www.youtube.com/embed/JkWx38odFw0?si=g97f0_O-UhC1pzCC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="background:black; border: outset 3px gold;"></iframe>
+                    <iframe width="100%" height="280" src="https://www.youtube.com/embed/JkWx38odFw0?si=g97f0_O-UhC1pzCC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="background:black; border: outset 3px gold;"></iframe>
                 </div>
             `;
             return div;
@@ -764,10 +764,7 @@ function createRetroAds() {
     if (isIndexPage) {
         // Max 2-3 pubs sur l'index, dont AU MOINS UNE PUB VIDÉO + PODCAST / ANTI-ART
         const youtubeFocusAd = videoAds.find(a => a.id === 'youtubeFocusAd');
-        const useYoutubeFocus = !!youtubeFocusAd && Math.random() < 0.5;
-        const firstVideoAd = useYoutubeFocus
-            ? youtubeFocusAd
-            : videoAds[Math.floor(Math.random() * videoAds.length)];
+        const firstVideoAd = youtubeFocusAd || videoAds[Math.floor(Math.random() * videoAds.length)];
         selectedAds.push(firstVideoAd);
 
         const remainingPool = retroAdPool.filter(a => a.id !== firstVideoAd.id);
