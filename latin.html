@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-<span class="decl-ending">width</span>, initial-<span class="decl-ending">scale</span>=1.0">
+    <title>Julianous - Déclinaisons Latines & Citations de Mozart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Bannières Fixes Partitions de Musique (Gauche et Droite) -->
+<div id="sideBannerLeft" class="side-<span class="decl-ending">pub</span>-banner side-<span class="decl-ending">pub</span>-left">
+    <div class="side-<span class="decl-ending">pub</span>-header">
+        <span>🔥 PUB PARTITION 🔥</span>
+        <button class="side-<span class="decl-ending">pub</span>-close" onclick="this.closest('.side-<span class="decl-ending">pub</span>-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-<span class="decl-ending">pub</span>-img-<span class="decl-ending">container</span>">
+        <img id="sideImgLeft" class="side-<span class="decl-ending">pub</span>-img" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/DwtkII-as-<span class="decl-ending">dur</span>-fuga.jpg/330px-DwtkII-as-<span class="decl-ending">dur</span>-fuga.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Partition Sponsorisée 1">
+        <div class="side-<span class="decl-ending">pub</span>-badge">-90% RECLAME</div>
+    </div>
+    <div class="side-<span class="decl-ending">pub</span>-footer">
+        <button class="side-<span class="decl-ending">pub</span>-btn" onclick="triggerPartitionPopupExplosion()">⚡ VOIR PARTITION ⚡</button>
+    </div>
+</div>
+
+<div id="sideBannerRight" class="side-<span class="decl-ending">pub</span>-banner side-<span class="decl-ending">pub</span>-right">
+    <div class="side-<span class="decl-ending">pub</span>-header">
+        <span>🎼 SPONSOR D'ÉPOQUE 🎼</span>
+        <button class="side-<span class="decl-ending">pub</span>-close" onclick="this.closest('.side-<span class="decl-ending">pub</span>-banner').style.display='none'">X</button>
+    </div>
+    <div class="side-<span class="decl-ending">pub</span>-img-<span class="decl-ending">container</span>">
+        <img id="sideImgRight" class="side-<span class="decl-ending">pub</span>-img" src="https://img.pixers.pics/pho_wat(s3:700/FO/34/16/16/16/700_FO34161616_6faab85e99d30390f4ec34cb89cfb59b.jpg,543,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,323,650,jpg)/stickers-<span class="decl-ending">vieille</span>-partition-<span class="decl-ending">de</span>-musique.jpg.jpg" alt="Partition Sponsorisée 2">
+        <div class="side-<span class="decl-ending">pub</span>-badge">100% SOLFÈGE</div>
+    </div>
+    <div class="side-<span class="decl-ending">pub</span>-footer">
+        <button class="side-<span class="decl-ending">pub</span>-btn" onclick="triggerPartitionPopupExplosion()">🎵 ACHETER PARTITION 🎵</button>
+    </div>
+</div>
+
+<div class="container">
+    <div style="display: flex; justify-<span class="decl-ending">content</span>: center; align-<span class="decl-ending">items</span>: center; flex-<span class="decl-ending">direction</span>: column; margin-<span class="decl-ending">top</span>: 30px;">
+        <h1 style="display: flex; align-<span class="decl-ending">items</span>: center; justify-<span class="decl-ending">content</span>: center; gap: 12px; margin: 0; font-<span class="decl-ending">size</span>: 3.8em;">
+            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-<span class="decl-ending">radius</span>: 6px; box-<span class="decl-ending">shadow</span>: 4px 4px 10px black;" />
+            <span>Julianous</span>
+            <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-<span class="decl-ending">radius</span>: 6px; box-<span class="decl-ending">shadow</span>: -4px 4px 10px black;" />
+        </h1>
+        <h2 style="margin-<span class="decl-ending">top</span>: 10px; margin-<span class="decl-ending">bottom</span>: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
+    </div>
+
+    <div class="nav-<span class="decl-ending">menu</span>" style="background-<span class="decl-ending">color</span>: #000080; padding: 15px; margin-<span class="decl-ending">top</span>: 20px; margin-<span class="decl-ending">bottom</span>: 20px; border: inset 5px #dfdfdf; text-<span class="decl-ending">align</span>: center;">
+        <a href="index.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Accueil</a> |
+        <a href="etudes.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Études Classiques</a> |
+        <a href="requiem.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Requiem de Mozart</a> |
+        <a href="chatiments.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Châtiments Corporels</a> |
+        <a href="auditions.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Auditions</a> |
+        <a href="latin.html" style="color: #ffff00; text-<span class="decl-ending">decoration</span>: underline; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Déclinaisons & Mozart</a> |
+        <a href="livre-<span class="decl-ending">dor</span>.html" style="color: #ffffff; text-<span class="decl-ending">decoration</span>: none; font-<span class="decl-ending">weight</span>: bold; margin: 0 10px; font-<span class="decl-ending">family</span>: 'Times New Roman', Times, serif; font-<span class="decl-ending">size</span>: 1.3em;">Livre d'or</a>
+    </div>
+
+    <!-- BANNIÈRE PRINCIPALE DE LA PAGE -->
+    <div style="background: linear-<span class="decl-ending">gradient</span>(180deg, #800000, #400000); border: outset 8px gold; padding: 25px; text-<span class="decl-ending">align</span>: center; color: white; margin-<span class="decl-ending">bottom</span>: 30px; box-<span class="decl-ending">shadow</span>: 10px 10px 0px #000;">
+        <h2 style="font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>; font-<span class="decl-ending">size</span>: 2.8em; margin: 0; color: yellow; text-<span class="decl-ending">shadow</span>: 3px 3px 0px black;">
+            🏛️ GRAMMAIRE LATINE & VERBIAGE MOZARTIEN 🏛️
+        </h2>
+        <h3 class="blink" style="color: #00ffff; font-<span class="decl-ending">size</span>: 1.5em; margin-<span class="decl-ending">top</span>: 10px;">
+            « Sine Lingua Latina, Musica Est Tantum Cacophonia ! »
+        </h3>
+    </div>
+
+    <!-- GRAND PAVÉ ÉDITORIAL DU MAÎTRE -->
+    <div style="border: double 8px #800000; background: #fff8eb; padding: 30px; margin: 25px 0; text-<span class="decl-ending">align</span>: justify; font-<span class="decl-ending">family</span>: 'Times New Roman', serif; box-<span class="decl-ending">shadow</span>: 8px 8px 0px #400000;">
+        <h3 style="color: #800000; text-<span class="decl-ending">align</span>: center; border-<span class="decl-ending">bottom</span>: solid 4px #800000; padding-<span class="decl-ending">bottom</span>: 10px; font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>; font-<span class="decl-ending">size</span>: 2.2em; text-<span class="decl-ending">transform</span>: uppercase;">
+            📜 LE DISCOURS SOLENNEL SUR LES DÉCLINAISON ET LA PENSÉE MOZARTIENNE 📜
+        </h3>
+        <p style="font-<span class="decl-ending">size</span>: 1.3em; line-<span class="decl-ending">height</span>: 1.9; color: #000;">
+            Quiconque prétend étudier le contrepoint sans connaître sur le bout des doigts la cinquième déclinaison latine commet un crime de lèse-<span class="decl-ending">majest</span>é envers Cicéron, Quintilien et Wolfgang Amadeus Mozart lui-<span class="decl-ending">m</span>ême ! Comment osez-<span class="decl-ending">vous</span> toucher à une portée en clé de Fa alors que vous confondez encore l'ablatif absolu et le datif d'attribution ?
+        </p>
+        <blockquote style="border-<span class="decl-ending">left</span>: solid 8px #800000; padding-<span class="decl-ending">left</span>: 20px; margin: 20px 0; font-<span class="decl-ending">style</span>: italic; background: #fff0d6; font-<span class="decl-ending">size</span>: 1.25em; color: #500000;">
+            « La déclinaison est à la langue latine ce que le solfège est à l'harmonie : une armature inflexible sans laquelle vos paroles ne sont qu'un vagissement de porc qu'on égorge. Répétez vos cas avec ferveur avant d'oser poser vos doigts impurs sur les touches d'un orgue ! »
+        </blockquote>
+        <p style="font-<span class="decl-ending">size</span>: 1.3em; line-<span class="decl-ending">height</span>: 1.9; color: #000;">
+            Examinez ci-<span class="decl-ending">dessous</span> les grimoires de grammaire latine impériale suivis du recueil des pensées célèbres et réquisitoires cinglants du divin Mozart, annotés par ma plume inflexible.
+        </p>
+    </div>
+
+    <!-- SECTION 1 : LES TABLEAUX COMPLETS DES 5 DÉCLINAISONS LATINES -->
+    <div style="background: #ffffec; border: outset 8px #000080; padding: 25px; margin: 30px 0; box-<span class="decl-ending">shadow</span>: 10px 10px 0px #000;">
+        <h2 style="color: #000080; text-<span class="decl-ending">align</span>: center; font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>; font-<span class="decl-ending">size</span>: 2.4em; border-<span class="decl-ending">bottom</span>: double 6px #000080; padding-<span class="decl-ending">bottom</span>: 10px; text-<span class="decl-ending">transform</span>: uppercase;">
+            📊 TABLEAUX COMPLETS DES 5 DÉCLINAISONS LATINES OBLIGATOIRES 📊
+        </h2>
+        <p style="text-<span class="decl-ending">align</span>: center; font-<span class="decl-ending">weight</span>: bold; font-<span class="decl-ending">size</span>: 1.2em; color: darkred;" class="blink">
+            ⚠️ APPRENEZ CES TABLEAUX PAR CŒUR SOUS PEINE DE COUPS DE RÈGLE EN FER ! ⚠️
+        </p>
+
+        <!-- 1ÈRE DÉCLINAISON -->
+        <h3 style="background: #800000; color: yellow; padding: 10px; margin-<span class="decl-ending">top</span>: 30px; font-<span class="decl-ending">family</span>: 'Impact'; font-<span class="decl-ending">size</span>: 1.6em;">
+            1ère Déclinaison : Thème en -A (Modèle : Rosa, rosae f. - La Rose)
+        </h3>
+        <table style="width: 100%; border-<span class="decl-ending">collapse</span>: collapse; border: outset 4px #800000; font-<span class="decl-ending">family</span>: 'Times New Roman', serif; font-<span class="decl-ending">size</span>: 1.2em; text-<span class="decl-ending">align</span>: center; background: white;">
+            <thead>
+                <tr style="background: #ffcccc; color: #800000;">
+                    <th style="border: solid 2px #800000; padding: 10px;">Cas</th>
+                    <th style="border: solid 2px #800000; padding: 10px;">Singulier</th>
+                    <th style="border: solid 2px #800000; padding: 10px;">Pluriel</th>
+                    <th style="border: solid 2px #800000; padding: 10px;">Fonction Syntactique</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Nominatif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">a</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">ae</span></td>
+                    <td style="border: solid 1px #800000;">Sujet du verbe</td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Vocatif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">a</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">ae</span></td>
+                    <td style="border: solid 1px #800000;">Apostrophe / Apostropher la rose</td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Accusatif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">am</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">as</span></td>
+                    <td style="border: solid 1px #800000;">Complément d'Objet Direct (COD)</td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Génitif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">ae</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">arum</span></td>
+                    <td style="border: solid 1px #800000;">Complément du Nom (CDN)</td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Datif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">ae</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">is</span></td>
+                    <td style="border: solid 1px #800000;">Complément d'Objet Secondaire (Attribution)</td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #800000; font-<span class="decl-ending">weight</span>: bold; background: #fff0f0;">Ablatif</td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">a</span></td>
+                    <td style="border: solid 1px #800000; color: blue; font-<span class="decl-ending">weight</span>: bold;">ros-<span class="decl-ending">is</span></td>
+                    <td style="border: solid 1px #800000;">Complément Circonstanciel (Moyen, Lieu...)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 2ÈME DÉCLINAISON -->
+        <h3 style="background: #000080; color: yellow; padding: 10px; margin-<span class="decl-ending">top</span>: 35px; font-<span class="decl-ending">family</span>: 'Impact'; font-<span class="decl-ending">size</span>: 1.6em;">
+            2ème Déclinaison : Thème en -O (Modèles : Dominus, domini m. & Templum, templi n.)
+        </h3>
+        <table style="width: 100%; border-<span class="decl-ending">collapse</span>: collapse; border: outset 4px #000080; font-<span class="decl-ending">family</span>: 'Times New Roman', serif; font-<span class="decl-ending">size</span>: 1.15em; text-<span class="decl-ending">align</span>: center; background: white;">
+            <thead>
+                <tr style="background: #cce6ff; color: #000080;">
+                    <th style="border: solid 2px #000080; padding: 8px;" rowspan="2">Cas</th>
+                    <th style="border: solid 2px #000080; padding: 8px;" colspan="2">Masculin (Dominus - Le Maître)</th>
+                    <th style="border: solid 2px #000080; padding: 8px;" colspan="2">Neutre (Templum - Le Temple)</th>
+                </tr>
+                <tr style="background: #e6f2ff; color: #000080;">
+                    <th style="border: solid 1px #000080;">Singulier</th>
+                    <th style="border: solid 1px #000080;">Pluriel</th>
+                    <th style="border: solid 1px #000080;">Singulier</th>
+                    <th style="border: solid 1px #000080;">Pluriel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Nom.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">us</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">i</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">um</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">a</span></td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Voc.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">e</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">i</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">um</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">a</span></td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Acc.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">um</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">os</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">um</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">a</span></td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Gén.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">i</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">orum</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">i</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">orum</span></td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Dat.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">o</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">is</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">o</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">is</span></td>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px #000080; font-<span class="decl-ending">weight</span>: bold; background: #f0f7ff;">Abl.</td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">o</span></td>
+                    <td style="border: solid 1px #000080; color: red;">domin-<span class="decl-ending">is</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">o</span></td>
+                    <td style="border: solid 1px #000080; color: green;">templ-<span class="decl-ending">is</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 3ÈRE DÉCLINAISON -->
+        <h3 style="background: #006600; color: yellow; padding: 10px; margin-<span class="decl-ending">top</span>: 35px; font-<span class="decl-ending">family</span>: 'Impact'; font-<span class="decl-ending">size</span>: 1.6em;">
+            3ème Déclinaison : Thèmes Consonantiques et en -I (Modèles : Miles, militis m. & Civis, civis m.)
+        </h3>
+        <table style="width: 100%; border-<span class="decl-ending">collapse</span>: collapse; border: outset 4px #006600; font-<span class="decl-ending">family</span>: 'Times New Roman', serif; font-<span class="decl-ending">size</span>: 1.15em; text-<span class="decl-ending">align</span>: center; background: white;">
+            <thead>
+                <tr style="background: #d6f5d6; color: #004d00;">
+                    <th style="border: solid 2px #006600; padding: 8px;">Cas</th>
+                    <th style="border: solid 2px #006600; padding: 8px;">Imparisyllabique (Miles, militis - Le Soldat)</th>
+                    <th style="border: solid 2px #006600; padding: 8px;">Parisyllabique (Civis, civis - Le Citoyen)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Nom. / Voc. Sing.</td><td style="border: solid 1px #006600;">miles</td><td style="border: solid 1px #006600;">civ-<span class="decl-ending">is</span></td></tr>
+                <tr><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Accusatif Sing.</td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">em</span></td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">em</span></td></tr>
+                <tr><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Génitif Sing.</td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">is</span></td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">is</span></td></tr>
+                <tr><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Datif Sing.</td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">i</span></td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">i</span></td></tr>
+                <tr><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Ablatif Sing.</td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">e</span></td><td style="border: solid 1px #006600; color: purple; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">e</span> (ou civ-<span class="decl-ending">i</span>)</td></tr>
+                <tr style="background: #f0fff0;"><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Nom. / Voc. Plur.</td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">es</span></td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">es</span></td></tr>
+                <tr style="background: #f0fff0;"><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Génitif Pluriel</td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">um</span></td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">ium</span> (remarquez le -ium !)</td></tr>
+                <tr style="background: #f0fff0;"><td style="border: solid 1px #006600; font-<span class="decl-ending">weight</span>: bold;">Datif / Abl. Plur.</td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">milit-<span class="decl-ending">ibus</span></td><td style="border: solid 1px #006600; color: darkgreen; font-<span class="decl-ending">weight</span>: bold;">civ-<span class="decl-ending">ibus</span></td></tr>
+            </tbody>
+        </table>
+
+        <!-- 4ÈME & 5ÈME DÉCLINAISONS -->
+        <h3 style="background: #993300; color: yellow; padding: 10px; margin-<span class="decl-ending">top</span>: 35px; font-<span class="decl-ending">family</span>: 'Impact'; font-<span class="decl-ending">size</span>: 1.6em;">
+            4ème & 5ème Déclinaisons : (Modèles : Manus, manus f. & Res, rei f.)
+        </h3>
+        <table style="width: 100%; border-<span class="decl-ending">collapse</span>: collapse; border: outset 4px #993300; font-<span class="decl-ending">family</span>: 'Times New Roman', serif; font-<span class="decl-ending">size</span>: 1.15em; text-<span class="decl-ending">align</span>: center; background: white;">
+            <thead>
+                <tr style="background: #ffe6cc; color: #662200;">
+                    <th style="border: solid 2px #993300; padding: 8px;" rowspan="2">Cas</th>
+                    <th style="border: solid 2px #993300; padding: 8px;" colspan="2">4ème Déclinaison (Manus - La Main)</th>
+                    <th style="border: solid 2px #993300; padding: 8px;" colspan="2">5ème Déclinaison (Res - La Chose)</th>
+                </tr>
+                <tr style="background: #fff0e6; color: #662200;">
+                    <th style="border: solid 1px #993300;">Singulier</th>
+                    <th style="border: solid 1px #993300;">Pluriel</th>
+                    <th style="border: solid 1px #993300;">Singulier</th>
+                    <th style="border: solid 1px #993300;">Pluriel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="border: solid 1px #993300; font-<span class="decl-ending">weight</span>: bold;">Nom. / Voc.</td><td style="border: solid 1px #993300;">man-<span class="decl-ending">us</span></td><td style="border: solid 1px #993300;">man-<span class="decl-ending">us</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">es</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">es</span></td></tr>
+                <tr><td style="border: solid 1px #993300; font-<span class="decl-ending">weight</span>: bold;">Accusatif</td><td style="border: solid 1px #993300;">man-<span class="decl-ending">um</span></td><td style="border: solid 1px #993300;">man-<span class="decl-ending">us</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">em</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">es</span></td></tr>
+                <tr><td style="border: solid 1px #993300; font-<span class="decl-ending">weight</span>: bold;">Génitif</td><td style="border: solid 1px #993300; color: brown; font-<span class="decl-ending">weight</span>: bold;">man-<span class="decl-ending">us</span></td><td style="border: solid 1px #993300; color: brown; font-<span class="decl-ending">weight</span>: bold;">man-<span class="decl-ending">uum</span></td><td style="border: solid 1px #993300; color: brown; font-<span class="decl-ending">weight</span>: bold;">r-<span class="decl-ending">ei</span></td><td style="border: solid 1px #993300; color: brown; font-<span class="decl-ending">weight</span>: bold;">r-<span class="decl-ending">erum</span></td></tr>
+                <tr><td style="border: solid 1px #993300; font-<span class="decl-ending">weight</span>: bold;">Datif</td><td style="border: solid 1px #993300;">man-<span class="decl-ending">ui</span></td><td style="border: solid 1px #993300;">man-<span class="decl-ending">ibus</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">ei</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">ebus</span></td></tr>
+                <tr><td style="border: solid 1px #993300; font-<span class="decl-ending">weight</span>: bold;">Ablatif</td><td style="border: solid 1px #993300;">man-<span class="decl-ending">u</span></td><td style="border: solid 1px #993300;">man-<span class="decl-ending">ibus</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">e</span></td><td style="border: solid 1px #993300;">r-<span class="decl-ending">ebus</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SECTION 2 : FLORILÈGE DE CITATIONS DE MOZART & PAVÉS THÉÂTRAUX DU MAÎTRE -->
+    <div style="background: #fff0f5; border: dashed 6px #cc0066; padding: 25px; margin: 30px 0; box-<span class="decl-ending">shadow</span>: 10px 10px 0px #000;">
+        <h2 style="color: #99004d; text-<span class="decl-ending">align</span>: center; font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>; font-<span class="decl-ending">size</span>: 2.4em; border-<span class="decl-ending">bottom</span>: double 6px #99004d; padding-<span class="decl-ending">bottom</span>: 10px; text-<span class="decl-ending">transform</span>: uppercase;">
+            🎼 CITATIONS CÉLÈBRES DE MOZART ET PAVÉS PÉDAGOGIQUES DU MAÎTRE 🎼
+        </h2>
+
+        <!-- CITATION MOZART 1 -->
+        <div style="border: double 6px #800000; background: white; padding: 20px; margin: 20px 0; box-<span class="decl-ending">shadow</span>: 5px 5px 0px #400000;">
+            <h3 style="color: #800000; margin-<span class="decl-ending">top</span>: 0; font-<span class="decl-ending">family</span>: 'Times New Roman'; font-<span class="decl-ending">size</span>: 1.6em;">
+                🎻 Citation N°1 : La véritable musique ne réside pas dans les notes
+            </h3>
+            <blockquote style="font-<span class="decl-ending">size</span>: 1.3em; font-<span class="decl-ending">style</span>: italic; color: #400000; border-<span class="decl-ending">left</span>: solid 5px red; padding-<span class="decl-ending">left</span>: 15px;">
+                « La musique ne se trouve pas dans les notes, mais dans le silence qui existe entre elles. »
+                <br><span style="font-<span class="decl-ending">size</span>: 0.9em; font-<span class="decl-ending">weight</span>: bold; color: black;">— Wolfgang Amadeus Mozart (Lettre à son père Leopold, 1778)</span>
+            </blockquote>
+            <!-- PAVÉ DU MAÎTRE -->
+            <div style="background: #fff0f0; border: solid 2px red; padding: 15px; margin-<span class="decl-ending">top</span>: 15px;">
+                <strong style="color: darkred; font-<span class="decl-ending">size</span>: 1.2em;">🔥 Annotation cinglante du Maître Julianous :</strong>
+                <p style="font-<span class="decl-ending">size</span>: 1.15em; line-<span class="decl-ending">height</span>: 1.7; color: #000; margin-<span class="decl-ending">bottom</span>: 0;">
+                    « Vous entendez, cancres sans cervelle ? Mozart lui-<span class="decl-ending">m</span>ême célébrait le silence ! Lorsque vous massacrez le <em>Requiem</em> au piano avec vos doigts maladroits, le meilleur service que vous puissiez rendre à l'art est précisément de vous taire ! Votre silence est la seule musique qui soulage mes oreilles martyrisées par vos quintes consécutives ! »
+                </p>
+            </div>
+        </div>
+
+        <!-- CITATION MOZART 2 -->
+        <div style="border: double 6px #000080; background: white; padding: 20px; margin: 20px 0; box-<span class="decl-ending">shadow</span>: 5px 5px 0px #000040;">
+            <h3 style="color: #000080; margin-<span class="decl-ending">top</span>: 0; font-<span class="decl-ending">family</span>: 'Times New Roman'; font-<span class="decl-ending">size</span>: 1.6em;">
+                🎹 Citation N°2 : L'Inspiration et la Douleur
+            </h3>
+            <blockquote style="font-<span class="decl-ending">size</span>: 1.3em; font-<span class="decl-ending">style</span>: italic; color: #000066; border-<span class="decl-ending">left</span>: solid 5px blue; padding-<span class="decl-ending">left</span>: 15px;">
+                « Quand je suis bien disposé et de bonne humeur, en voyage ou en promenade, les idées me viennent en foule et le plus abondamment du monde. D'où et comment ? Je n'en sais rien. »
+                <br><span style="font-<span class="decl-ending">size</span>: 0.9em; font-<span class="decl-ending">weight</span>: bold; color: black;">— Wolfgang Amadeus Mozart</span>
+            </blockquote>
+            <!-- PAVÉ DU MAÎTRE -->
+            <div style="background: #e6f2ff; border: solid 2px blue; padding: 15px; margin-<span class="decl-ending">top</span>: 15px;">
+                <strong style="color: #000080; font-<span class="decl-ending">size</span>: 1.2em;">🔥 Annotation cinglante du Maître Julianous :</strong>
+                <p style="font-<span class="decl-ending">size</span>: 1.15em; line-<span class="decl-ending">height</span>: 1.7; color: #000; margin-<span class="decl-ending">bottom</span>: 0;">
+                    « Mozart recevait l'inspiration divine parce qu'il avait bu le solfège jusqu'à la lie dès l'âge de quatre ans ! Vous, au contraire, vos idées ne sont que des bruits de vaisselle brisée ! Pour vous, l'inspiration ne viendra qu'après cent heures de réécriture forcée de traités d'harmonie tonale sous la menace d'un zéro éliminatoire ! »
+                </p>
+            </div>
+        </div>
+
+        <!-- CITATION MOZART 3 -->
+        <div style="border: double 6px #006600; background: white; padding: 20px; margin: 20px 0; box-<span class="decl-ending">shadow</span>: 5px 5px 0px #003300;">
+            <h3 style="color: #006600; margin-<span class="decl-ending">top</span>: 0; font-<span class="decl-ending">family</span>: 'Times New Roman'; font-<span class="decl-ending">size</span>: 1.6em;">
+                🎼 Citation N°3 : Le génie exige la passion et la sévérité
+            </h3>
+            <blockquote style="font-<span class="decl-ending">size</span>: 1.3em; font-<span class="decl-ending">style</span>: italic; color: #004d00; border-<span class="decl-ending">left</span>: solid 5px green; padding-<span class="decl-ending">left</span>: 15px;">
+                « Ni un haut degré d'intelligence, ni l'imagination, ni toutes deux ensemble ne font le génie. Amour, amour, amour, voilà l'âme du génie. »
+                <br><span style="font-<span class="decl-ending">size</span>: 0.9em; font-<span class="decl-ending">weight</span>: bold; color: black;">— Wolfgang Amadeus Mozart</span>
+            </blockquote>
+            <!-- PAVÉ DU MAÎTRE -->
+            <div style="background: #f0fff0; border: solid 2px green; padding: 15px; margin-<span class="decl-ending">top</span>: 15px;">
+                <strong style="color: #006600; font-<span class="decl-ending">size</span>: 1.2em;">🔥 Annotation cinglante du Maître Julianous :</strong>
+                <p style="font-<span class="decl-ending">size</span>: 1.15em; line-<span class="decl-ending">height</span>: 1.7; color: #000; margin-<span class="decl-ending">bottom</span>: 0;">
+                    « N'allez pas croire que cet "amour" soit une mièvrerie moderne ! C'est l'amour exigeant, impitoyable et rigoureux du solfège d'antan ! Celui qui aime la musique souffre en chantant ses gammes. Si vous n'avez pas de crampes aux poignets à la fin du cours, c'est que vous n'aimez pas la musique ! »
+                </p>
+            </div>
+        </div>
+
+        <!-- GRAND PAVÉ THEATRAL SUPPLEMENTAIRE SUR MOLIERE ET LA GRAMMAIRE -->
+        <div style="border: outset 6px gold; background: #ffffd9; padding: 25px; margin-<span class="decl-ending">top</span>: 30px; text-<span class="decl-ending">align</span>: justify; font-<span class="decl-ending">family</span>: 'Times New Roman', serif;">
+            <h3 style="color: #800000; text-<span class="decl-ending">align</span>: center; border-<span class="decl-ending">bottom</span>: solid 3px #800000; padding-<span class="decl-ending">bottom</span>: 8px; font-<span class="decl-ending">family</span>: 'Impact'; font-<span class="decl-ending">size</span>: 1.8em; text-<span class="decl-ending">transform</span>: uppercase;">
+                🎭 LE RÉQUISITOIRE FINAL SUR LA DÉCADENCE DE LA GRAMMAIRE ET DU SOLFÈGE 🎭
+            </h3>
+            <p style="font-<span class="decl-ending">size</span>: 1.2em; line-<span class="decl-ending">height</span>: 1.8; color: #000;">
+                « Dans <em>Les Femmes Savantes</em>, Molière moquait la pédanterie excessive de Trissotin, mais face à l'ignorance crasse des élèves d'aujourd'hui, la pédanterie est devenue notre dernier rempart civique ! Comment prétendre analyser une symphonie de Beethoven ou un motet de Palestrina quand on ignore la différence entre un ablatif absolu et un sujet au nominatif ?
+            </p>
+            <p style="font-<span class="decl-ending">size</span>: 1.2em; line-<span class="decl-ending">height</span>: 1.8; color: #000;">
+                Quittez immédiatement cette page si vous n'avez pas mémorisé l'intégralité des 5 déclinaisons ci-<span class="decl-ending">dessus</span> ! Retournez à vos cahiers de solfège, réécrivez dix fois le modèle <em>dominus, domini</em>, et ne revenez poser une question au Maître que lorsque votre syntaxe latine sera aussi pure que le contrepoint de Jean-Sébastien Bach ! »
+            </p>
+        </div>
+    </div>
+
+    <!-- GROSSES PUBS RÉCLAMES RÉTRO & SPONSORS DE SOLFÈGE -->
+    <div style="background: repeating-<span class="decl-ending">linear</span>-gradient(45deg, #ff0000, #ff0000 15px, #ffff00 15px, #ffff00 30px); padding: 15px; border: outset 8px gold; margin: 25px 0; text-<span class="decl-ending">align</span>: center; box-<span class="decl-ending">shadow</span>: 10px 10px 0px #000;">
+        <div style="background: black; color: lime; font-<span class="decl-ending">family</span>: 'Courier New', monospace; padding: 15px; border: inset 4px white;">
+            <h2 class="blink" style="color: yellow; font-<span class="decl-ending">size</span>: 2.2em; margin: 0; text-<span class="decl-ending">transform</span>: uppercase;">
+                🔥 ÉNORME PROMO : DICTIONNAIRE GAFFIOT VINTAGE (1895) À -90% ! 🔥
+            </h2>
+            <p style="font-<span class="decl-ending">size</span>: 1.3em; margin-<span class="decl-ending">top</span>: 10px; color: white;">
+                Achetez le tome 12 des déclinaisons latines rares & recevez 1 RÈGLE EN FER OFFERTE par le Maître Julianous !
+            </p>
+            <button style="background: red; color: yellow; font-<span class="decl-ending">size</span>: 1.4em; font-<span class="decl-ending">weight</span>: bold; padding: 10px 20px; border: outset 5px gold; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
+                ⚡ COMMANDER LA RÈGLE EN FER & LE GAFFIOT ⚡
+            </button>
+        </div>
+    </div>
+
+    <!-- PUBS SECONDAIRES EN BANIÈRES CÔTE À CÔTE -->
+    <div style="display: flex; gap: 20px; margin: 25px 0;">
+        <div style="flex: 1; background: #000080; border: double 6px cyan; padding: 15px; color: white; text-<span class="decl-ending">align</span>: center;">
+            <h3 style="color: yellow; margin-<span class="decl-ending">top</span>: 0;">🎺 GAZETTE DU BAROQUE 🎺</h3>
+            <p style="font-<span class="decl-ending">size</span>: 1.1em;">Le Maître Julianous a été élu "Professeur le plus redouté de l'Europe Occidentale" pour la 15ème année consécutive !</p>
+            <button style="background: yellow; color: black; font-<span class="decl-ending">weight</span>: bold; padding: 5px 10px; border: outset 3px #fff;" onclick="triggerPartitionPopupExplosion()">Lire l'article de 1782</button>
+        </div>
+        <div style="flex: 1; background: #800000; border: double 6px yellow; padding: 15px; color: white; text-<span class="decl-ending">align</span>: center;">
+            <h3 style="color: cyan; margin-<span class="decl-ending">top</span>: 0;">⚡ LATIN EXPRESS ⚡</h3>
+            <p style="font-<span class="decl-ending">size</span>: 1.1em;">Apprenez l'ablatif absolu sous hypnose ou recevez un zéro pointé direct !</p>
+            <button style="background: lime; color: black; font-<span class="decl-ending">weight</span>: bold; padding: 5px 10px; border: outset 3px #fff;" onclick="triggerPartitionPopupExplosion()">S'inscrire au supplice</button>
+        </div>
+    </div>
+
+    <!-- COURS DE LATIN INTERACTIF AVEC LE MAÎTRE JULIANOUS -->
+    <div style="background: #e6ffff; border: double 8px #008080; padding: 25px; margin: 30px 0; box-<span class="decl-ending">shadow</span>: 8px 8px 0px #004d4d;">
+        <h2 style="color: #004d4d; text-<span class="decl-ending">align</span>: center; font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>; font-<span class="decl-ending">size</span>: 2.3em; margin-<span class="decl-ending">top</span>: 0; text-<span class="decl-ending">transform</span>: uppercase;">
+            🎓 INTERROGATEUR DU MAÎTRE : COURS DE LATIN INTERACTIF 🎓
+        </h2>
+        <div style="background: white; border: inset 4px #008080; padding: 20px; text-<span class="decl-ending">align</span>: center;">
+            <h3 style="color: darkred; font-<span class="decl-ending">size</span>: 1.6em;">Question immédiate du Maître Julianous :</h3>
+            <p style="font-<span class="decl-ending">size</span>: 1.3em; font-<span class="decl-ending">weight</span>: bold;">« Cancre ! Quel est l'Accusatif Singulier de <em>Rosa, rosae (f.)</em> ? »</p>
+            <input type="text" id="latinAnswerInput" style="font-<span class="decl-ending">size</span>: 1.3em; padding: 8px; width: 60%; text-<span class="decl-ending">align</span>: center; border: outset 3px gold;" placeholder="Écrivez votre réponse en latin...">
+            <br><br>
+            <button onclick="checkLatinCourseAnswer()" style="font-<span class="decl-ending">size</span>: 1.3em; background: darkred; color: yellow; font-<span class="decl-ending">weight</span>: bold; padding: 10px 25px; border: outset 4px gold; cursor: pointer;">
+                 Soumettre au Maître Julianous
+            </button>
+            <p id="latinCourseFeedback" style="font-<span class="decl-ending">size</span>: 1.4em; font-<span class="decl-ending">weight</span>: bold; margin-<span class="decl-ending">top</span>: 15px; min-<span class="decl-ending">height</span>: 30px;"></p>
+        </div>
+    </div>
+
+    
+    <!-- NOUVELLE SECTION HYPER POMPEUSE : LE MANIFESTE SACRÉ DE MOZART ET DU MAÎTRE -->
+    <div style="background: linear-gradient(135deg, #400000, #800000, #000040); border: double 12px gold; padding: 30px; margin: 35px 0; color: white; box-shadow: 15px 15px 0px #000; text-align: center;">
+        <h2 style="font-family: 'Impact', sans-serif; font-size: 3em; color: yellow; text-shadow: 4px 4px 0px black; text-transform: uppercase;">
+            👑 LE MANIFESTE ABSOLU DE LA SOUVERAINETÉ MOZARTIENE 👑
+        </h2>
+        <h3 class="blink" style="color: cyan; font-size: 1.8em; margin-bottom: 25px;">
+            « CUM MOZART LOQUITUR, CANCRES TACEANT ET FLENT ! »
+        </h3>
+
+        <!-- BOUTONS D'ACTION RÉTRO UN PEU PARTOUT -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px;">
+            <button style="background: red; color: yellow; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px gold; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
+                ⚡ DÉCLENCHER LE FOUET DE SOLFÈGE ⚡
+            </button>
+            <button style="background: darkblue; color: cyan; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px cyan; cursor: pointer;" onclick="toggleAudio()">
+                🎹 ÉCOUTER LA MUSIQUE DU MAÎTRE 🎹
+            </button>
+            <button style="background: darkgreen; color: lime; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px lime; cursor: pointer;" onclick="alert('📜 CERTIFICAT D'IGNORANCE DÉLIVRÉ :
+
+Le Maître Julianous atteste que votre niveau en contrepoint est nul, non avenu et punissable par décret impérial !');">
+                📜 AFFICHER VOTRE CERTIFICAT D'IGNORANCE 📜
+            </button>
+            <button style="background: purple; color: white; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px magenta; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
+                💣 EXPLOSER TOUTES LES RÉCLAMES 💣
+            </button>
+        </div>
+
+        <!-- TEXTE HYPER POMPEUX N°1 : LA LETTRE PERDUE DE MOZART -->
+        <div style="background: #fff8e6; color: black; padding: 25px; border: outset 6px gold; text-align: justify; font-family: 'Times New Roman', serif; margin-bottom: 25px;">
+            <h3 style="color: #800000; text-align: center; border-bottom: solid 3px #800000; padding-bottom: 8px; font-family: 'Impact'; font-size: 1.9em;">
+                ✉️ LA LETTRE SECRÈTE DE MOZART À SON PÈRE LEOPOLD (ANNOTÉE EN ROUGE PAR LE MAÎTRE) ✉️
+            </h3>
+            <p style="font-size: 1.3em; line-height: 1.9; text-indent: 30px;">
+                « Mon très cher père, à Vienne ce 14 Octobre 1781... Je composais hier soir un menuet en Ré majeur lorsque me vint la pensée terrifiante des élèves du futur ! S'ils osent jouer mes sonates sans respecter la justesse des dièses et la rigueur de la cadence parfaite, je préfère que mes partitions soient brûlées en place publique ! »
+            </p>
+            <blockquote style="border-left: solid 8px red; padding-left: 20px; background: #ffe6e6; font-style: italic; font-size: 1.25em; color: darkred; margin: 15px 0;">
+                <strong style="color: black;">🔥 Note fulminante du Maître Julianous :</strong><br>
+                « Vous l'entendez, misérables ignorants ? Mozart lui-même préférait voir ses chefs-d'œuvre détruits plutôt que d'entendre vos doigts hésitants massacrer ses arpèges ! »
+            </blockquote>
+        </div>
+
+        <!-- RECLAME RÉTRO INTERMÉDIAIRE FLAMBOYANTE -->
+        <div style="background: yellow; color: black; padding: 15px; border: dashed 6px red; margin-bottom: 25px; text-align: center;">
+            <h3 class="blink" style="color: red; font-size: 2em; margin: 0;">
+                🎺 SPONSOR DE L'IMPERIAL CONSERVATOIRE 🎺
+            </h3>
+            <p style="font-size: 1.3em; font-weight: bold; margin: 8px 0;">
+                VINAIGRE SOLFÉGIQUE DU MAÎTRE : Purifiez vos oreilles après l'écoute d'une fausse note ! (-95% pour les cancres).
+            </p>
+            <button style="background: black; color: lime; font-size: 1.3em; font-weight: bold; padding: 8px 25px; border: outset 4px white; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
+                🛒 ACHETER LE VINAIGRE PURIFICATEUR
+            </button>
+        </div>
+
+        <!-- TEXTE HYPER POMPEUX N°2 : LE TRAITÉ DE LA SYMPHONIE EN UT MINEUR -->
+        <div style="background: #f0f7ff; color: black; padding: 25px; border: outset 6px #000080; text-align: justify; font-family: 'Times New Roman', serif; margin-bottom: 25px;">
+            <h3 style="color: #000080; text-align: center; border-bottom: solid 3px #000080; padding-bottom: 8px; font-family: 'Impact'; font-size: 1.9em;">
+                🎼 ANALYSE MAGISTRALE : LA SUPRÉMATIE DU CONTREPOINT MOZARTIEN 🎼
+            </h3>
+            <p style="font-size: 1.3em; line-height: 1.9; text-indent: 30px;">
+                La Symphonie en Ut mineur n'est pas un divertissement pour esprits frivoles ! C'est une cathédrale sonore construite sur les fondations granitiques de la basse continue et de la fugue à quatre voix. Quiconque n'est pas capable de chanter la partie de basse à livre ouvert sera séance tenante privé de récréation pour les trente prochaines années !
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button style="background: #000080; color: white; font-size: 1.2em; font-weight: bold; padding: 10px 20px; border: outset 4px gold; cursor: pointer;" onclick="alert('🎺 BÂTON PÉDAGOGIQUE ACTIF !
+
+Le Maître frappe votre pupitre avec vigueur !');">
+                    💥 FRAPPER LE PUPITRE DU CANCRE
+                </button>
+            </div>
+        </div>
+
+        <!-- BOUTONS D'ACTION SECONDAIRES -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+            <button style="background: gold; color: black; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px black; cursor: pointer;" onclick="triggerPartitionPopupExplosion()">
+                🎺 COMMANDER LA RÈGLE EN FER DE 50CM 🎺
+            </button>
+            <button style="background: darkred; color: white; font-size: 1.2em; font-weight: bold; padding: 12px 20px; border: outset 5px red; cursor: pointer;" onclick="alert('🕊️ PIGEON VOYAGEUR ENVOYÉ !
+
+Une convocation officielle a été expédiée à vos parents avec mention : CANCRE ASSIGNÉ AU CHÂTIMENT !');">
+                🕊️ ENVOYER UN CHÂTIMENT PAR PIGEON VOYAGEUR 🕊️
+            </button>
+        </div>
+    </div>
+
+    <!-- BOUTON RETOUR -->
+    <div style="text-<span class="decl-ending">align</span>: center; margin-<span class="decl-ending">top</span>: 30px; margin-<span class="decl-ending">bottom</span>: 30px;">
+        <a href="index.html" style="font-<span class="decl-ending">size</span>: 1.5em; background: #c0c0c0; padding: 12px 25px; border: outset 5px #fff; text-<span class="decl-ending">decoration</span>: none; color: black; font-<span class="decl-ending">weight</span>: bold; box-<span class="decl-ending">shadow</span>: 5px 5px 0px black;">
+            ⬅️ RETOUR À L'ACCUEIL DU MAÎTRE
+        </a>
+    </div>
+</div>
+
+<!-- SCRIPTS JS SPÉCIAUX PAGE LATIN : DEFILEMENT ALEATOIRE & DECLINAISONS BALADEUSES -->
+<style>
+    
+    /* Clignotement néon des terminaisons latines */
+    .decl-ending {
+        font-weight: bold;
+        display: inline-block;
+        padding: 0 2px;
+        animation: rainbowBlink 0.6s infinite alternate;
+    }
+    @keyframes rainbowBlink {
+        0% { color: #ff0000; text-shadow: 0 0 8px #ff0000; background: #ffff00; }
+        25% { color: #00ff00; text-shadow: 0 0 8px #00ff00; background: #000000; }
+        50% { color: #00ffff; text-shadow: 0 0 8px #00ffff; background: #ff00ff; }
+        75% { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; background: #000080; }
+        100% { color: #ffff00; text-shadow: 0 0 8px #ffff00; background: #800000; }
+    }
+
+    /* Effet Glitch & Baladage des déclinaisons */
+    .wandering-<span class="decl-ending">table</span> {
+        transition: transform 0.4s ease-<span class="decl-ending">in</span>-out, box-<span class="decl-ending">shadow</span> 0.3s ease-<span class="decl-ending">in</span>-out, filter 0.3s ease-<span class="decl-ending">in</span>-out;
+    }
+    .wandering-<span class="decl-ending">table</span>:hover {
+        transform: scale(1.02) rotate(1deg) translateY(-5px);
+        box-<span class="decl-ending">shadow</span>: 0px 0px 25px red !important;
+    }
+    .glitch-<span class="decl-ending">active</span> {
+        animation: tableShake 0.15s infinite alternate;
+        filter: hue-<span class="decl-ending">rotate</span>(90deg) contrast(150%);
+    }
+    @keyframes tableShake {
+        0% { transform: translate(3px, 2px) rotate(0.5deg); }
+        50% { transform: translate(-3px, -2px) rotate(-0.5deg); }
+        100% { transform: translate(2px, -3px) rotate(1deg); }
+    }
+    #autoScrollBanner {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: red;
+        color: yellow;
+        padding: 12px 20px;
+        font-<span class="decl-ending">weight</span>: bold;
+        font-<span class="decl-ending">family</span>: 'Impact', sans-<span class="decl-ending">serif</span>;
+        font-<span class="decl-ending">size</span>: 1.3em;
+        border: outset 4px gold;
+        box-<span class="decl-ending">shadow</span>: 5px 5px 15px black;
+        z-<span class="decl-ending">index</span>: 99999;
+        display: none;
+    }
+</style>
+
+
+    <!-- GRAND PAVÉ ENCORE PLUS POMPEUX ET SURANÉ DU MAÎTRE JULIANOUS -->
+    <div style="border: double 10px #800000; background: #fff0db; padding: 30px; margin: 35px 0; text-align: justify; font-family: 'Times New Roman', serif; box-shadow: 12px 12px 0px #400000;">
+        <h2 style="color: darkred; text-align: center; border-bottom: double 5px darkred; padding-bottom: 12px; font-family: 'Impact', sans-serif; font-size: 2.5em; text-transform: uppercase;">
+            📜 LE RÉQUISITOIRE PÉDAGOGIQUE ET MAGISTRAL DU MAÎTRE JULIANOUS 📜
+        </h2>
+        <p style="font-size: 1.35em; line-height: 2.0; color: #000; text-indent: 40px;">
+            « Ô insensés qui foulez le sol sacré du conservatoire sans trembler ! Apollon lui-même, descendant du mont Parnasse pour contempler vos lamentables solfèges, en aurait brisé sa lyre d'or contre les rochers d'Inachus ! Comment osez-vous prétendre aborder l'art sublime du contrepoint rigoureux, alors que votre esprit embrumé tâtonne lamentablement entre le nominatif et le dative d'intérêt ? Molière, dans la grandeur de sa comédie française, fustigeait les faux savants et les pédants de cour ; mais face à la vacuité sidérale de votre ignorance solfégique, le plus grand pédant devenait un phare de la civilisation !
+        </p>
+        <blockquote style="border-left: solid 10px darkred; padding-left: 25px; margin: 25px 0; font-style: italic; background: #ffe6e6; font-size: 1.3em; color: #600000; line-height: 1.9;">
+            « Répétez avec moi, bécasses du solfège : <em>Rosa, rosae, rosam, rosae, rosae, rosa !</em> Que chaque terminaison soit gravée dans vos mémoires déficientes à grands coups de férule et de menaces d'excommunication harmonique ! Celui qui osera murmurer une fausse note devant le buste de Mozart sera immédiatement condamné à copier mille fois le traité de composition de Jean-Philippe Rameau en caractères gothiques ! »
+        </blockquote>
+        <p style="font-size: 1.35em; line-height: 2.0; color: #000; text-indent: 40px;">
+            Regardez vos yeux qui s'écarquillent devant les déclinaisons qui s'agitent et clignotent sur cette page ! C'est le châtiment divin de la grammaire latine qui s'empare de votre écran pour punir votre négligence ! Ne détournez pas le regard : la vérité grammaticale exige votre soumission totale ! »
+        </p>
+    </div>
+
+<div id="autoScrollBanner" class="blink">
+    ⚠️ LE MAÎTRE ANIME LA PAGE ET DÉPLACE VOTRE REGARD SUR LES DÉCLINAISONS ! ⚠️
+</div>
+
+<script src="script.js"></script>
+<script>
+    // 1. Ajouter les classes d'animation baladeuse sur tous les tableaux de déclinaisons
+    document.addEventListener('DOMContentLoaded', () => {
+        const tables = document.querySelectorAll('table');
+        tables.forEach(table => {
+            table.classList.add('wandering-<span class="decl-ending">table</span>');
+        });
+
+        // 2. Glitch périodique aléatoire sur les tableaux de déclinaisons
+        setInterval(() => {
+            if (tables.length > 0) {
+                const randomTable = tables[Math.floor(Math.random() * tables.length)];
+                randomTable.classList.add('glitch-<span class="decl-ending">active</span>');
+                setTimeout(() => {
+                    randomTable.classList.remove('glitch-<span class="decl-ending">active</span>');
+                }, 1200);
+            }
+        }, 4000);
+
+        // 3. Défilement automatique aléatoire (Auto-<span class="decl-ending">scroll</span> capricieux du Maître)
+        setInterval(() => {
+        if (Math.random() > 0.1) {
+                const banner = document.getElementById('autoScrollBanner');
+                banner.style.display = 'block';
+                
+                const randomY = Math.floor(Math.random() * (document.body.scrollHeight - window.innerHeight));
+                window.scrollTo({
+                    top: randomY,
+                    behavior: 'smooth'
+                });
+
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                }, 2500);
+            }
+        }, 1750);
+    });
+
+    
+        // 5. Clignotement et mutation dynamique permanente des terminaisons latines
+        const latinEndingsList = ['a', 'ae', 'am', 'arum', 'is', 'as', 'us', 'i', 'um', 'os', 'orum', 'o', 'e', 'es', 'ium', 'ibus', 'uum', 'ebus', 'ei', 'em', 'res'];
+        const endingSpans = document.querySelectorAll('.decl-ending');
+        
+        setInterval(() => {
+            endingSpans.forEach(span => {
+                if (Math.random() > 0.4) {
+                    const randomEnding = latinEndingsList[Math.floor(Math.random() * latinEndingsList.length)];
+                    span.innerText = randomEnding;
+                }
+            });
+        }, 700);
+
+    // 4. Fonction de vérification du Cours de Latin
+    function checkLatinCourseAnswer() {
+        const input = document.getElementById('latinAnswerInput').value.trim().toLowerCase();
+        const feedback = document.getElementById('latinCourseFeedback');
+        
+        if (input === 'rosam') {
+            feedback.style.color = 'green';
+            feedback.innerHTML = '✅ BRAVO CANCRE ! "Rosam" est exact. Mais ne vous vantez pas, la 3ème déclinaison va vous détruire !';
+        } else if (input === '') {
+            feedback.style.color = 'red';
+            feedback.innerHTML = '❌ CHAMP VIDE ! L\'ignorance totale ! Vous méritez 50 coups de règle en fer !';
+            triggerPartitionPopupExplosion();
+        } else {
+            feedback.style.color = 'red';
+            feedback.innerHTML = '❌ HERÉSIE LATINE ! "' + input + '" est FAUX ! L\'accusatif singulier est ROSAM ! CHÂTIMENT IMMÉDIAT !';
+            triggerPartitionPopupExplosion();
+        }
+    }
+</script>
+</body>
+</html>

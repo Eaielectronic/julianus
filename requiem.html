@@ -54,41 +54,179 @@
         <a href="requiem.html">Requiem de Mozart</a> | 
         <a href="chatiments.html">Châtiments Corporels</a> | 
         <a href="auditions.html">Auditions</a> |
+        <a href="latin.html">Déclinaisons & Mozart</a> | 
         <a href="livre-dor.html">Livre d'or</a>
     </div>
 
-    <div style="border: outset 10px #00ffff; padding: 20px; background: #ccccff; margin: 20px 0; box-shadow: 15px 15px 0px #000;">
-        <h2 style="color: purple; text-align: center; border-bottom: double 5px purple; padding-bottom: 10px; font-family: 'Impact', sans-serif; font-size: 2.5em;">Le Requiem de Mozart</h2>
-        <h3 class="blink" style="text-align: center; color: red; font-size: 1.8em;">Votre enterrement musical</h3>
+    <!-- BANNIÈRE DE TITRE DU REQUIEM -->
+    <div style="border: outset 10px #00ffff; padding: 25px; background: linear-gradient(180deg, #1a0033, #4b0082); color: white; margin: 20px 0; box-shadow: 15px 15px 0px #000; text-align: center;">
+        <h2 style="color: yellow; text-shadow: 4px 4px 0px black; font-family: 'Impact', sans-serif; font-size: 3.2em; margin: 0;">
+            🎼 LE REQUIEM DE MOZART (KV 626) 🎼
+        </h2>
+        <h3 class="blink" style="color: #ff0055; font-size: 1.9em; margin-top: 10px;">
+            « VOTRE ENTERREMENT MUSICAL INTERACTIF — CLIQUEZ PARTOUT ! »
+        </h3>
+        <p style="font-size: 1.2em; color: cyan;">
+            ⚠️ Cliquez sur n'importe quelle strophe du Requiem pour déclencher la colère sacrée de Mozart et du Maître Julianous !
+        </p>
+    </div>
+
+    <!-- TABLEAU INTERACTIF DU REQUIEM (DIES IRAE, TUBA MIRUM, LACRIMOSA...) -->
+    <div style="background: repeating-linear-gradient(0deg, #000, #000 20px, #1a001a 20px, #1a001a 40px); border: double 8px red; padding: 25px; color: white; margin: 20px 0;">
         
-        <table style="width: 100%; border: inset 8px #00ffff; margin: 30px 0; background: url('https://anlucas.neocities.org/bg_stars.gif'); color: white;">
-            <tr>
-                <td style="padding: 30px;">
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dashed 4px yellow; padding: 20px; background: rgba(0,0,0,0.8); box-shadow: 5px 5px 10px black;">Le Dies Irae est la seule musique appropriée pour juger vos misérables tentatives de déchiffrage. Chaque fausse note est un pas de plus vers les flammes éternelles de l'enfer musical.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0; background: #fff; padding: 10px; border: solid 3px red; display: inline-block;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                        <img src="https://anlucas.neocities.org/flames.gif" alt="Flammes" style="margin: 0 20px;">
-                        <img src="https://anlucas.neocities.org/underconstruction.gif" alt="Construction">
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: double 6px cyan; padding: 20px; background: rgba(0,0,100,0.8); box-shadow: 5px 5px 10px black;">Vous pleurez ? Le Lacrimosa n'a pas été écrit pour consoler les faibles, mais pour illustrer l'immensité du génie que vous ne toucherez jamais du doigt, même dans vos rêves les plus fous.</p>
-                    
-                    <div style="text-align: center; margin: 30px 0;">
-                        <marquee scrollamount="20" style="color: yellow; font-size: 2em; font-weight: bold; background: red; padding: 10px; border: solid 3px black;">VOUS N'AVEZ TOUJOURS RIEN COMPRIS !!! VOTRE IGNORANCE EST AFFLIGEANTE !!!</marquee>
-                    </div>
-                    
-                    <p style="font-size: 1.6em; line-height: 1.6; text-align: justify; border: dotted 5px lime; padding: 20px; background: rgba(50,0,0,0.8); box-shadow: 5px 5px 10px black;">Écoutez et tremblez ! Le chef-d'œuvre inachevé vous regarde de haut. Et moi aussi.</p>
-                </td>
-            </tr>
-        </table>
-        
-        <div style="text-align: center; padding: 25px; background: #ffffcc; border: solid 6px #000080; color: #000080; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px gray;">
-            <strong style="font-size: 1.5em; text-transform: uppercase;">🌐 Archive du Web Antique (Pensée du Maître) 🌐</strong><br><br>
-            <i style="font-size: 1.3em;">"Lorem ipsum dolor sit amet, consectetuer adipiscing elit... BLABLABLA ! La vérité est que votre niveau est si lamentable que même le latin perd son sens face à votre ignorance crasse. Les balises HTML de 1998 ont plus de structure que vos compositions. Retournez travailler vos gammes avant que je ne détruise votre clavier avec un marteau !"</i>
+        <marquee scrollamount="25" style="color: yellow; font-size: 2.2em; font-weight: bold; background: darkred; padding: 12px; border: outset 5px gold; margin-bottom: 25px;">
+            🔥 DIES IRAE ! DIES ILLA ! SOLVET SAECLUM IN FAVILLA ! CLIQUEZ SUR LE TEXTE POUR TENTER DE SURVIVRE ! 🔥
+        </marquee>
+
+        <!-- STROPHE 1 : DIES IRAE -->
+        <div class="requiem-block" onclick="triggerRequiemClick('Dies Irae', '💥 FAUSSE NOTE DANS LE DIES IRAE ! Les flammes de l\'enfer du solfège vous devorent !')" style="border: dashed 5px red; padding: 20px; background: rgba(128,0,0,0.8); margin-bottom: 25px; cursor: pointer; transition: transform 0.2s;">
+            <h3 style="color: yellow; font-family: 'Impact'; font-size: 2em; margin-top: 0; text-align: center;">
+                🔥 I. DIES IRAE (Jour de Colère) - [CLIQUEZ ICI !] 🔥
+            </h3>
+            <p style="font-size: 1.4em; line-height: 1.8; text-align: center; font-family: 'Times New Roman', serif;">
+                « Dies irae, dies illa,<br>
+                Solvet saeclum in favilla,<br>
+                Teste David cum Sibylla !<br>
+                Quantus tremor est futurus,<br>
+                Quando judex est venturus,<br>
+                Cuncta stricte discussurus ! »
+            </p>
+            <div style="text-align: center; font-style: italic; color: #ffcccc; font-size: 1.1em;">
+                (Traduction du Maître : "Le jour de colère réduira vos partitions médiocres en cendres ! Le Maître jugera vos fausses notes sans aucune pitié !")
+            </div>
         </div>
+
+        <!-- STROPHE 2 : TUBA MIRUM -->
+        <div class="requiem-block" onclick="triggerRequiemClick('Tuba Mirum', '🎺 LA TROMPETTE DU JUGEMENT DERNIER SONNE ! Votre niveau en contrepoint est jugé CATASTROPHIQUE !')" style="border: double 6px cyan; padding: 20px; background: rgba(0,0,128,0.8); margin-bottom: 25px; cursor: pointer; transition: transform 0.2s;">
+            <h3 style="color: cyan; font-family: 'Impact'; font-size: 2em; margin-top: 0; text-align: center;">
+                🎺 II. TUBA MIRUM (La Trompette Étonnante) - [CLIQUEZ ICI !] 🎺
+            </h3>
+            <p style="font-size: 1.4em; line-height: 1.8; text-align: center; font-family: 'Times New Roman', serif;">
+                « Tuba mirum spargens sonum<br>
+                Per sepulcra regionum,<br>
+                Coget omnes ante thronum.<br>
+                Mors stupebit et natura,<br>
+                Cum resurget creatura,<br>
+                Judicanti responsura. »
+            </p>
+            <div style="text-align: center; font-style: italic; color: #cce6ff; font-size: 1.1em;">
+                (Traduction du Maître : "La trompette résonne et même la mort est stupéfaite devant l'immensité de vos erreurs de solfège !")
+            </div>
+        </div>
+
+        <!-- STROPHE 3 : REX TREMENDAE -->
+        <div class="requiem-block" onclick="triggerRequiemClick('Rex Tremendae', '👑 REX TREMENDAE MAJESTATIS ! Le Roi de Majesté ordonne 100 coups de règle sur vos doigts !')" style="border: dotted 6px gold; padding: 20px; background: rgba(128,128,0,0.8); margin-bottom: 25px; cursor: pointer; transition: transform 0.2s;">
+            <h3 style="color: yellow; font-family: 'Impact'; font-size: 2em; margin-top: 0; text-align: center;">
+                👑 III. REX TREMENDAE (Roi de Majesté Redoutable) - [CLIQUEZ ICI !] 👑
+            </h3>
+            <p style="font-size: 1.4em; line-height: 1.8; text-align: center; font-family: 'Times New Roman', serif;">
+                « Rex tremendae majestatis,<br>
+                Qui salvandos salvas gratis,<br>
+                Salva me, fons pietatis ! »
+            </p>
+            <div style="text-align: center; font-style: italic; color: #ffffcc; font-size: 1.1em;">
+                (Traduction du Maître : "Roi de majesté redoutable, sauvez-moi de la cacophonie de mes élèves !")
+            </div>
+        </div>
+
+        <!-- STROPHE 4 : CONFUTATIS MALEDICTIS -->
+        <div class="requiem-block" onclick="triggerRequiemClick('Confutatis', '🌋 CONFUTATIS MALEDICTIS ! Les maudits du solfège sont jetés dans les flammes du contrepoint !')" style="border: outset 8px magenta; padding: 20px; background: rgba(128,0,128,0.8); margin-bottom: 25px; cursor: pointer; transition: transform 0.2s;">
+            <h3 style="color: magenta; font-family: 'Impact'; font-size: 2em; margin-top: 0; text-align: center;">
+                🔥 IV. CONFUTATIS MALEDICTIS (Confondu avec les Maudits) - [CLIQUEZ ICI !] 🔥
+            </h3>
+            <p style="font-size: 1.4em; line-height: 1.8; text-align: center; font-family: 'Times New Roman', serif;">
+                « Confutatis maledictis,<br>
+                Flammis acribus addictis,<br>
+                Voca me cum benedictis.<br>
+                Oro supplex et acclinis,<br>
+                Cor contritum quasi cinis,<br>
+                Gere curam mei finis. »
+            </p>
+            <div style="text-align: center; font-style: italic; color: #ffccff; font-size: 1.1em;">
+                (Traduction du Maître : "Quand les cancres seront jetés aux flammes, écoutez mes suppliques et punissez-les sévèrement !")
+            </div>
+        </div>
+
+        <!-- STROPHE 5 : LACRIMOSA -->
+        <div class="requiem-block" onclick="triggerRequiemClick('Lacrimosa', '💧 LACRIMOSA ! Jour de larmes pour vos tympans et votre moyenne de solfège !')" style="border: double 10px lime; padding: 20px; background: rgba(0,100,0,0.8); margin-bottom: 25px; cursor: pointer; transition: transform 0.2s;">
+            <h3 style="color: lime; font-family: 'Impact'; font-size: 2.2em; margin-top: 0; text-align: center;" class="blink">
+                💧 V. LACRIMOSA (Jour de Larmes) - [CLIQUEZ ABSOLUMENT ICI !] 💧
+            </h3>
+            <p style="font-size: 1.5em; line-height: 1.8; text-align: center; font-family: 'Times New Roman', serif; font-weight: bold;">
+                « Lacrimosa dies illa,<br>
+                Qua resurget ex favilla<br>
+                Judicandus homo reus.<br>
+                Huic ergo parce, Deus :<br>
+                Pie Jesu Domine,<br>
+                Dona eis requiem. Amen. »
+            </p>
+            <div style="text-align: center; font-style: italic; color: #ccffcc; font-size: 1.2em;">
+                (Traduction du Maître : "Jour de larmes où l'élève coupable sera jugé pour ses 40 fausses notes par mesure. Donnez-lui le repos éternel loin de mon piano !")
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PENSÉE FINALE DU MAÎTRE SUR MOZART -->
+    <div style="text-align: center; padding: 25px; background: #ffffcc; border: solid 6px #000080; color: #000080; font-family: 'Times New Roman', serif; box-shadow: 10px 10px 0px gray; margin: 25px 0;">
+        <strong style="font-size: 1.6em; text-transform: uppercase;">🌐 PENSÉE FINALE DU MAÎTRE SUR LE REQUIEM 🌐</strong><br><br>
+        <i style="font-size: 1.3em; line-height: 1.8;">
+            "Le Requiem est une œuvre sacrée incomprise par vos esprits ramollis par la musique moderne ! Si vous avez cliqué sur les strophes ci-dessus, j'espère que vos oreilles résonnent encore de la terreur du Dies Irae. Retournez travailler vos gammes ou affrontez mon courroux !"
+        </i>
     </div>
 </div>
+
+<!-- STYLES & SCRIPTS DE TRUCS QUI BOUGENT PARTOUT (FLOATING NOTES & REQUIEM CHAOS) -->
+<style>
+    .requiem-block:hover {
+        transform: scale(1.03) rotate(-0.5deg) !important;
+        box-shadow: 0 0 25px yellow !important;
+    }
+    .floating-note {
+        position: fixed;
+        font-size: 2em;
+        user-select: none;
+        pointer-events: none;
+        z-index: 9999;
+        animation: floatMove 6s linear infinite;
+    }
+    @keyframes floatMove {
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-100px) rotate(360deg); opacity: 0.2; }
+    }
+</style>
+
 <script src="script.js"></script>
+<script>
+    // 1. Générateur de notes de musique volantes qui bougent partout sur la page
+    document.addEventListener('DOMContentLoaded', () => {
+        const notes = ['♪', '♫', '♬', '🎼', '🎻', '🔥', '⚡', '💀'];
+        for (let i = 0; i < 20; i++) {
+            const noteEl = document.createElement('div');
+            noteEl.className = 'floating-note';
+            noteEl.innerText = notes[Math.floor(Math.random() * notes.length)];
+            noteEl.style.left = Math.random() * 95 + 'vw';
+            noteEl.style.animationDuration = (3 + Math.random() * 5) + 's';
+            noteEl.style.animationDelay = (Math.random() * 5) + 's';
+            noteEl.style.color = ['yellow', 'cyan', 'lime', 'red', 'magenta'][Math.floor(Math.random() * 5)];
+            document.body.appendChild(noteEl);
+        }
+    });
+
+    // 2. Gestionnaire de clics sur les strophes du Requiem
+    function triggerRequiemClick(section, message) {
+        // Alerte interactive
+        alert("🎼 REQUIEM DE MOZART - " + section.toUpperCase() + " 🎼\n\n" + message);
+        
+        // Explosion de popups réclames rétro
+        triggerPartitionPopupExplosion();
+        
+        // Flash visuel sur le fond de page
+        document.body.style.background = 'red';
+        setTimeout(() => {
+            document.body.style.background = '';
+        }, 300);
+    }
+</script>
 </body>
 </html>
