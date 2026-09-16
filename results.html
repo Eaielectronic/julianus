@@ -42,12 +42,14 @@
 <div id="exerciseModal" class="modal-overlay">
     <div class="modal-content">
         <h2>Halte-là, cancrelat !</h2>
+<div class="bancale-gif" style="float: right; margin: 15px 0 15px 20px; transform: rotate(5deg); z-index: 10;"><img src="assets/conducting_van_cliburn.gif" alt="Conducting" style="height: 115px; border: outset 4px gold; box-shadow: -5px 5px 10px black;" /></div>
         <p>Vous avez trop sollicité le savoir sans effort ! Résolvez ceci :</p>
         <p><strong>Combien font 14 multiplié par 7, divisé par 2, plus l'âge de la mort de Mozart ?</strong></p>
         <input type="text" id="modalAnswer" placeholder="Votre réponse...">
         <button onclick="checkModalAnswer()">Soumettre au Maître</button>
         <button onclick="skipModalExercise()" style="margin-left:10px;">Sécher le cours</button>
         <p id="modalResponse" style="color:red; font-weight:bold;"></p>
+<div class="bancale-gif" style="text-align: center; margin: 25px 0; transform: rotate(-3deg); clear: both;"><img src="assets/dance_opera.gif" alt="Dance Opera" style="height: 120px; border: inset 5px blue; box-shadow: 6px 6px 12px black;" /></div>
     </div>
 </div>
 
@@ -58,6 +60,7 @@
             <span>Julianous</span>
             <img src="assets/user_screenshot_animated.gif" alt="Chef d'orchestre 5-frames" style="height: 75px; border: outset 4px gold; border-radius: 6px; box-shadow: -4px 4px 10px black;" />
         </h1>
+<div class="bancale-gif" style="float: left; margin: 15px 20px 15px 0; transform: rotate(-4deg); z-index: 10;"><img src="assets/dancing_teacher.gif" alt="Teacher Dancing" style="height: 110px; border: outset 4px red; box-shadow: 5px 5px 10px black;" /></div>
         <h2 style="margin-top: 10px; margin-bottom: 0;">L'excellence intellectuelle par la douleur pédagogique</h2>
     </div>
 
@@ -84,11 +87,18 @@
         </div>
     </div>
 
+    <!-- ZONE DE RÉSULTATS DYNAMIQUES POUR LE MOTEUR DE RECHERCHE -->
+    <div class="results" id="resultsArea" style="display: block; margin-top: 20px; padding: 20px; border: outset 5px #dfdfdf; background-color: rgba(255, 255, 255, 0.95); text-align: left;">
+        <div id="responseText">
+            <p style="font-size: 1.3em; color: blue; font-family: 'Times New Roman', serif;">Recherche en cours dans les archives impériales du Maître...</p>
+        </div>
+    </div>
 
     <div style="text-align: center; margin-top: 30px;">
         <a href="index.html" style="font-size: 1.5em; background: #c0c0c0; padding: 10px; border: outset 4px #fff; text-decoration: none; color: black; font-weight: bold;">Retour au menu principal</a>
     </div>
 </div>
+<div class="bancale-gif" style="float: left; margin: 20px 20px 10px 0; transform: rotate(3deg); z-index: 10;"><img src="assets/sesame_street_band.gif" alt="Sesame Band" style="height: 105px; border: double 6px green; box-shadow: 4px 6px 10px black;" /></div>
 <script src="script.js"></script>
 <script>
     window.addEventListener('DOMContentLoaded', () => {
