@@ -256,102 +256,145 @@ function scatterBadges() {
 function triggerPartitionPopupExplosion() {
     const funnyPopups = [
         {
-            title: "📜 DÉCRET SOLENNEL DE MOZART & MOLIÈRE 📜",
+            title: "🎻 LEÇON DE CONTREPOINT EN VIDÉO 🎻",
             bg: "#ffcccc",
             border: "red",
-            width: "350px",
+            width: "340px",
             content: `
-                <h4 style="color:red; margin:5px 0;" class="blink">🎉 CONTRAT DE SOLFÈGE ILLIMITÉ DÉBLOQUÉ ! 🎉</h4>
-                <p style="font-size:12px; font-weight:bold; color:#000;">En écoutant ce cours, vous vous engagez à réviser la fugue en Sol mineur pendant 14h par jour !</p>
-                <img src="assets/giphy_maitre.gif" style="width:120px; border:outset 3px gold; margin-bottom:5px;">
-                <video width="100%" height="150" controls loop autoplay muted style="border:inset 3px red; background:black;">
+                <h4 style="color:red; margin:5px 0;" class="blink">🎉 COURS DE SOLFÈGE EXCLUSIF ! 🎉</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Démonstration vidéo du contrepoint rigoureux :</p>
+                <video width="100%" height="160" controls loop autoplay muted style="border:inset 3px red; background:black;">
                     <source src="assets/audition1.mp4" type="video/mp4">
                 </video>
             `
         },
         {
-            title: "🎙️ SPONSOR PODCAST MOLIÈRE & SOLFÈGE 🎙️",
+            title: "🕺 LE PROFESSEUR EN ACTION 🕺",
+            bg: "#e6ffe6",
+            border: "green",
+            width: "330px",
+            content: `
+                <h4 style="color:green; margin:5px 0;" class="blink">🎓 CADENCE MUSICALE PARFAITE 🎓</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Le Maître démontre le rythme de la fugue :</p>
+                <img src="assets/dancing_teacher.gif" style="width:100%; border:outset 3px green; margin-top:5px;">
+            `
+        },
+        {
+            title: "📜 DÉCRET SOLENNEL DE MOZART 📜",
+            bg: "#ffffcc",
+            border: "darkred",
+            width: "320px",
+            content: `
+                <h4 style="color:darkred; margin:5px 0;">📜 AVIS DE LA DIRECTION 📜</h4>
+                <p style="font-size:13px; font-weight:bold; color:#000; line-height:1.4;">« Tout élève surpris à réviser sans chanter ses déclinaisons latines sera consigné 4h ce samedi matin ! »</p>
+                <button style="background:darkred; color:yellow; font-weight:bold; border:outset 3px gold; width:100%; padding:8px; cursor:pointer;" onclick="this.closest('.retro-popup-ad').style.display='none'">MÉDITER CE DÉCRET</button>
+            `
+        },
+        {
+            title: "🎙️ SPONSOR PODCAST MOLIÈRE 🎙️",
             bg: "#ffe6ff",
             border: "magenta",
-            width: "360px",
+            width: "350px",
             content: `
                 <h4 style="color:purple; margin:5px 0;" class="blink">🎧 LE PODCAST DU MAÎTRE JULIANOUS 🎧</h4>
-                <p style="font-size:12px; font-weight:bold; color:#000;">Écoutez l'analyse impitoyable de la Symphonie N°40 en Ut mineur et les tirades de Molière !</p>
-                <img src="assets/maitre_orchestra.gif" style="width:130px; border:outset 3px magenta; margin-bottom:5px;">
-                <audio controls autoplay loop style="width:100%; margin-top:5px;">
+                <p style="font-size:12px; font-weight:bold; color:#000;">Écoutez l'analyse impitoyable de la Symphonie N°40 en Ut mineur !</p>
+                <audio controls autoplay loop style="width:100%; margin-top:8px;">
                     <source src="assets/Mozart_Nachtmusik.ogg" type="audio/ogg">
                 </audio>
             `
         },
         {
-            title: "🎨 BOUCLIER ANTI-ART BAROQUE 🎨",
-            bg: "#e6ffff",
-            border: "cyan",
+            title: "🎼 CHEF D'ORCHESTRE IMPÉRIAL 🎼",
+            bg: "#e6f2ff",
+            border: "blue",
+            width: "330px",
+            content: `
+                <h4 style="color:blue; margin:5px 0;" class="blink">🎶 DIRECTION D'ORCHESTRE 🎶</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Observez la précision de la baguette baroque :</p>
+                <img src="assets/conducting_van_cliburn.gif" style="width:100%; border:outset 3px blue; margin-top:5px;">
+            `
+        },
+        {
+            title: "⚠️ ALERTE VIRUS HARMONIQUE ⚠️",
+            bg: "#000000",
+            border: "red",
             width: "350px",
             content: `
-                <h4 style="color:darkblue; margin:5px 0;" class="blink">🛡️ PURIFICATION DE L'ART MODERNE 🛡️</h4>
-                <p style="font-size:12px; font-weight:bold; color:#000;">Démonstration du contrepoint rigoureux du XVIIIe siècle en vidéo HD :</p>
-                <img src="assets/point_education.gif" style="width:120px; border:outset 3px cyan; margin-bottom:5px;">
-                <video width="100%" height="150" controls loop autoplay muted style="border:inset 3px darkblue; background:black;">
+                <h4 style="color:yellow; margin:5px 0;" class="blink">🚨 DÉFENSE DE L'ART BAROQUE 🚨</h4>
+                <p style="font-size:12px; font-weight:bold; color:#00ff00;">Interdiction stricte des quintes parallèles en vidéo :</p>
+                <video width="100%" height="160" controls loop autoplay muted style="border:outset 3px red; background:black;">
                     <source src="assets/virus_art.mp4" type="video/mp4">
                 </video>
             `
         },
         {
-            title: "⚡ TÉLÉCHARGEMENT EXPRESS DU CLAVECIN ⚡",
+            title: "📚 RECLAME : GAFFIOT VINTAGE -90% 📚",
+            bg: "#fff0f0",
+            border: "red",
+            width: "320px",
+            content: `
+                <h4 style="color:red; margin:5px 0;">📚 DICTIONNAIRE GAFFIOT 1895 📚</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000; line-height:1.4;">Recevez 1 RÈGLE EN FER DE 50CM OFFERTE pour corriger les fautes de déclinaisons latines !</p>
+                <button style="background:red; color:white; font-weight:bold; border:outset 3px black; width:100%; padding:8px; cursor:pointer;" onclick="this.closest('.retro-popup-ad').style.display='none'">COMMANDER LA RÈGLE</button>
+            `
+        },
+        {
+            title: "🎭 BALLET D'OPÉRA BAROQUE 🎭",
+            bg: "#fff0ff",
+            border: "purple",
+            width: "330px",
+            content: `
+                <h4 style="color:purple; margin:5px 0;">💃 DANCE OPERA VINTAGE 💃</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">L'élégance de la danse sous Louis XIV :</p>
+                <img src="assets/dance_opera.gif" style="width:100%; border:outset 3px purple; margin-top:5px;">
+            `
+        },
+        {
+            title: "⚡ TÉLÉCHARGEMENT MINITEL 56K ⚡",
+            bg: "#ffffcc",
+            border: "gold",
+            width: "310px",
+            content: `
+                <p style="font-size:12px; font-weight:bold; color:blue;">Téléchargement de la partition en cours...</p>
+                <div style="background:black; color:lime; font-family:monospace; padding:10px; border:inset 3px gray; font-size:12px; margin-top:5px;">
+                    [████████████░░░░] 68% - Clavecin_Du_Maitre.midi
+                </div>
+                <p style="font-size:11px; color:red; margin-top:5px; font-weight:bold;">Ne coupez pas votre ligne téléphonique !</p>
+            `
+        },
+        {
+            title: "🎺 FANFARE ET SOLFÈGE 🎺",
+            bg: "#e6ffff",
+            border: "cyan",
+            width: "330px",
+            content: `
+                <h4 style="color:darkblue; margin:5px 0;">🎶 LA FANFARE ACADÉMIQUE 🎶</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Ensemble instrumental en pleine répétition :</p>
+                <img src="assets/sesame_street_band.gif" style="width:100%; border:outset 3px cyan; margin-top:5px;">
+            `
+        },
+        {
+            title: "🏆 DIPLÔME DU PREMIER DE CLASSE 🏆",
+            bg: "#e6ffe6",
+            border: "green",
+            width: "320px",
+            content: `
+                <h4 style="color:green; margin:5px 0;">🥇 PALME ACADÉMIQUE 🥇</h4>
+                <p style="font-size:13px; font-weight:bold; color:#000; line-height:1.4;">Le Professeur Julianous vous décerne la Palme Académique du Solfège Vivant pour votre assiduité !</p>
+                <button style="background:gold; color:black; font-weight:bold; border:outset 3px green; width:100%; padding:8px; cursor:pointer;" onclick="this.closest('.retro-popup-ad').style.display='none'">RECEVOIR LE DIPLÔME</button>
+            `
+        },
+        {
+            title: "🎓 PROMO COURS EXCLUSIFS 🎓",
             bg: "#ffffcc",
             border: "gold",
             width: "340px",
             content: `
-                <p style="font-size:12px; font-weight:bold; color:blue;">Téléchargement de la partition en 56k en cours...</p>
-                <img src="assets/teachers_day.gif" style="width:130px; border:outset 3px gold; margin-bottom:5px;">
-                <div style="background:black; color:lime; font-family:monospace; padding:8px; border:inset 2px gray; font-size:11px;">
-                    [████████████░░░░] 68% - Clavecin_Du_Maitre_1998.midi
-                </div>
-                <video width="100%" height="140" controls loop autoplay muted style="border:outset 3px gold; margin-top:5px; background:black;">
-                    <source src="assets/audition2.mp4" type="video/mp4">
+                <h4 style="color:darkred; margin:5px 0;" class="blink">🎓 LEÇONS SOUS LA MENACE DU MAÎTRE 🎓</h4>
+                <p style="font-size:12px; font-weight:bold; color:#000;">Promo exclusive -90% en vidéo :</p>
+                <video width="100%" height="160" controls loop autoplay muted style="border:inset 3px gold; background:black;">
+                    <source src="assets/course_video.mp4" type="video/mp4">
                 </video>
-            `
-        },
-        {
-            title: "🎭 SANCTION LITTÉRAIRE DE LEOPOLD MOZART 🎭",
-            bg: "#e6f2ff",
-            border: "blue",
-            width: "350px",
-            content: `
-                <p style="font-size:12px; font-weight:bold; color:#000080;">« Récitation solennelle des règles du solfège par le grand Mozart ! »</p>
-                <img src="assets/giphy_maitre.gif" style="width:110px; border:outset 3px blue; margin-bottom:5px;">
-                <video width="100%" height="150" controls loop autoplay muted style="border:inset 3px blue; background:black;">
-                    <source src="assets/audition3.mp4" type="video/mp4">
-                </video>
-            `
-        },
-        {
-            title: "🔥 ÉNORME RECLAME : GAFFIOT VINTAGE -90% 🔥",
-            bg: "#fff0f0",
-            border: "red",
-            width: "350px",
-            content: `
-                <h4 style="color:red; margin:5px 0;" class="blink">📚 LE DICTIONNAIRE GAFFIOT & RÈGLE EN FER 📚</h4>
-                <p style="font-size:12px; font-weight:bold; color:#000;">Recevez la règle de 50cm pour corriger les fautes d'harmonie !</p>
-                <img src="assets/point_education.gif" style="width:120px; border:outset 3px red; margin-bottom:5px;">
-                <video width="100%" height="140" controls loop autoplay muted style="border:inset 3px red; background:black;">
-                    <source src="assets/audition4.mp4" type="video/mp4">
-                </video>
-            `
-        },
-        {
-            title: "🏆 DIPLÔME DE L'ÉLÈVE PREMIER DE LA CLASSE 🏆",
-            bg: "#e6ffe6",
-            border: "green",
-            width: "340px",
-            content: `
-                <h4 style="color:green; margin:5px 0;">🥇 DISTINCTION ROYALE DU MAÎTRE 🥇</h4>
-                <p style="font-size:12px; font-weight:bold; color:#000;">Le Professeur Julianous vous décerne la Palme Académique du Solfège !</p>
-                <img src="assets/maitre_orchestra.gif" style="width:140px; border:outset 3px green; margin-bottom:5px;">
-                <audio controls loop style="width:100%; margin-top:5px;">
-                    <source src="assets/Dies_irae.ogg" type="audio/ogg">
-                </audio>
             `
         }
     ];
@@ -454,7 +497,6 @@ function hideAdKeepPlaying(btn) {
 function setupVideoSoundOnStart() {
     const videos = document.querySelectorAll('video');
     videos.forEach(vid => {
-        // Le son ne s'active à 100% que lorsque la vidéo commence à tourner !
         vid.addEventListener('play', () => {
             vid.muted = false;
             vid.volume = 1.0;
@@ -486,11 +528,9 @@ const retroAdPool = [
                     <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #00ff00;" class="blink">
                         🔊 MOZART (2 MIN) - LE SON S'ACTIVE AU LANCEMENT ! 🔊
                     </p>
-                    <img src="assets/maitre_orchestra.gif" style="width:110px; border:outset 2px gold; margin-bottom:4px;">
                     <video class="ad-popup-video" width="100%" height="180" controls loop style="border: outset 4px gold; background: black;">
                         <source src="assets/mozart_pub.mp4" type="video/mp4">
                     </video>
-                    <p style="font-size:11px; margin: 4px 0; color:#00ffff; font-family: monospace;">Fermer la pub laisse la vidéo tourner !</p>
                 </div>
             `;
             return div;
@@ -510,11 +550,9 @@ const retroAdPool = [
                 </div>
                 <div class="retro-popup-body" style="background: #ffffcc;">
                     <div class="blink" style="color:red; font-weight:bold; font-size:13px; margin-bottom:5px;">🎓 PROMO SOLFÈGE EXPRESS 🎓</div>
-                    <img src="assets/giphy_maitre.gif" style="width:100px; border:outset 2px red; margin-bottom:4px;">
                     <video class="ad-popup-video" width="100%" height="160" controls loop style="border: inset 3px gold; background: black;">
                         <source src="assets/course_video.mp4" type="video/mp4">
                     </video>
-                    <p style="font-size:11px; font-weight:bold; color:#000080; margin: 5px 0;">Leçons sous la menace du Maître ! -90% !</p>
                 </div>
             `;
             return div;
@@ -536,11 +574,9 @@ const retroAdPool = [
                     <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #ffff00;" class="blink">
                         🚨 ATTENTION ! UN VIRUS DÉRANGE L'ART ! 🚨
                     </p>
-                    <img src="assets/point_education.gif" style="width:110px; border:outset 2px red; margin-bottom:4px;">
                     <video class="ad-popup-video" width="100%" height="170" controls loop style="border: outset 4px red; background: black;">
                         <source src="assets/virus_art.mp4" type="video/mp4">
                     </video>
-                    <p style="font-size:11px; margin: 6px 0; color:#00ffff; font-family: monospace;">Fermer la pop-up laisse le virus tourner !</p>
                 </div>
             `;
             return div;
@@ -561,7 +597,6 @@ const retroAdPool = [
                 <div class="retro-popup-body" style="background: #ffe6ff; color: #000; border: inset 4px purple;">
                     <h4 style="color:purple; margin:5px 0;" class="blink">🎧 LE PODCAST DU MAÎTRE JULIANOUS 🎧</h4>
                     <p style="font-size:12px; font-weight:bold; color:#000;">Analyse impitoyable de la Symphonie N°40 en Ut mineur et tirades de Molière !</p>
-                    <img src="assets/teachers_day.gif" style="width:130px; border:outset 3px gold; margin-bottom:5px;">
                     <audio controls autoplay loop style="width:100%; margin-top:5px;">
                         <source src="assets/Mozart_Nachtmusik.ogg" type="audio/ogg">
                     </audio>
@@ -571,47 +606,61 @@ const retroAdPool = [
         }
     },
     {
-        id: 'antiArtAd',
+        id: 'dancingTeacherAd',
         isVideo: false,
         create: () => {
             const div = document.createElement('div');
             div.className = 'retro-popup-ad';
-            div.style.cssText = 'bottom: 80px; right: 120px; width: 350px; border: outset 8px cyan; z-index: 100012; box-shadow: 10px 10px 0px #000; position: fixed; background: #e6ffff; transform: none !important; border-radius: 0px !important;';
+            div.style.cssText = 'bottom: 80px; right: 120px; width: 330px; border: outset 8px green; z-index: 100012; box-shadow: 10px 10px 0px #000; position: fixed; background: #e6ffe6; transform: none !important; border-radius: 0px !important;';
             div.innerHTML = `
-                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #008080, #00ffff); color: #000;">
-                    <span class="blink" style="color: #000080; font-weight: bold;">🎨 PUB ANTI-ART BAROQUE 🎨</span>
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #008000, #00ff00); color: #000;">
+                    <span class="blink" style="color: #000080; font-weight: bold;">🕺 DANSE DU SOLFÈGE 🕺</span>
                     <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
                 </div>
-                <div class="retro-popup-body" style="background: #e6ffff; color: #000; border: inset 4px darkblue;">
-                    <h4 style="color:darkblue; margin:5px 0;">🎨 BOUCLIER ANTI-ART MODERNE ACTIVÉ 🎨</h4>
-                    <p style="font-size:12px; font-weight:bold; color:#000;">La défense absolue de la grande musique classique contre la laideur contemporaine !</p>
-                    <img src="assets/point_education.gif" style="width:130px; border:outset 3px darkblue; margin-bottom:5px;">
-                    <video width="100%" height="150" controls loop autoplay muted style="border: outset 3px cyan; background: black;">
-                        <source src="assets/virus_art.mp4" type="video/mp4">
-                    </video>
+                <div class="retro-popup-body" style="background: #e6ffe6; color: #000; border: inset 4px green;">
+                    <h4 style="color:green; margin:5px 0;">🎓 LE PROFESSEUR EN CADENCE 🎓</h4>
+                    <img src="assets/dancing_teacher.gif" style="width:100%; border:outset 3px green;">
                 </div>
             `;
             return div;
         }
     },
     {
-        id: 'visitorAd',
+        id: 'cliburnAd',
         isVideo: false,
         create: () => {
             const div = document.createElement('div');
             div.className = 'retro-popup-ad';
-            div.style.cssText = 'top: 250px; left: 220px; width: 330px; z-index: 100003; box-shadow: 10px 10px 0px #000; position: fixed; background: #ffffcc; border: outset 6px gold; transform: none !important; border-radius: 0px !important;';
+            div.style.cssText = 'top: 220px; left: 280px; width: 340px; border: outset 8px blue; z-index: 100014; box-shadow: 10px 10px 0px #000; position: fixed; background: #e6f2ff; transform: none !important; border-radius: 0px !important;';
             div.innerHTML = `
-                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ff00ff);">
-                    <span>🎉 FELICITATIONS VISITEUR #1 000 000 🎉</span>
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #000080, #00ffff); color: #fff;">
+                    <span class="blink" style="color: #ffff00; font-weight: bold;">🎼 DIRECTION D'ORCHESTRE 🎼</span>
                     <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
                 </div>
-                <div class="retro-popup-body" style="background: #ffffcc;">
-                    <img src="assets/giphy_maitre.gif" alt="Gagnant" style="width: 110px; border: outset 3px gold; margin-bottom: 5px;">
-                    <p style="color: #ff0000; font-weight: bold; font-size: 13px;" class="blink">VOUS AVEZ GAGNÉ UN CLAVECIN GRATUIT !</p>
-                    <video width="100%" height="140" controls loop autoplay muted style="border: inset 3px green; background: black;">
-                        <source src="assets/audition1.mp4" type="video/mp4">
-                    </video>
+                <div class="retro-popup-body" style="background: #e6f2ff; color: #000; border: inset 4px blue;">
+                    <h4 style="color:blue; margin:5px 0;">🎶 LA BAGUETTE DU MAÎTRE 🎶</h4>
+                    <img src="assets/conducting_van_cliburn.gif" style="width:100%; border:outset 3px blue;">
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
+        id: 'gaffiotTextAd',
+        isVideo: false,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'top: 250px; left: 220px; width: 310px; z-index: 100003; box-shadow: 10px 10px 0px #000; position: fixed; background: #fff0f0; border: outset 6px red; transform: none !important; border-radius: 0px !important;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #800000); color: #fff;">
+                    <span>📚 RECLAME : GAFFIOT 1895 📚</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #fff0f0;">
+                    <h4 style="color:red; margin:5px 0;">📚 DICTIONNAIRE GAFFIOT 📚</h4>
+                    <p style="color: #000; font-weight: bold; font-size: 12px; line-height:1.4;">Commandez le dictionnaire des déclinaisons latines et recevez 1 règle en fer de 50cm offerte !</p>
+                    <button style="background: #ff0000; color: #fff; font-weight: bold; border: outset 3px black; font-size: 12px; cursor: pointer; width: 100%; padding: 6px;" onclick="this.closest('.retro-popup-ad').style.display='none'">COMMANDER LA RÈGLE</button>
                 </div>
             `;
             return div;
