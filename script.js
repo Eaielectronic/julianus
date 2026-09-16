@@ -315,120 +315,181 @@ function createSidebars() {
     }, 3000);
 }
 
-// --- Publicités Rétro Enrichies (Vidéos, Images, Pop-ups Virus Anti-Art, Mozart 2 Min & Cours Julianous) ---
+// --- Masquage sans couper le son des vidéos ---
+function hideAdKeepPlaying(btn) {
+    const popup = btn.closest('.retro-popup-ad');
+    if (popup) {
+        popup.style.display = 'none'; // Se masque visuellement mais la vidéo et le son continuent en arrière-plan !
+    }
+}
+
+// --- Configuration du son au démarrage de chaque vidéo ---
+function setupVideoSoundOnStart() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(vid => {
+        // Le son ne s'active à 100% que lorsque la vidéo commence à tourner !
+        vid.addEventListener('play', () => {
+            vid.muted = false;
+            vid.volume = 1.0;
+        });
+        if (vid.paused) {
+            vid.muted = true;
+        } else {
+            vid.muted = false;
+            vid.volume = 1.0;
+        }
+    });
+}
+
+// Pool de publicités rétro fixes (sans animation de déplacement/bougeotte)
+const retroAdPool = [
+    {
+        id: 'mozartAd',
+        isVideo: true,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'top: 75px; left: 30px; width: 360px; border: outset 8px gold; z-index: 100008; box-shadow: 10px 10px 0px #000; position: fixed;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ffff00); color: #000;">
+                    <span class="blink" style="color: #ff0000; font-weight: bold;">🎻 PUB MOZART 2 MIN 🎻</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #000; color: #ffff00; border: inset 4px red;">
+                    <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #00ff00;" class="blink">
+                        🔊 MOZART (2 MIN) - LE SON S'ACTIVE AU LANCEMENT ! 🔊
+                    </p>
+                    <video class="ad-popup-video" width="100%" height="180" controls loop style="border: outset 4px gold; background: black;">
+                        <source src="assets/mozart_pub.mp4" type="video/mp4">
+                    </video>
+                    <p style="font-size:11px; margin: 4px 0; color:#00ffff; font-family: monospace;">Fermer la pub laisse la vidéo tourner !</p>
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
+        id: 'courseAd',
+        isVideo: true,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'bottom: 30px; left: 200px; width: 340px; border: outset 6px gold; z-index: 100004; box-shadow: 10px 10px 0px #000; position: fixed;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #000080, #008000);">
+                    <span>🎓 COURS EXCLUSIFS PAR JULIANOUS 🎓</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #ffffcc;">
+                    <div class="blink" style="color:red; font-weight:bold; font-size:13px; margin-bottom:5px;">🎓 PROMO SOLFÈGE EXPRESS 🎓</div>
+                    <video class="ad-popup-video" width="100%" height="160" controls loop style="border: inset 3px gold; background: black;">
+                        <source src="assets/course_video.mp4" type="video/mp4">
+                    </video>
+                    <p style="font-size:11px; font-weight:bold; color:#000080; margin: 5px 0;">Leçons sous la menace du Maître ! -90% !</p>
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
+        id: 'virusAd',
+        isVideo: true,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'top: 110px; right: 30px; width: 360px; border: outset 8px red; z-index: 100005; box-shadow: 10px 10px 0px #000; position: fixed;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #800000);">
+                    <span class="blink" style="color: #ffff00;">⚠️ ALERTE CRITIQUE : VIRUS ANTI-ART ⚠️</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #000; color: #ff0000; border: inset 3px red;">
+                    <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #ffff00;" class="blink">
+                        🚨 ATTENTION ! UN VIRUS DÉRANGE L'ART ! 🚨
+                    </p>
+                    <div style="position:relative; width:100%; height:180px; border: outset 4px red; background: black;">
+                        <iframe width="100%" height="180" src="https://www.youtube.com/embed/coNzTMQ0DFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="background: black;"></iframe>
+                    </div>
+                    <p style="font-size:11px; margin: 6px 0; color:#00ffff; font-family: monospace;">Fermer la pop-up laisse le virus tourner !</p>
+                </div>
+            `;
+            return div;
+        }
+    },
+    {
+        id: 'visitorAd',
+        isVideo: false,
+        create: () => {
+            const div = document.createElement('div');
+            div.className = 'retro-popup-ad';
+            div.style.cssText = 'top: 250px; left: 220px; width: 270px; z-index: 100003; box-shadow: 10px 10px 0px #000; position: fixed;';
+            div.innerHTML = `
+                <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ff00ff);">
+                    <span>🎉 FELICITATIONS VISITEUR #1 000 000 🎉</span>
+                    <button class="side-pub-close" onclick="hideAdKeepPlaying(this)">X</button>
+                </div>
+                <div class="retro-popup-body" style="background: #ffffcc;">
+                    <img src="assets/giphy_maitre.gif" alt="Gagnant" style="width: 90px; height: 90px; border: outset 3px gold; margin-bottom: 5px;">
+                    <p style="color: #ff0000; font-weight: bold; font-size: 12px;" class="blink">VOUS AVEZ GAGNÉ UN CLAVECIN GRATUIT !</p>
+                    <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 12px; cursor: pointer; width: 100%; padding: 5px;" onclick="alert('Félicitations ! Le clavecin sera livré par calèche.');">👉 RANGER VOTRE CLAVECIN 👈</button>
+                </div>
+            `;
+            return div;
+        }
+    }
+];
+
+// --- Publicités Rétro Alignées aux exigences exactes ---
 function createRetroAds() {
+    const pageName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    const isSearchPage = pageName === 'results.html';
+    const isIndexPage = pageName === 'index.html' || pageName === '' || pageName === 'julianous';
+
+    if (isSearchPage) return; // 0 pub sur la recherche
+
     // 1. Bandeau défilant supérieur rétro
     if (!document.querySelector('.marquee-ad-bar')) {
         const marqueeBar = document.createElement('div');
         marqueeBar.className = 'marquee-ad-bar';
         marqueeBar.innerHTML = `
             <marquee behavior="scroll" direction="left" scrollamount="6">
-                🚨 ALERTE OFFRE SPÉCIALE 1998 🚨 : -90% SUR TOUTES LES LEÇONS DE CONTREPOINT DE MAÎTRE JULIANOUS ! ★ GAGNEZ UN CLAVECIN EN BOIS DU XVIIe SIÈCLE EN TÉLÉCHARGEANT NOTRE SONNERIE POLYPHONIQUE MOZART (ENVOYEZ "MOZART" AU 81000) ★ C'EST INTOLÉRABLE DE MANQUER CELA ! ★
+                🚨 ALERTE OFFRE SPÉCIALE 1998 🚨 : -90% SUR TOUTES LES LEÇONS DE CONTREPOINT DE MAÎTRE JULIANOUS ! ★ GAGNEZ UN CLAVECIN EN BOIS DU XVIIe SIÈCLE ! ★
             </marquee>
         `;
         document.body.appendChild(marqueeBar);
     }
 
-    // 2. PUB MOZART 2 MINUTES MAX VOLUME (Pop-up vidéo géante en autoplay)
-    const mozartAdPopup = document.createElement('div');
-    mozartAdPopup.className = 'retro-popup-ad boing-effect';
-    mozartAdPopup.style.top = '70px';
-    mozartAdPopup.style.left = '30px';
-    mozartAdPopup.style.width = '370px';
-    mozartAdPopup.style.border = 'outset 8px gold';
-    mozartAdPopup.style.zIndex = '100008';
-    mozartAdPopup.style.boxShadow = '12px 12px 0px #000';
-    mozartAdPopup.innerHTML = `
-        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ffff00); color: #000;">
-            <span class="blink" style="color: #ff0000; font-weight: bold;">🎻 PUB MOZART 2 MIN (MAX VOLUME) 🎻</span>
-            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
-        </div>
-        <div class="retro-popup-body" style="background: #000; color: #ffff00; border: inset 4px red;">
-            <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #00ff00;" class="blink">
-                🔊 LE CHEF D'ŒUVRE MOZART (2 MINUTES CHRONO) EN AUTOPLAY SON MAXIMAL ! 🔊
-            </p>
-            <video id="mozartVideoAd" class="all-ad-video" width="100%" height="190" controls autoplay loop style="border: outset 4px gold; background: black;">
-                <source src="assets/mozart_pub.mp4" type="video/mp4">
-            </video>
-            <p style="font-size:11px; margin: 4px 0; color:#00ffff; font-family: monospace;">Écoutez l'opéra à plein volume pendant la navigation !</p>
-            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 13px; cursor: pointer; width: 100%; padding: 6px; text-transform: uppercase;" onclick="playAllVideosSimultaneously(); alert('TOUTES LES VIDÉOS JOUENT EN SIMULTANÉ À FULL VOLUME !');">🔊 MONTER TOUS LES SONS AU MAXIMUM 🔊</button>
-        </div>
-    `;
-    document.body.appendChild(mozartAdPopup);
+    const videoAds = retroAdPool.filter(a => a.isVideo);
+    let selectedAds = [];
 
-    // 3. LA FENÊTRE POP-UP DU VIRUS ANTI-ART (Format iframe YouTube standard exact)
-    const virusPopup = document.createElement('div');
-    virusPopup.className = 'retro-popup-ad boing-effect';
-    virusPopup.style.top = '100px';
-    virusPopup.style.right = '30px';
-    virusPopup.style.width = '360px';
-    virusPopup.style.border = 'outset 8px red';
-    virusPopup.style.zIndex = '100005';
-    virusPopup.style.boxShadow = '12px 12px 0px #000';
-    virusPopup.innerHTML = `
-        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #800000);">
-            <span class="blink" style="color: #ffff00;">⚠️ ALERTE CRITIQUE : VIRUS ANTI-ART ⚠️</span>
-            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
-        </div>
-        <div class="retro-popup-body" style="background: #000; color: #ff0000; border: inset 3px red;">
-            <p style="font-size:13px; font-weight:bold; margin-top:2px; font-family:'Impact', sans-serif; color: #ffff00;" class="blink">
-                🚨 ATTENTION ! UN VIRUS ESSAYE DE VOUS ATTAQUER ET DÉRANGE L'ART ! 🚨
-            </p>
-            <div style="position:relative; width:100%; height:180px; border: outset 4px red; background: black;">
-                <iframe width="100%" height="180" src="https://www.youtube.com/embed/coNzTMQ0DFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="background: black;"></iframe>
-            </div>
-            <p style="font-size:11px; margin: 6px 0; color:#00ffff; font-family: monospace;">Attaque détectée ! Un virus de médiocrité dérange la musique classique !</p>
-            <button style="background: #ff0000; color: #ffff00; font-weight: bold; border: outset 4px gold; font-size: 13px; cursor: pointer; width: 100%; padding: 6px; text-transform: uppercase;" onclick="alert('Le Maître a neutralisé le virus anti-art !'); this.closest('.retro-popup-ad').style.display='none';">🔴 ÉLIMINER LE VIRUS PAR LE CONTREPOINT 🔴</button>
-        </div>
-    `;
-    document.body.appendChild(virusPopup);
+    if (isIndexPage) {
+        // Max 2 pubs sur l'index, dont AU MOINS UNE PUB VIDÉO
+        const firstVideoAd = videoAds[Math.floor(Math.random() * videoAds.length)];
+        selectedAds.push(firstVideoAd);
 
-    // 4. Pop-up Rétro : COURS MAGISTRAUX DE JULIANOUS (-90% avec vidéo de cours)
-    const coursePopup = document.createElement('div');
-    coursePopup.className = 'retro-popup-ad boing-effect';
-    coursePopup.style.bottom = '20px';
-    coursePopup.style.left = '200px';
-    coursePopup.style.width = '320px';
-    coursePopup.style.border = 'outset 6px gold';
-    coursePopup.style.zIndex = '100004';
-    coursePopup.innerHTML = `
-        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #000080, #008000);">
-            <span>🎓 COURS EXCLUSIFS PAR JULIANOUS 🎓</span>
-            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
-        </div>
-        <div class="retro-popup-body" style="background: #ffffcc;">
-            <div class="blink" style="color:red; font-weight:bold; font-size:13px; margin-bottom:5px;">🎓 PROMO SOLFÈGE & HARMONIE EXPRESS 🎓</div>
-            <video id="courseVidAd" class="all-ad-video" width="100%" height="160" controls autoplay loop style="border: inset 3px gold; background: black;">
-                <source src="assets/course_video.mp4" type="video/mp4">
-            </video>
-            <p style="font-size:11px; font-weight:bold; color:#000080; margin: 5px 0;">Apprenez la fugue et le clavecin sous la menace du Maître ! -90% de réduction immédiate !</p>
-            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 13px; cursor: pointer; width: 100%; padding: 6px;" onclick="alert('Inscription enregistrée ! Vos leçons de clavecin commencent à 5h du matin !');">▶ REJOINDRE LE COURS DU MAÎTRE ◀</button>
-        </div>
-    `;
-    document.body.appendChild(coursePopup);
+        const remainingPool = retroAdPool.filter(a => a.id !== firstVideoAd.id);
+        const secondAd = remainingPool[Math.floor(Math.random() * remainingPool.length)];
+        selectedAds.push(secondAd);
+    } else {
+        // Exactement 1 pub aléatoire sur les autres pages, et c'est TOUJOURS UNE PUB VIDÉO !
+        const randomVideoAd = videoAds[Math.floor(Math.random() * videoAds.length)];
+        selectedAds.push(randomVideoAd);
+    }
 
-    // 5. Pop-up rétro image "Vous êtes le 1 000 000ème visiteur"
-    const visitorAdPopup = document.createElement('div');
-    visitorAdPopup.className = 'retro-popup-ad boing-effect';
-    visitorAdPopup.style.top = '280px';
-    visitorAdPopup.style.left = '180px';
-    visitorAdPopup.style.width = '260px';
-    visitorAdPopup.style.zIndex = '100003';
-    visitorAdPopup.innerHTML = `
-        <div class="retro-popup-titlebar" style="background: linear-gradient(90deg, #ff0000, #ff00ff);">
-            <span>🎉 FELICITATIONS VISITEUR #1 000 000 🎉</span>
-            <button class="side-pub-close" onclick="this.closest('.retro-popup-ad').style.display='none'">X</button>
-        </div>
-        <div class="retro-popup-body" style="background: #ffffcc;">
-            <img src="assets/giphy_maitre.gif" alt="Gagnant" style="width: 90px; height: 90px; border: outset 3px gold; margin-bottom: 5px;">
-            <p style="color: #ff0000; font-weight: bold; font-size: 12px;" class="blink">VOUS AVEZ GAGNÉ UN CLAVECIN GRATUIT !</p>
-            <button style="background: #00ff00; color: #000; font-weight: bold; border: outset 4px green; font-size: 12px; cursor: pointer; width: 100%; padding: 5px;" onclick="this.innerText='RÉCLAMATION EN COURS...'; setTimeout(()=>alert('Félicitations ! Le clavecin sera livré par calèche d\\'ici 6 à 8 semaines.'), 500);">👉 RANGER VOTRE CLAVECIN 👈</button>
-        </div>
-    `;
-    document.body.appendChild(visitorAdPopup);
+    // Instancier les pubs sélectionnées (sans bouger, position fixe)
+    selectedAds.forEach(ad => {
+        const popupElement = ad.create();
+        document.body.appendChild(popupElement);
+    });
 
-    // Lancer immédiatement toutes les vidéos en simultané au chargement
-    setTimeout(playAllVideosSimultaneously, 500);
+    // Attacher les gestionnaires de son au lancement de vidéo
+    setTimeout(() => {
+        setupVideoSoundOnStart();
+        const popupVideos = document.querySelectorAll('.retro-popup-ad video');
+        popupVideos.forEach(vid => {
+            vid.play().catch(() => {});
+        });
+    }, 300);
 }
 
 
