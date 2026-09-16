@@ -584,15 +584,19 @@ window.addEventListener('DOMContentLoaded', () => {
     try { scatterMorals(); } catch(e) {}
     try { createFloatingNotes(); } catch(e) {}
 
-    // Bannières de partitions latérales fixes : présentes sur l'index et les autres pages, masquées sur la recherche pour garder la recherche propre
+    // Bannières de partitions latérales fixes
     if (!isSearchPage) {
         try { createSidebars(); } catch(e) {}
     }
 
-    // SUR L'INDEX SEULEMENT : BOURRÉ DE PUBS, POP-UPS VIRUS, BLOB OPERA ET BANNERS !
+    // EXÉCUTER LES PUBS RÉTRO ET VIDÉOS SUR TOUS LES FICHIERS HTML !
+    if (!isSearchPage) {
+        try { createRetroAds(); } catch(e) {}
+    }
+
+    // Éléments spécifiques à l'index
     if (isIndexPage) {
         try { scatterBadges(); } catch(e) {}
-        try { createRetroAds(); } catch(e) {}
         try { addBlobOperaIframe(); } catch(e) {}
         try { createGlobalFloatingGifs(); } catch(e) {}
     }
