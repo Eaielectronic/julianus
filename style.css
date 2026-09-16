@@ -435,13 +435,18 @@ hr {
     }
 }
 
-/* Style Formes Bancales (Crooked / Wonky / Asymmetric Layout Shapes sur TOUTES les pages) */
-.container, .nav-menu, .search-area, .widget, .wiki-result, .audio-player,
-.retro-popup-ad, .side-pub-banner, .game-card, .moral-box, .cookie-banner,
-.modal-content, .decl-box, .insult-box, fieldset, table {
+/* Style Formes Bancales (Crooked / Wonky / Asymmetric Layout Shapes sur TOUTES les pages sauf les pubs et la recherche) */
+.container, .nav-menu, .widget, .wiki-result, .audio-player,
+.game-card, .moral-box, .cookie-banner, .modal-content, .decl-box, .insult-box, fieldset, table {
     border-radius: 25px 8px 30px 6px / 7px 26px 5px 32px !important;
     box-shadow: 12px 10px 0px rgba(0,0,0,0.8), -4px 6px 10px rgba(255,0,0,0.2) !important;
     transition: transform 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Les publicités et la barre de recherche restent droites (non bancales) */
+.retro-popup-ad, .side-pub-banner, .marquee-ad-bar, .search-area, .search-area input, input[type="text"], #searchInput {
+    transform: none !important;
+    border-radius: 0px !important;
 }
 
 .container {
@@ -464,6 +469,11 @@ hr {
 button {
     border-radius: 15px 4px 18px 5px / 5px 16px 4px 19px !important;
     transform: rotate(-1deg);
+}
+
+.retro-popup-ad button, .side-pub-banner button {
+    transform: none !important;
+    border-radius: 0px !important;
 }
 
 button:hover {
