@@ -583,6 +583,7 @@ window.addEventListener('DOMContentLoaded', () => {
     try { scatterImages(); } catch(e) {}
     try { scatterMorals(); } catch(e) {}
     try { createFloatingNotes(); } catch(e) {}
+    try { createGlobalFloatingGifs(); } catch(e) {}
 
     // Bannières de partitions latérales fixes
     if (!isSearchPage) {
@@ -598,7 +599,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (isIndexPage) {
         try { scatterBadges(); } catch(e) {}
         try { addBlobOperaIframe(); } catch(e) {}
-        try { createGlobalFloatingGifs(); } catch(e) {}
     }
     
     // Autoplay aléatoire sur la page auditions
